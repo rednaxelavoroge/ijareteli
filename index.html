@@ -866,15 +866,15 @@
     <a href="vernissage.html" class="btn-primary" data-i18n="gallery_all">View All Works</a>
   </div>
   <div class="gallery-grid fade-up">
-    <div class="gallery-item"><img src="images/6.jpeg" alt="Composition" loading="lazy"><div class="gallery-overlay">Composition</div></div>
-    <div class="gallery-item"><img src="images/3.jpeg" alt="Portrait" loading="lazy"><div class="gallery-overlay">Portrait</div></div>
-    <div class="gallery-item"><img src="images/9.jpeg" alt="Figure" loading="lazy"><div class="gallery-overlay">Figure</div></div>
-    <div class="gallery-item"><img src="images/39.jpeg" alt="Dynamic" loading="lazy"><div class="gallery-overlay">Dynamic</div></div>
-    <div class="gallery-item"><img src="images/10.jpeg" alt="Meditative" loading="lazy"><div class="gallery-overlay">Meditative</div></div>
-    <div class="gallery-item"><img src="images/50.jpeg" alt="Abstract" loading="lazy"><div class="gallery-overlay">Abstract</div></div>
-    <div class="gallery-item"><img src="images/55.jpeg" alt="Figurative" loading="lazy"><div class="gallery-overlay">Figurative</div></div>
-    <div class="gallery-item"><img src="images/80.jpeg" alt="Graphic" loading="lazy"><div class="gallery-overlay">Graphic</div></div>
-    <div class="gallery-item"><img src="images/100.jpeg" alt="Colorful" loading="lazy"><div class="gallery-overlay">Colorful</div></div>
+    <div class="gallery-item" onclick="openGalleryLb('images/6.jpeg','Composition')"><img src="images/6.jpeg" alt="Composition" loading="lazy"><div class="gallery-overlay">Composition</div></div>
+    <div class="gallery-item" onclick="openGalleryLb('images/3.jpeg','Portrait')"><img src="images/3.jpeg" alt="Portrait" loading="lazy"><div class="gallery-overlay">Portrait</div></div>
+    <div class="gallery-item" onclick="openGalleryLb('images/9.jpeg','Figure')"><img src="images/9.jpeg" alt="Figure" loading="lazy"><div class="gallery-overlay">Figure</div></div>
+    <div class="gallery-item" onclick="openGalleryLb('images/39.jpeg','Dynamic')"><img src="images/39.jpeg" alt="Dynamic" loading="lazy"><div class="gallery-overlay">Dynamic</div></div>
+    <div class="gallery-item" onclick="openGalleryLb('images/10.jpeg','Meditative')"><img src="images/10.jpeg" alt="Meditative" loading="lazy"><div class="gallery-overlay">Meditative</div></div>
+    <div class="gallery-item" onclick="openGalleryLb('images/50.jpeg','Abstract')"><img src="images/50.jpeg" alt="Abstract" loading="lazy"><div class="gallery-overlay">Abstract</div></div>
+    <div class="gallery-item" onclick="openGalleryLb('images/55.jpeg','Figurative')"><img src="images/55.jpeg" alt="Figurative" loading="lazy"><div class="gallery-overlay">Figurative</div></div>
+    <div class="gallery-item" onclick="openGalleryLb('images/80.jpeg','Graphic')"><img src="images/80.jpeg" alt="Graphic" loading="lazy"><div class="gallery-overlay">Graphic</div></div>
+    <div class="gallery-item" onclick="openGalleryLb('images/100.jpeg','Colorful')"><img src="images/100.jpeg" alt="Colorful" loading="lazy"><div class="gallery-overlay">Colorful</div></div>
   </div>
   <div class="gallery-more fade-up">
     <a href="vernissage.html" class="btn-primary" data-i18n="gallery_vernissage">Enter the Vernissage →</a>
@@ -1332,8 +1332,30 @@ function toggleMenu() {
   links.style.borderBottom = '1px solid var(--border)';
 }
 
+// Gallery lightbox
+function openGalleryLb(src, caption) {
+  const lb = document.getElementById('galleryLb');
+  document.getElementById('galleryLbImg').src = src;
+  document.getElementById('galleryLbCaption').textContent = caption;
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeGalleryLb(e) {
+  if (e) e.stopPropagation();
+  document.getElementById('galleryLb').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGalleryLb(); });
+
 // Set default
 setLang(currentLang);
 </script>
+<!-- GALLERY LIGHTBOX -->
+<div id="galleryLb" style="display:none;position:fixed;inset:0;background:rgba(18,18,18,0.95);z-index:200;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out;" onclick="closeGalleryLb()">
+  <button onclick="closeGalleryLb(event)" style="position:absolute;top:1.5rem;right:1.5rem;background:rgba(253,250,246,0.1);border:1px solid rgba(253,250,246,0.25);color:#FDFAF6;width:48px;height:48px;border-radius:50%;font-size:1.3rem;cursor:pointer;">✕</button>
+  <img id="galleryLbImg" src="" alt="" style="max-width:92vw;max-height:86vh;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+  <div id="galleryLbCaption" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);color:#FDFAF6;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.15em;background:rgba(253,250,246,0.08);padding:0.4rem 1.2rem;border-radius:40px;backdrop-filter:blur(10px);white-space:nowrap;"></div>
+</div>
+
 </body>
 </html>
