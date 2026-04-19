@@ -14,13 +14,13 @@
 <meta property="og:url" content="https://ijareteli.com/vernissage">
 <meta property="og:title" content="Vernissage · Fridon Bolkvadze · Ijareteli">
 <meta property="og:description" content="127 works by Georgian artist Fridon Bolkvadze — paintings, drawings and graphics spanning four decades of practice.">
-<meta property="og:image" content="https://ijareteli.vercel.app/images/6.jpeg">
+<meta property="og:image" content="https://www.ijareteli.com/images/6.jpeg">
 <meta property="og:site_name" content="MODA ARTS · Ijareteli">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vernissage · Fridon Bolkvadze · Ijareteli">
-<meta name="twitter:image" content="https://ijareteli.vercel.app/images/6.jpeg">
+<meta name="twitter:image" content="https://www.ijareteli.com/images/6.jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -332,6 +332,142 @@
     letter-spacing: 0.08em;
   }
 
+  /* ── PURCHASE MODAL ── */
+  .purchase-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(18,18,18,0.85);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    backdrop-filter: blur(6px);
+  }
+
+  .purchase-modal.open { display: flex; }
+
+  .pm-card {
+    background: var(--warm-white);
+    max-width: 520px;
+    width: 100%;
+    border: 1px solid var(--border);
+    position: relative;
+    animation: pmIn 0.3s ease-out;
+  }
+
+  @keyframes pmIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .pm-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    color: var(--mid);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.2rem 0.4rem;
+    transition: color 0.2s;
+    z-index: 1;
+  }
+
+  .pm-close:hover { color: var(--charcoal); }
+
+  .pm-img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    display: block;
+    background: var(--cream);
+  }
+
+  .pm-body {
+    padding: 1.8rem 2rem 2rem;
+  }
+
+  .pm-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .pm-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--charcoal);
+    margin-bottom: 0.5rem;
+  }
+
+  .pm-sub {
+    font-size: 0.85rem;
+    color: var(--mid);
+    margin-bottom: 1.8rem;
+    line-height: 1.6;
+  }
+
+  .pm-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .pm-btn-wa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: #25D366;
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.25s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .pm-btn-wa:hover { background: #1ebe5d; }
+
+  .pm-btn-email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: transparent;
+    color: var(--mid);
+    text-decoration: none;
+    padding: 0.8rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    transition: border-color 0.25s, color 0.25s;
+    cursor: pointer;
+  }
+
+  .pm-btn-email:hover { border-color: var(--gold); color: var(--charcoal); }
+
+  .pm-divider {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--mid);
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -526,6 +662,30 @@
   <span>ijareteli.com</span>
 </footer>
 
+<!-- PURCHASE MODAL -->
+<div class="purchase-modal" id="purchaseModal">
+  <div class="pm-card">
+    <button class="pm-close" onclick="closePurchaseModal()">✕</button>
+    <img class="pm-img" id="pmImg" src="" alt="">
+    <div class="pm-body">
+      <span class="pm-label" data-i18n="pm_label">Original Artwork</span>
+      <div class="pm-title" id="pmTitle">Work № 001</div>
+      <p class="pm-sub" data-i18n="pm_sub">To purchase the original, contact the artist directly via WhatsApp or email. The artist will provide pricing, dimensions and shipping details.</p>
+      <div class="pm-buttons">
+        <a class="pm-btn-wa" id="pmWa" href="#" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span data-i18n="pm_wa">Write on WhatsApp</span>
+        </a>
+        <div class="pm-divider" data-i18n="pm_or">or</div>
+        <a class="pm-btn-email" id="pmEmail" href="#" onclick="closePurchaseModal()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <span data-i18n="pm_email">Send Email</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <button class="lb-close" onclick="closeLightbox(event)" aria-label="Close">✕</button>
@@ -546,7 +706,9 @@ const i18n = {
     vernissage_sub: "A curated walk through the works of Fridon Bolkvadze — drawings, paintings, graphics and compositions from four decades of practice.",
     filter_all: "All Works", filter_s1: "Series I", filter_s2: "Series II", filter_s3: "Series III", filter_s4: "Series IV",
     back_home: "← Back to Home",
-    btn_original: "Buy Original", btn_nft: "Mint NFT", btn_soon: "Soon"
+    btn_original: "Buy Original", btn_nft: "Mint NFT", btn_soon: "Soon",
+    pm_label: "Original Artwork", pm_sub: "To purchase the original, contact the artist directly. The artist will provide pricing, dimensions and shipping details.",
+    pm_wa: "Write on WhatsApp", pm_or: "or", pm_email: "Send Email"
   },
   ru: {
     nav_home: "Главная", nav_about: "О художнике", nav_gallery: "Работы",
@@ -556,7 +718,9 @@ const i18n = {
     vernissage_sub: "Прогулка по работам Фридона Болквадзе — рисунки, живопись, графика и композиции за четыре десятилетия творчества.",
     filter_all: "Все работы", filter_s1: "Серия I", filter_s2: "Серия II", filter_s3: "Серия III", filter_s4: "Серия IV",
     back_home: "← Назад на главную",
-    btn_original: "Купить оригинал", btn_nft: "Mint NFT", btn_soon: "Скоро"
+    btn_original: "Купить оригинал", btn_nft: "Mint NFT", btn_soon: "Скоро",
+    pm_label: "Оригинальная работа", pm_sub: "Для покупки оригинала свяжитесь с художником напрямую. Он предоставит информацию о цене, размере и доставке.",
+    pm_wa: "Написать в WhatsApp", pm_or: "или", pm_email: "Отправить email"
   },
   tr: {
     nav_home: "Ana Sayfa", nav_about: "Hakkında", nav_gallery: "Eserler",
@@ -566,7 +730,9 @@ const i18n = {
     vernissage_sub: "Fridon Bolkvadze'nin eserleri arasında bir yürüyüş — dört on yıllık çalışmadan çizimler, resimler, grafikler ve kompozisyonlar.",
     filter_all: "Tüm Eserler", filter_s1: "Seri I", filter_s2: "Seri II", filter_s3: "Seri III", filter_s4: "Seri IV",
     back_home: "← Ana Sayfaya Dön",
-    btn_original: "Orijinal Satın Al", btn_nft: "Mint NFT", btn_soon: "Yakında"
+    btn_original: "Orijinal Satın Al", btn_nft: "Mint NFT", btn_soon: "Yakında",
+    pm_label: "Orijinal Eser", pm_sub: "Orijinali satın almak için sanatçıyla doğrudan iletişime geçin. Fiyat, boyut ve teslimat bilgilerini sağlayacaktır.",
+    pm_wa: "WhatsApp'ta Yaz", pm_or: "veya", pm_email: "E-posta Gönder"
   },
   ka: {
     nav_home: "მთავარი", nav_about: "მხატვარზე", nav_gallery: "ნამუშევრები",
@@ -576,7 +742,9 @@ const i18n = {
     vernissage_sub: "ფრიდონ ბოლქვაძის ნამუშევრების მიმოხილვა — ნახატები, ფერწერა, გრაფიკა და კომპოზიციები ოთხი ათეული წლის შემოქმედებიდან.",
     filter_all: "ყველა ნამუშევარი", filter_s1: "სერია I", filter_s2: "სერია II", filter_s3: "სერია III", filter_s4: "სერია IV",
     back_home: "← მთავარზე დაბრუნება",
-    btn_original: "ორიგინალის ყიდვა", btn_nft: "Mint NFT", btn_soon: "მალე"
+    btn_original: "ორიგინალის ყიდვა", btn_nft: "Mint NFT", btn_soon: "მალე",
+    pm_label: "ორიგინალი ნამუშევარი", pm_sub: "ორიგინალის შესაძენად დაუკავშირდით მხატვარს პირდაპირ. ის მოგაწვდის ფასის, ზომის და მიწოდების დეტალებს.",
+    pm_wa: "WhatsApp-ში დაწერა", pm_or: "ან", pm_email: "Email გაგზავნა"
   }
 };
 
@@ -626,10 +794,9 @@ function buildGallery() {
       <img src="images/${i}.jpeg" alt="Work ${i}" loading="lazy">
       <span class="m-num">№ ${String(i).padStart(3, '0')}</span>
       <div class="m-actions">
-        <a href="mailto:ijareteli@gmail.com?subject=Purchase original — Work №${String(i).padStart(3,'0')}&body=Hello, I am interested in purchasing the original of work №${String(i).padStart(3,'0')}."
-           class="m-btn m-btn-original"
-           onclick="event.stopPropagation()"
-           data-i18n-btn="btn_original">Buy Original</a>
+        <button class="m-btn m-btn-original"
+           onclick="event.stopPropagation(); openPurchaseModal(${i})"
+           data-i18n-btn="btn_original">Buy Original</button>
         <span class="m-btn m-btn-nft" onclick="event.stopPropagation()" title="NFT coming soon">
           <span data-i18n-btn="btn_nft">Mint NFT</span>
           <span class="nft-soon" data-i18n-btn="btn_soon">Soon</span>
@@ -698,12 +865,47 @@ lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox || e.target === lbImg) closeLightbox();
 });
 
-// Keyboard
+// ── PURCHASE MODAL ──
+const purchaseModal = document.getElementById('purchaseModal');
+
+function openPurchaseModal(n) {
+  const num = String(n).padStart(3, '0');
+  const lang = currentLang;
+  const msgs = {
+    en: `Hello! I am interested in purchasing the original of Work №${num}. Please provide details on price, dimensions and shipping.`,
+    ru: `Здравствуйте! Хочу купить оригинал работы №${num}. Пожалуйста, сообщите цену, размер и условия доставки.`,
+    tr: `Merhaba! ${num} numaralı eserin orijinalini satın almak istiyorum. Lütfen fiyat, boyut ve teslimat bilgilerini paylaşın.`,
+    ka: `გამარჯობა! მაინტერესებს №${num} ნამუშევრის ორიგინალის შეძენა. გთხოვთ მომაწოდოთ ფასი, ზომა და მიწოდების დეტალები.`
+  };
+  const msg = msgs[lang] || msgs.en;
+  const waUrl = `https://wa.me/995555692224?text=${encodeURIComponent(msg)}`;
+  const emailUrl = `mailto:ijareteli@gmail.com?subject=Purchase Original — Work №${num}&body=${encodeURIComponent(msg)}`;
+
+  document.getElementById('pmImg').src = `images/${n}.jpeg`;
+  document.getElementById('pmImg').alt = `Work №${num}`;
+  document.getElementById('pmTitle').textContent = `Work № ${num}`;
+  document.getElementById('pmWa').href = waUrl;
+  document.getElementById('pmEmail').href = emailUrl;
+
+  purchaseModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePurchaseModal() {
+  purchaseModal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+purchaseModal.addEventListener('click', (e) => {
+  if (e.target === purchaseModal) closePurchaseModal();
+});
+
 document.addEventListener('keydown', (e) => {
-  if (!lightbox.classList.contains('open')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') navLightbox(-1);
-  if (e.key === 'ArrowRight') navLightbox(1);
+  if (lightbox.classList.contains('open')) {
+    if (e.key === 'ArrowLeft') navLightbox(-1);
+    if (e.key === 'ArrowRight') navLightbox(1);
+  }
+  if (e.key === 'Escape') { closeLightbox(); closePurchaseModal(); }
 });
 
 // Mobile menu
