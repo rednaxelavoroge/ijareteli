@@ -272,6 +272,66 @@
 
   .m-item:hover .m-num { opacity: 1; }
 
+  /* ── BUY BUTTONS ── */
+  .m-actions {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    display: flex;
+    gap: 0;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.35s, transform 0.35s;
+    pointer-events: none;
+  }
+
+  .m-item:hover .m-actions {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+
+  .m-btn {
+    flex: 1;
+    padding: 0.7rem 0.4rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background 0.25s, color 0.25s;
+  }
+
+  .m-btn-original {
+    background: rgba(28,28,28,0.88);
+    color: #F7F3ED;
+    backdrop-filter: blur(8px);
+  }
+
+  .m-btn-original:hover { background: rgba(28,28,28,1); }
+
+  .m-btn-nft {
+    background: rgba(184,150,90,0.88);
+    color: #1C1C1C;
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+  }
+
+  .m-btn-nft:hover { background: rgba(184,150,90,1); }
+
+  .nft-soon {
+    font-size: 0.55rem;
+    background: rgba(28,28,28,0.25);
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -485,7 +545,8 @@ const i18n = {
     vernissage_title: "Vernissage",
     vernissage_sub: "A curated walk through the works of Fridon Bolkvadze — drawings, paintings, graphics and compositions from four decades of practice.",
     filter_all: "All Works", filter_s1: "Series I", filter_s2: "Series II", filter_s3: "Series III", filter_s4: "Series IV",
-    back_home: "← Back to Home"
+    back_home: "← Back to Home",
+    btn_original: "Buy Original", btn_nft: "Mint NFT", btn_soon: "Soon"
   },
   ru: {
     nav_home: "Главная", nav_about: "О художнике", nav_gallery: "Работы",
@@ -494,7 +555,8 @@ const i18n = {
     vernissage_title: "Вернисаж",
     vernissage_sub: "Прогулка по работам Фридона Болквадзе — рисунки, живопись, графика и композиции за четыре десятилетия творчества.",
     filter_all: "Все работы", filter_s1: "Серия I", filter_s2: "Серия II", filter_s3: "Серия III", filter_s4: "Серия IV",
-    back_home: "← Назад на главную"
+    back_home: "← Назад на главную",
+    btn_original: "Купить оригинал", btn_nft: "Mint NFT", btn_soon: "Скоро"
   },
   tr: {
     nav_home: "Ana Sayfa", nav_about: "Hakkında", nav_gallery: "Eserler",
@@ -503,7 +565,8 @@ const i18n = {
     vernissage_title: "Vernisaj",
     vernissage_sub: "Fridon Bolkvadze'nin eserleri arasında bir yürüyüş — dört on yıllık çalışmadan çizimler, resimler, grafikler ve kompozisyonlar.",
     filter_all: "Tüm Eserler", filter_s1: "Seri I", filter_s2: "Seri II", filter_s3: "Seri III", filter_s4: "Seri IV",
-    back_home: "← Ana Sayfaya Dön"
+    back_home: "← Ana Sayfaya Dön",
+    btn_original: "Orijinal Satın Al", btn_nft: "Mint NFT", btn_soon: "Yakında"
   },
   ka: {
     nav_home: "მთავარი", nav_about: "მხატვარზე", nav_gallery: "ნამუშევრები",
@@ -512,7 +575,8 @@ const i18n = {
     vernissage_title: "ვერნისაჟი",
     vernissage_sub: "ფრიდონ ბოლქვაძის ნამუშევრების მიმოხილვა — ნახატები, ფერწერა, გრაფიკა და კომპოზიციები ოთხი ათეული წლის შემოქმედებიდან.",
     filter_all: "ყველა ნამუშევარი", filter_s1: "სერია I", filter_s2: "სერია II", filter_s3: "სერია III", filter_s4: "სერია IV",
-    back_home: "← მთავარზე დაბრუნება"
+    back_home: "← მთავარზე დაბრუნება",
+    btn_original: "ორიგინალის ყიდვა", btn_nft: "Mint NFT", btn_soon: "მალე"
   }
 };
 
@@ -529,6 +593,10 @@ function setLang(lang) {
     if (i18n[lang] && i18n[lang][key]) {
       el.innerHTML = i18n[lang][key];
     }
+  });
+  document.querySelectorAll('[data-i18n-btn]').forEach(el => {
+    const key = el.getAttribute('data-i18n-btn');
+    if (i18n[lang] && i18n[lang][key]) el.textContent = i18n[lang][key];
   });
   document.documentElement.lang = lang;
 }
@@ -557,6 +625,16 @@ function buildGallery() {
     div.innerHTML = `
       <img src="images/${i}.jpeg" alt="Work ${i}" loading="lazy">
       <span class="m-num">№ ${String(i).padStart(3, '0')}</span>
+      <div class="m-actions">
+        <a href="mailto:ijareteli@gmail.com?subject=Purchase original — Work №${String(i).padStart(3,'0')}&body=Hello, I am interested in purchasing the original of work №${String(i).padStart(3,'0')}."
+           class="m-btn m-btn-original"
+           onclick="event.stopPropagation()"
+           data-i18n-btn="btn_original">Buy Original</a>
+        <span class="m-btn m-btn-nft" onclick="event.stopPropagation()" title="NFT coming soon">
+          <span data-i18n-btn="btn_nft">Mint NFT</span>
+          <span class="nft-soon" data-i18n-btn="btn_soon">Soon</span>
+        </span>
+      </div>
     `;
     frag.appendChild(div);
   }
