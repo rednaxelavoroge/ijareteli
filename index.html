@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fridon Bolkvadze · Ijareteli · Artist</title>
+<meta name="description" content="Fridon Bolkvadze Ijareteli — Georgian artist, painter, designer. Works in Batumi, Georgia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3ED;
+    --warm-white: #FDFAF6;
+    --charcoal: #1C1C1C;
+    --mid: #5A5550;
+    --gold: #B8965A;
+    --gold-light: #D4B483;
+    --border: #E2DAD0;
+    --accent-line: #C4A882;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--charcoal);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(253,250,246,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: padding 0.3s;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 400;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* Language switcher */
+  .lang-switch {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .lang-btn {
+    background: none;
+    border: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .lang-btn.active, .lang-btn:hover {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* The painting IS the hero background */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, #2A5A6A 0%, #C4601A 45%, #1E4A58 100%);
+    /* ↑ PLACEHOLDER — replace background with: */
+    /* background-image: url('YOUR_HERO_PAINTING_URL'); */
+    /* background-size: cover; background-position: center; */
+  }
+
+  .hero-bg img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Dark overlay for text legibility */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.18) 0%,
+      rgba(0,0,0,0.52) 50%,
+      rgba(0,0,0,0.65) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+    max-width: 900px;
+    animation: heroFadeIn 1.4s ease forwards;
+  }
+
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-welcome {
+    font-size: 0.78rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.8rem;
+    font-weight: 400;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 2px 40px rgba(0,0,0,0.4);
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold-light);
+    margin: 1.4rem auto;
+    opacity: 0.7;
+  }
+
+  .hero-sub1 {
+    font-size: clamp(0.72rem, 1.5vw, 0.88rem);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+  }
+
+  .hero-sub2 {
+    font-size: clamp(0.68rem, 1.2vw, 0.78rem);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.08em;
+    text-shadow: 0 2px 30px rgba(0,0,0,0.5);
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid rgba(255,255,255,0.5);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin-top: 2rem;
+    backdrop-filter: blur(4px);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .btn-primary:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: white;
+  }
+
+  .btn-dark {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid var(--charcoal);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    transition: all 0.3s;
+    align-self: flex-start;
+  }
+
+  .btn-dark:hover {
+    background: var(--charcoal);
+    color: var(--warm-white);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: var(--gold-light);
+    animation: scrollDown 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollDown {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 5rem; }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold-light);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-image {
+    position: relative;
+  }
+
+  .about-img-frame {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(160deg, #D8CEBD 0%, #BFB09C 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #9A8A75;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-img-frame::before {
+    content: '';
+    position: absolute;
+    top: -12px; left: -12px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--gold-light);
+    z-index: -1;
+  }
+
+  .about-text p {
+    font-size: 0.92rem;
+    color: var(--mid);
+    margin-bottom: 1.4rem;
+    line-height: 1.9;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  /* ── GALLERY PREVIEW ── */
+  #gallery {
+    padding: 7rem 5rem;
+  }
+
+  .gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.2rem;
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    background: var(--cream);
+    cursor: pointer;
+    position: relative;
+  }
+
+  .gallery-item:first-child {
+    grid-row: 1 / 3;
+    grid-column: 1;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .gallery-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #9A8A75;
+    background: linear-gradient(135deg, #E4DAC8 0%, #D0C3AD 100%);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+  }
+
+  .gallery-item:first-child .gallery-placeholder {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 480px;
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(28,28,28,0.7));
+    color: white;
+    padding: 2rem 1.5rem 1.2rem;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+  }
+
+  .gallery-item:hover .gallery-overlay {
+    transform: translateY(0);
+  }
+
+  .gallery-more {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  /* ── EXHIBITIONS ── */
+  #exhibitions {
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 7rem 5rem;
+  }
+
+  #exhibitions .section-label { color: var(--gold-light); }
+  #exhibitions .section-label::after { background: var(--gold); }
+  #exhibitions .section-title { color: var(--warm-white); }
+
+  .exhibitions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .exhibition-item {
+    padding: 1.6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding-right: 3rem;
+  }
+
+  .exhibition-item:nth-child(even) {
+    padding-right: 0;
+    padding-left: 3rem;
+    border-left: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .ex-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--gold-light);
+    font-weight: 300;
+  }
+
+  .ex-info { }
+
+  .ex-title {
+    font-size: 0.88rem;
+    color: var(--warm-white);
+    margin-bottom: 0.25rem;
+    font-weight: 400;
+  }
+
+  .ex-location {
+    font-size: 0.75rem;
+    color: rgba(247,243,237,0.5);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 7rem 5rem;
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .contact-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-line:hover { color: var(--gold); }
+
+  .contact-icon {
+    width: 18px;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .social-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.3rem;
+    border: 1px solid var(--border);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .social-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .contact-map-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #E8DFD4 0%, #D4C5B0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #9A8A75;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    border: 1px solid var(--border);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal);
+    color: rgba(247,243,237,0.4);
+    padding: 2.5rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: rgba(247,243,237,0.7);
+    font-weight: 300;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── MOBILE MENU ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    width: 24px;
+    height: 1px;
+    background: var(--charcoal);
+    transition: all 0.3s;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { min-height: 100svh; }
+    #about, #contact { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 2rem; }
+    section { padding: 4rem 2rem; }
+    #exhibitions { padding: 4rem 2rem; }
+    .exhibitions-grid { grid-template-columns: 1fr; }
+    .exhibition-item:nth-child(even) { padding-left: 0; border-left: none; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item:first-child { grid-row: auto; grid-column: 1 / -1; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    nav { padding: 1rem 1.5rem; }
+    .about-img-frame { aspect-ratio: 4/3; }
+    footer { flex-direction: column; gap: 1rem; padding: 2rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Fridon Bolkvadze</a>
+  <ul class="nav-links">
+    <li><a href="#" data-i18n="nav_home">Home</a></li>
+    <li><a href="#about" data-i18n="nav_about">About</a></li>
+    <li><a href="#gallery" data-i18n="nav_gallery">Works</a></li>
+    <li><a href="#exhibitions" data-i18n="nav_exhibitions">Exhibitions</a></li>
+    <li><a href="vernissage.html" data-i18n="nav_vernissage">Vernissage</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="lang-switch">
+    <button class="lang-btn" onclick="setLang('ka')">ქA</button>
+    <button class="lang-btn" onclick="setLang('tr')">TR</button>
+    <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <!-- Hero background: full-bleed painting -->
+  <div class="hero-bg">
+    <img src="images/41.jpeg" alt="Fridon Bolkvadze — artwork">
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <p class="hero-welcome" data-i18n="hero_welcome">Welcome</p>
+    <h1 class="hero-title">MODA ARTS</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub1" data-i18n="hero_sub1">Solo Exhibition at the Craft Gallery · Batumi, Georgia</p>
+    <p class="hero-sub2" data-i18n="hero_sub2">Graphic Design</p>
+    <p class="hero-name">Ijareteli</p>
+    <a href="vernissage.html" class="btn-primary" data-i18n="hero_cta">View Works</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-image fade-up">
+    <div class="about-img-frame">
+      <!-- Replace with artist portrait photo -->
+      <span data-i18n="img_portrait">Portrait</span>
+    </div>
+  </div>
+  <div class="about-text fade-up">
+    <p class="section-label" data-i18n="label_about">About the Artist</p>
+    <h2 class="section-title" data-i18n="about_title">A Life Woven<br>from Art</h2>
+    <p data-i18n="about_p1">
+      Fridon Bolkvadze was born in August 1963 in the village of Ikareti, Adigeni district. In 1990 he enrolled in the Faculty of Fashion Design at the Tbilisi State Academy of Fine Arts, graduating in 1995. Since 1996 he has lived and worked in Batumi.
+    </p>
+    <p data-i18n="about_p2">
+      Under the literary pseudonym <em>Fridon Ikareteli</em>, he writes poetry, novellas and phantasmagoria. His works have been published in the newspapers "Adjara", "Batumi" and "Social Matsne", and in the magazine "Akhali Era". His poems ranked in the top ten at national poetry competitions.
+    </p>
+    <p data-i18n="about_p3">
+      An active participant in international plein-air sessions and group exhibitions, he is a laureate of numerous awards and has been granted the title of International Ambassador of Sicily, Italy. His works are held in private and state art collections across the world.
+    </p>
+    <div class="about-stats">
+      <div>
+        <div class="stat-num">30+</div>
+        <div class="stat-label" data-i18n="stat_exhibitions">Exhibitions</div>
+      </div>
+      <div>
+        <div class="stat-num">2000+</div>
+        <div class="stat-label" data-i18n="stat_works">Artworks</div>
+      </div>
+      <div>
+        <div class="stat-num">60+</div>
+        <div class="stat-label" data-i18n="stat_years">Years of Life</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY PREVIEW -->
+<section id="gallery">
+  <div class="gallery-header fade-up">
+    <div>
+      <p class="section-label" data-i18n="label_gallery">Selected Works</p>
+      <h2 class="section-title" data-i18n="gallery_title">Vernissage</h2>
+    </div>
+    <a href="vernissage.html" class="btn-primary" data-i18n="gallery_all">View All Works</a>
+  </div>
+  <div class="gallery-grid fade-up">
+    <div class="gallery-item">
+      <img src="images/6.jpeg" alt="Figures with Blue Orbs">
+      <div class="gallery-overlay">Composition · 2024</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/3.jpeg" alt="Portrait — Woman">
+      <div class="gallery-overlay">Portrait · 2024</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/9.jpeg" alt="Figure with Triangles">
+      <div class="gallery-overlay">Figure · 2024</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/39.jpeg" alt="Dynamic Figures">
+      <div class="gallery-overlay">Dynamic · 2024</div>
+    </div>
+    <div class="gallery-item">
+      <img src="images/10.jpeg" alt="Two Figures — Meditative">
+      <div class="gallery-overlay">Meditative · 2025</div>
+    </div>
+  </div>
+  <div class="gallery-more fade-up">
+    <a href="vernissage.html" class="btn-primary" data-i18n="gallery_vernissage">Enter the Vernissage →</a>
+  </div>
+</section>
+
+<!-- EXHIBITIONS -->
+<section id="exhibitions">
+  <p class="section-label" data-i18n="label_exhibitions">Exhibition History</p>
+  <h2 class="section-title" data-i18n="exhibitions_title">Personal Exhibitions</h2>
+  <div class="exhibitions-grid fade-up">
+    <div class="exhibition-item">
+      <span class="ex-year">1990</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_1990">"Meditative Paintings" — Personal Exhibition</div>
+        <div class="ex-location">Tbilisi</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">1994</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_1994">"Color Graphics" — Personal Exhibition</div>
+        <div class="ex-location">Tbilisi, Merani Publishing House</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2008</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2008">"Dark Background" (Graphics)</div>
+        <div class="ex-location">Batumi, Art Museum of Adjara</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2014</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2014a">"Exhibition for Neighbors" — In memory of Nika Bolkvadze</div>
+        <div class="ex-location">Batumi, Bagationi 111</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2014</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2014b">"Achromatic and Chromatic Graphics"</div>
+        <div class="ex-location">Batumi, Art Museum of Adjara</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2015</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2015">"Road to the Rainbow"</div>
+        <div class="ex-location">Kobuleti Museum</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2018</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2018">"Decorating the Space"</div>
+        <div class="ex-location">Kutaisi</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2019</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2019a">Personal Exhibition</div>
+        <div class="ex-location">Tbilisi</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2019</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2019b">"ART MODERN"</div>
+        <div class="ex-location">Kutaisi</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2019</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2019c">"EXPERIMENTAL" — Citadel</div>
+        <div class="ex-location">Akhaltsikhe</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2020</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2020">"MONUMENTAL"</div>
+        <div class="ex-location">Batumi</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2022–23</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2022">"Woman of My Dreams"</div>
+        <div class="ex-location">Kobuleti</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2023</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2023a">60th Anniversary Exhibition</div>
+        <div class="ex-location">Tbilisi · Batumi · Kutaisi</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2023</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2023b">"Colorful Square"</div>
+        <div class="ex-location">Batumi</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2024</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2024">Personal Exhibition</div>
+        <div class="ex-location">Ankara, Turkey</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2025</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2025">"Art of Ankara"</div>
+        <div class="ex-location">Ankara, Turkey</div>
+      </div>
+    </div>
+    <div class="exhibition-item">
+      <span class="ex-year">2026</span>
+      <div class="ex-info">
+        <div class="ex-title" data-i18n="ex_2026">"Infinity"</div>
+        <div class="ex-location">Batumi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="fade-up">
+    <p class="section-label" data-i18n="label_contact">Get in Touch</p>
+    <h2 class="section-title" data-i18n="contact_title">Contact<br>the Artist</h2>
+    <a href="mailto:ijareteli.modaarts@gmail.com" class="contact-line">
+      <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      ijareteli.modaarts@gmail.com
+    </a>
+    <a href="mailto:ijareteli@mail.ru" class="contact-line">
+      <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      ijareteli@mail.ru
+    </a>
+    <a href="tel:+995555692224" class="contact-line">
+      <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+      +995 (555) 69-22-24
+    </a>
+    <div class="social-row">
+      <a href="https://www.instagram.com/bolkvadzefridon" target="_blank" class="social-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+        Instagram
+      </a>
+      <a href="https://www.facebook.com/Ijareteli/" target="_blank" class="social-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        Facebook
+      </a>
+    </div>
+  </div>
+  <div class="fade-up">
+    <div class="contact-map-placeholder">
+      Batumi, Georgia
+    </div>
+    <p style="margin-top:1rem; font-size:0.8rem; color:var(--mid); letter-spacing:0.05em;">© 2018–2026 MODA ARTS · Fridon Bolkvadze "Ijareteli"</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Fridon Bolkvadze · Ijareteli</span>
+  <span>© 2018–2026 MODA ARTS · Batumi, Georgia</span>
+  <span>ijareteli.com</span>
+</footer>
+
+<script>
+// ── TRANSLATIONS ──
+const i18n = {
+  en: {
+    nav_home: "Home", nav_about: "About", nav_gallery: "Works",
+    nav_exhibitions: "Exhibitions", nav_vernissage: "Vernissage", nav_contact: "Contact",
+    hero_welcome: "Welcome",
+    hero_sub1: "Solo Exhibition at the Craft Gallery · Batumi, Georgia",
+    hero_sub2: "Graphic Design",
+    hero_cta: "View Works",
+    label_about: "About the Artist",
+    about_title: "A Life Woven\nfrom Art",
+    about_p1: "Fridon Bolkvadze was born in August 1963 in the village of Ikareti, Adigeni district. In 1990 he enrolled in the Faculty of Fashion Design at the Tbilisi State Academy of Fine Arts, graduating in 1995. Since 1996 he has lived and worked in Batumi.",
+    about_p2: "Under the literary pseudonym Fridon Ikareteli, he writes poetry, novellas and phantasmagoria. His works have been published in the newspapers "Adjara", "Batumi" and "Social Matsne", and in the magazine "Akhali Era". His poems ranked in the top ten at national poetry competitions.",
+    about_p3: "An active participant in international plein-air sessions and group exhibitions, he is a laureate of numerous awards and has been granted the title of International Ambassador of Sicily, Italy. His works are held in private and state art collections across the world.",
+    stat_exhibitions: "Exhibitions", stat_works: "Artworks", stat_years: "Years of Life",
+    label_gallery: "Selected Works", gallery_title: "Vernissage",
+    gallery_all: "View All Works", gallery_vernissage: "Enter the Vernissage →",
+    label_exhibitions: "Exhibition History", exhibitions_title: "Personal Exhibitions",
+    label_contact: "Get in Touch", contact_title: "Contact\nthe Artist",
+    ex_1990: '"Meditative Paintings" — Personal Exhibition',
+    ex_1994: '"Color Graphics" — Personal Exhibition',
+    ex_2008: '"Dark Background" (Graphics)',
+    ex_2014a: '"Exhibition for Neighbors" — In memory of Nika Bolkvadze',
+    ex_2014b: '"Achromatic and Chromatic Graphics"',
+    ex_2015: '"Road to the Rainbow"',
+    ex_2018: '"Decorating the Space"',
+    ex_2019a: 'Personal Exhibition',
+    ex_2019b: '"ART MODERN"',
+    ex_2019c: '"EXPERIMENTAL" — Citadel',
+    ex_2020: '"MONUMENTAL"',
+    ex_2022: '"Woman of My Dreams"',
+    ex_2023a: '60th Anniversary Exhibition',
+    ex_2023b: '"Colorful Square"',
+    ex_2024: 'Personal Exhibition',
+    ex_2025: '"Art of Ankara"',
+    ex_2026: '"Infinity"',
+  },
+  ru: {
+    nav_home: "Главная", nav_about: "О художнике", nav_gallery: "Работы",
+    nav_exhibitions: "Выставки", nav_vernissage: "Вернисаж", nav_contact: "Контакты",
+    hero_welcome: "Добро пожаловать",
+    hero_sub1: "Персональная выставка в Craft Gallery · Батуми, Грузия",
+    hero_sub2: "Графика и дизайн",
+    hero_cta: "Смотреть работы",
+    label_about: "О художнике",
+    about_title: "Жизнь, сотканная\nиз искусства",
+    about_p1: "Фридон Болквадзе родился в августе 1963 года в селе Икарети Адигенского района. В 1990 году поступил на факультет художественного моделирования одежды Тбилисской государственной академии изящных искусств, которую окончил в 1995 году. С 1996 года живёт и работает в Батуми.",
+    about_p2: "Под псевдонимом «Фридон Икарети» пишет стихи, повести и фантасмагории. Произведения публиковались в газетах «Аджария», «Батуми», «Социал Мацне» и журнале «Ахали Эра». Стихи вошли в десятку лучших на национальных поэтических конкурсах.",
+    about_p3: "Активный участник международных пленэров и групповых выставок, лауреат многочисленных премий. Удостоен звания Международного посла региона Сицилия (Италия). Работы хранятся в частных и государственных коллекциях разных стран.",
+    stat_exhibitions: "Выставок", stat_works: "Работ", stat_years: "Лет жизни",
+    label_gallery: "Избранные работы", gallery_title: "Вернисаж",
+    gallery_all: "Все работы", gallery_vernissage: "Войти в вернисаж →",
+    label_exhibitions: "История выставок", exhibitions_title: "Персональные выставки",
+    label_contact: "Связаться", contact_title: "Контакты\nхудожника",
+    ex_1990: '«Медитативные картины» — персональная выставка',
+    ex_1994: '«Цветная графика» — персональная выставка',
+    ex_2008: '«Тёмный фон» (графика)',
+    ex_2014a: '«Выставка для соседей» — памяти Ники Болквадзе',
+    ex_2014b: '«Ахроматическая и хроматическая графика»',
+    ex_2015: '«Дорога к радуге»',
+    ex_2018: '«Декорирование пространства»',
+    ex_2019a: 'Персональная выставка',
+    ex_2019b: '«ART MODERN»',
+    ex_2019c: '«ЭКСПЕРИМЕНТАЛЬНОЕ» — Цитадель',
+    ex_2020: '«МОНУМЕНТАЛЬНОЕ»',
+    ex_2022: '«Женщина моей мечты»',
+    ex_2023a: 'Персональная выставка к 60-летию',
+    ex_2023b: '«Красочная площадь»',
+    ex_2024: 'Персональная выставка',
+    ex_2025: '«Искусство Анкары»',
+    ex_2026: '«Бесконечность»',
+  },
+  tr: {
+    nav_home: "Ana Sayfa", nav_about: "Hakkında", nav_gallery: "Eserler",
+    nav_exhibitions: "Sergiler", nav_vernissage: "Vernik", nav_contact: "İletişim",
+    hero_welcome: "Hoş Geldiniz",
+    hero_sub1: "Craft Gallery'de Kişisel Sergi · Batum, Gürcistan",
+    hero_sub2: "Grafik Tasarım",
+    hero_cta: "Eserleri Gör",
+    label_about: "Sanatçı Hakkında",
+    about_title: "Sanattan Örülmüş\nBir Hayat",
+    about_p1: "Fridon Bolkvadze, Ağustos 1963'te Adigeni ilçesinin İkareti köyünde doğdu. 1990'da Tiflis Devlet Güzel Sanatlar Akademisi'nde moda tasarımı bölümüne kaydoldu ve 1995'te mezun oldu. 1996'dan bu yana Batum'da yaşamakta ve çalışmaktadır.",
+    about_p2: "Fridon İkareteli takma adıyla şiir, novella ve fantazmagori yazar. Eserleri «Adjara», «Batum» ve «Sosyal Matsne» gazetelerinde, «Akhali Era» dergisinde yayımlandı. Şiirleri ulusal şiir yarışmalarında ilk ona girdi.",
+    about_p3: "Uluslararası plein-air seanslarına ve grup sergilerine aktif katılımcı olan sanatçı, çok sayıda ödülün sahibidir. İtalya Sicilya Uluslararası Büyükelçisi unvanına layık görülmüştür. Eserleri dünyanın farklı ülkelerinde özel ve devlet koleksiyonlarında bulunmaktadır.",
+    stat_exhibitions: "Sergi", stat_works: "Eser", stat_years: "Yaşam Yılı",
+    label_gallery: "Seçili Eserler", gallery_title: "Vernik",
+    gallery_all: "Tüm Eserleri Gör", gallery_vernissage: "Verniğe Gir →",
+    label_exhibitions: "Sergi Tarihi", exhibitions_title: "Kişisel Sergiler",
+    label_contact: "İletişim", contact_title: "Sanatçıyla\nİletişim",
+    ex_1990: '"Meditatif Resimler" — Kişisel sergi',
+    ex_1994: '"Renkli Grafik" — Kişisel sergi',
+    ex_2008: '"Karanlık Zemin" (Grafik)',
+    ex_2014a: '"Komşular İçin Sergi" — Nika Bolkvadze anısına',
+    ex_2014b: '"Akromatik ve Kromatik Grafik"',
+    ex_2015: '"Gökkuşağına Giden Yol"',
+    ex_2018: '"Mekanı Dekore Etmek"',
+    ex_2019a: 'Kişisel Sergi',
+    ex_2019b: '"ART MODERN"',
+    ex_2019c: '"DENEYSEL" — Kale',
+    ex_2020: '"ANIT"',
+    ex_2022: '"Hayalimde Kadın"',
+    ex_2023a: '60. Yıldönümü Sergisi',
+    ex_2023b: '"Renkli Meydan"',
+    ex_2024: 'Kişisel Sergi',
+    ex_2025: '"Ankara Sanatı"',
+    ex_2026: '"Sonsuzluk"',
+  },
+  ka: {
+    nav_home: "მთავარი", nav_about: "მხატვარზე", nav_gallery: "ნამუშევრები",
+    nav_exhibitions: "გამოფენები", nav_vernissage: "ვერნისაჟი", nav_contact: "კონტაქტი",
+    hero_welcome: "კეთილი იყოს თქვენი მობრძანება",
+    hero_sub1: "პერსონალური გამოფენა Craft Gallery-ში · ბათუმი, საქართველო",
+    hero_sub2: "გრაფიკული დიზაინი",
+    hero_cta: "ნამუშევრების ნახვა",
+    label_about: "მხატვარის შესახებ",
+    about_title: "ხელოვნებით\nნაქსოვი სიცოცხლე",
+    about_p1: "ფრიდონ ბოლქვაძე დაიბადა 1963 წლის აგვისტოში, ადიგენის რაიონის სოფელ იყარეთში. 1990 წელს ჩაირიცხა თბილისის სახელმწიფო სამხატვრო აკადემიის სამოსის მხატვრული მოდელირების ფაკულტეტზე, რომელიც 1995 წელს დაამთავრა. 1996 წლიდან ცხოვრობს და მუშაობს ბათუმში.",
+    about_p2: "ფსევდონიმით «ფრიდონ იყარეთელი» წერს ლექსებს, მოთხრობებს და ფანტასმაგორიებს. მისი ნაწარმოებები გამოქვეყნდა გაზეთებში «აჭარა», «ბათუმი», «სოციალ მაცნე» და ჟურნალში «ახალი ერა». ლექსები ეროვნულ კონკურსებში პირველ ათეულში მოხვდა.",
+    about_p3: "საერთაშორისო პლენერებისა და ჯგუფური გამოფენების აქტიური მონაწილე, მრავალი ჯილდოს ლაურეატი. მიენიჭა სიცილიის (იტალია) საერთაშორისო ელჩის წოდება. ნამუშევრები ინახება სხვადასხვა ქვეყნის კერძო და სახელმწიფო კოლექციებში.",
+    stat_exhibitions: "გამოფენა", stat_works: "ნამუშევარი", stat_years: "ცხოვრების წელი",
+    label_gallery: "რჩეული ნამუშევრები", gallery_title: "ვერნისაჟი",
+    gallery_all: "ყველა ნამუშევარი", gallery_vernissage: "ვერნისაჟში შესვლა →",
+    label_exhibitions: "გამოფენების ისტორია", exhibitions_title: "პერსონალური გამოფენები",
+    label_contact: "დაგვიკავშირდით", contact_title: "მხატვართან\nდაკავშირება",
+    ex_1990: '«მედიტაციური სურათები» — პერსონალური გამოფენა',
+    ex_1994: '«ფერადი გრაფიკა» — პერსონალური გამოფენა',
+    ex_2008: '«მუქი ფონი» (გრაფიკა)',
+    ex_2014a: '«სამეზობლო გამოფენა» — ნიკა ბოლქვაძის ხსოვნისადმი',
+    ex_2014b: '«ახრომატული და ქრომატული გრაფიკა»',
+    ex_2015: '«გზა ცისარტყელამდე»',
+    ex_2018: '«სივრცის დეკორირება»',
+    ex_2019a: 'პერსონალური გამოფენა',
+    ex_2019b: '«ART MODERN»',
+    ex_2019c: '«ექსპერიმენტული» — ციხე',
+    ex_2020: '«მონუმენტური»',
+    ex_2022: '«ჩემი ოცნების ქალი»',
+    ex_2023a: '60 წლის იუბილეს გამოფენა',
+    ex_2023b: '«ფერადი მოედანი»',
+    ex_2024: 'პერსონალური გამოფენა',
+    ex_2025: '«ანკარის ხელოვნება»',
+    ex_2026: '«უსასრულობა»',
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang] && i18n[lang][key]) {
+      // Handle newlines in about_title etc
+      el.innerHTML = i18n[lang][key].replace(/\n/g, '<br>');
+    }
+  });
+  document.documentElement.lang = lang;
+}
+
+// ── SCROLL ANIMATIONS ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ── MOBILE MENU ──
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+  links.style.flexDirection = 'column';
+  links.style.position = 'absolute';
+  links.style.top = '64px';
+  links.style.left = '0';
+  links.style.right = '0';
+  links.style.background = 'var(--warm-white)';
+  links.style.padding = '1.5rem 2rem';
+  links.style.borderBottom = '1px solid var(--border)';
+}
+
+// Set default
+setLang('en');
+</script>
+</body>
+</html>
