@@ -585,19 +585,31 @@
     color: var(--gold);
   }
 
-  .contact-map-placeholder {
+  .contact-map {
     width: 100%;
     aspect-ratio: 4/3;
-    background: linear-gradient(135deg, #E8DFD4 0%, #D4C5B0 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    background: #E8DFD4;
+  }
+
+  .contact-map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    filter: grayscale(0.2) contrast(0.95);
+  }
+
+  .contact-map-caption {
+    margin-top: 0.8rem;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    color: #9A8A75;
-    font-size: 1rem;
-    letter-spacing: 0.1em;
-    border: 1px solid var(--border);
+    color: var(--mid);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-align: center;
   }
 
   /* ── FOOTER ── */
@@ -933,9 +945,15 @@
     </div>
   </div>
   <div class="fade-up">
-    <div class="contact-map-placeholder">
-      Batumi, Georgia
+    <div class="contact-map">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=41.605%2C41.635%2C41.675%2C41.670&layer=mapnik&marker=41.6499%2C41.6367"
+        loading="lazy"
+        title="Batumi, Georgia"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
+    <p class="contact-map-caption" data-i18n="map_caption">Studio · Batumi, Georgia</p>
     <p style="margin-top:1rem; font-size:0.8rem; color:var(--mid); letter-spacing:0.05em;">© 2018–2026 MODA ARTS · Fridon Bolkvadze "Ijareteli"</p>
   </div>
 </section>
@@ -967,6 +985,7 @@ const i18n = {
     gallery_all: "View All Works", gallery_vernissage: "Enter the Vernissage →",
     label_exhibitions: "Exhibition History", exhibitions_title: "Personal Exhibitions",
     label_contact: "Get in Touch", contact_title: "Contact\nthe Artist",
+    map_caption: "Studio · Batumi, Georgia",
     ex_1990: '"Meditative Paintings" — Personal Exhibition',
     ex_1994: '"Color Graphics" — Personal Exhibition',
     ex_2008: '"Dark Background" (Graphics)',
@@ -1002,6 +1021,7 @@ const i18n = {
     gallery_all: "Все работы", gallery_vernissage: "Войти в вернисаж →",
     label_exhibitions: "История выставок", exhibitions_title: "Персональные выставки",
     label_contact: "Связаться", contact_title: "Контакты\nхудожника",
+    map_caption: "Студия · Батуми, Грузия",
     ex_1990: '«Медитативные картины» — персональная выставка',
     ex_1994: '«Цветная графика» — персональная выставка',
     ex_2008: '«Тёмный фон» (графика)',
@@ -1037,6 +1057,7 @@ const i18n = {
     gallery_all: "Tüm Eserleri Gör", gallery_vernissage: "Vernisaja Gir →",
     label_exhibitions: "Sergi Tarihi", exhibitions_title: "Kişisel Sergiler",
     label_contact: "İletişim", contact_title: "Sanatçıyla\nİletişim",
+    map_caption: "Stüdyo · Batum, Gürcistan",
     ex_1990: '"Meditatif Resimler" — Kişisel sergi',
     ex_1994: '"Renkli Grafik" — Kişisel sergi',
     ex_2008: '"Karanlık Zemin" (Grafik)',
@@ -1072,6 +1093,7 @@ const i18n = {
     gallery_all: "ყველა ნამუშევარი", gallery_vernissage: "ვერნისაჟში შესვლა →",
     label_exhibitions: "გამოფენების ისტორია", exhibitions_title: "პერსონალური გამოფენები",
     label_contact: "დაგვიკავშირდით", contact_title: "მხატვართან\nდაკავშირება",
+    map_caption: "სტუდია · ბათუმი, საქართველო",
     ex_1990: '«მედიტაციური სურათები» — პერსონალური გამოფენა',
     ex_1994: '«ფერადი გრაფიკა» — პერსონალური გამოფენა',
     ex_2008: '«მუქი ფონი» (გრაფიკა)',
