@@ -634,6 +634,76 @@
     text-align: center;
   }
 
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 3rem;
+  }
+
+  .trust-bar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .trust-section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .trust-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .trust-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    background: var(--warm-white);
+    color: var(--mid);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Jost', sans-serif;
+    white-space: nowrap;
+  }
+
+  .trust-badge svg { flex-shrink: 0; opacity: 0.7; }
+
+  .trust-badge span { opacity: 0.8; }
+
+  .trust-note {
+    font-size: 0.72rem;
+    color: var(--mid);
+    line-height: 1.6;
+    max-width: 700px;
+    opacity: 0.7;
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 700px) {
+    .trust-bar { padding: 2rem 1.2rem; }
+    .trust-badge { font-size: 0.68rem; padding: 0.4rem 0.7rem; }
+  }
+
   /* ── FOOTER ── */
   footer {
     background: var(--charcoal);
@@ -976,6 +1046,81 @@
   </div>
 </section>
 
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+
+    <!-- Payment methods -->
+    <div>
+      <span class="trust-section-label" data-i18n="trust_payment">We Accept</span>
+      <div class="trust-row">
+        <!-- Visa -->
+        <div class="trust-badge">
+          <svg width="32" height="20" viewBox="0 0 32 20" fill="none"><rect width="32" height="20" rx="3" fill="#1A1F71"/><path d="M13.5 14H11.7L12.9 6H14.7L13.5 14ZM10.2 6L8.5 11.6L8.3 10.6L7.6 6.7C7.6 6.3 7.3 6 6.9 6H4L4 6.2C5 6.4 5.9 6.8 6.7 7.3L8.3 14H10.2L13.1 6H10.2ZM24.3 14H26L24.5 6H23C22.6 6 22.3 6.2 22.1 6.5L19.4 14H21.3L21.7 12.8H24L24.3 14ZM22.2 11.3L23.1 8.7L23.6 11.3H22.2ZM19.3 8L19.6 6.2C19 6.1 18.3 6 17.6 6C15.7 6 14.4 7 14.4 8.4C14.4 9.5 15.4 10.1 16.1 10.5C16.8 10.9 17.1 11.2 17.1 11.6C17.1 12.2 16.4 12.5 15.7 12.5C14.9 12.5 14.2 12.3 13.6 12L13.3 13.9C14 14.1 14.8 14.3 15.6 14.3C17.6 14.3 18.9 13.3 18.9 11.8C18.9 10.2 16.9 10 16.9 8.9C16.9 8.4 17.4 8 18.2 8C18.6 8 19 8.1 19.3 8Z" fill="white"/></svg>
+          <span>Visa</span>
+        </div>
+        <!-- Mastercard -->
+        <div class="trust-badge">
+          <svg width="32" height="20" viewBox="0 0 32 20" fill="none"><rect width="32" height="20" rx="3" fill="#252525"/><circle cx="12" cy="10" r="6" fill="#EB001B"/><circle cx="20" cy="10" r="6" fill="#F79E1B"/><path d="M16 5.8A6 6 0 0118.2 10 6 6 0 0116 14.2 6 6 0 0113.8 10 6 6 0 0116 5.8Z" fill="#FF5F00"/></svg>
+          <span>Mastercard</span>
+        </div>
+        <!-- USDT -->
+        <div class="trust-badge">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#26A17B"/><path d="M11.2 8.6V7H14V5H6V7H8.8V8.6C6.6 8.8 5 9.4 5 10.1 5 10.8 6.6 11.4 8.8 11.6V15H11.2V11.6C13.4 11.4 15 10.8 15 10.1 15 9.4 13.4 8.8 11.2 8.6ZM10 11C7.8 11 6 10.6 6 10.1 6 9.6 7.8 9.2 10 9.2 12.2 9.2 14 9.6 14 10.1 14 10.6 12.2 11 10 11Z" fill="white"/></svg>
+          <span>USDT</span>
+        </div>
+        <!-- Bitcoin -->
+        <div class="trust-badge">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#F7931A"/><path d="M13.5 8.8C13.7 7.7 12.9 7.1 11.8 6.7L12.2 5L11.1 4.7L10.7 6.4C10.4 6.3 10.1 6.3 9.8 6.2L10.2 4.5L9.1 4.2L8.7 5.9L7.3 5.6L7 6.8L7.8 7C8.1 7.1 8.2 7.3 8.1 7.5L7 12.1C7 12.2 6.8 12.4 6.6 12.4L5.8 12.2L5.3 13.5L6.6 13.8L6 15.5L7.1 15.8L7.5 14.1C7.8 14.2 8.1 14.3 8.4 14.3L8 16L9.1 16.3L9.7 14.6C11.4 14.9 12.7 14.8 13.3 13.2C13.7 12 13.3 11.3 12.4 10.8 13.1 10.6 13.4 10.1 13.5 8.8ZM11.3 12.5C11 13.7 8.9 13.1 8.2 12.9L8.8 10.5C9.5 10.7 11.6 11.2 11.3 12.5ZM11.6 8.8C11.3 9.9 9.6 9.4 9 9.2L9.5 7C10.1 7.2 11.9 7.6 11.6 8.8Z" fill="white"/></svg>
+          <span>Bitcoin</span>
+        </div>
+        <!-- ETH -->
+        <div class="trust-badge">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#627EEA"/><path d="M10 3.5V8.3L14 10.2L10 3.5Z" fill="white" fill-opacity="0.6"/><path d="M10 3.5L6 10.2L10 8.3V3.5Z" fill="white"/><path d="M10 13.2V16.5L14 11L10 13.2Z" fill="white" fill-opacity="0.6"/><path d="M10 16.5V13.2L6 11L10 16.5Z" fill="white"/><path d="M10 12.4L14 10.2L10 8.3V12.4Z" fill="white" fill-opacity="0.2"/><path d="M6 10.2L10 12.4V8.3L6 10.2Z" fill="white" fill-opacity="0.6"/></svg>
+          <span>Ethereum</span>
+        </div>
+        <!-- Bank Transfer -->
+        <div class="trust-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 10v11M12 10v11M16 10v11"/></svg>
+          <span data-i18n="trust_bank">Bank Transfer</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-divider"></div>
+
+    <!-- Shipping -->
+    <div>
+      <span class="trust-section-label" data-i18n="trust_shipping">Worldwide Shipping</span>
+      <div class="trust-row">
+        <div class="trust-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3M9 17h10a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 002 2zM7 17a2 2 0 104 0 2 2 0 00-4 0zM17 17a2 2 0 104 0 2 2 0 00-4 0z"/></svg>
+          <span>DHL Express</span>
+        </div>
+        <div class="trust-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3M9 17h10a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 002 2zM7 17a2 2 0 104 0 2 2 0 00-4 0zM17 17a2 2 0 104 0 2 2 0 00-4 0z"/></svg>
+          <span>FedEx</span>
+        </div>
+        <div class="trust-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3M9 17h10a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 002 2zM7 17a2 2 0 104 0 2 2 0 00-4 0zM17 17a2 2 0 104 0 2 2 0 00-4 0z"/></svg>
+          <span>Georgia Post</span>
+        </div>
+        <div class="trust-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-i18n="trust_track">Live Tracking</span>
+        </div>
+        <div class="trust-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><path d="M9 12l2 2 4-4"/></svg>
+          <span data-i18n="trust_insured">Insured Delivery</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-note" data-i18n="trust_note">All original artworks are carefully packed and shipped worldwide. Delivery time: Europe 3–7 days, Turkey 2–4 days, USA & Asia 7–14 days. Tracking number provided upon dispatch.</div>
+
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <span class="footer-brand">Fridon Bolkvadze · Ijareteli</span>
@@ -1004,7 +1149,10 @@ const i18n = {
     label_exhibitions: "Exhibition History", exhibitions_title: "Personal Exhibitions",
     label_contact: "Get in Touch", contact_title: "Contact\nthe Artist",
     map_caption: "Studio · Batumi, Georgia",
-    ex_1990: '"Meditative Paintings" — Personal Exhibition',
+    trust_payment: "We Accept", trust_bank: "Bank Transfer",
+    trust_shipping: "Worldwide Shipping", trust_track: "Live Tracking",
+    trust_insured: "Insured Delivery",
+    trust_note: "All original artworks are carefully packed and shipped worldwide. Delivery: Europe 3–7 days, Turkey 2–4 days, USA & Asia 7–14 days. Tracking number provided upon dispatch.",
     ex_1994: '"Color Graphics" — Personal Exhibition',
     ex_2008: '"Dark Background" (Graphics)',
     ex_2014a: '"Exhibition for Neighbors" — In memory of Nika Bolkvadze',
@@ -1040,6 +1188,10 @@ const i18n = {
     label_exhibitions: "История выставок", exhibitions_title: "Персональные выставки",
     label_contact: "Связаться", contact_title: "Контакты\nхудожника",
     map_caption: "Студия · Батуми, Грузия",
+    trust_payment: "Принимаем к оплате", trust_bank: "Банковский перевод",
+    trust_shipping: "Доставка по всему миру", trust_track: "Отслеживание онлайн",
+    trust_insured: "Застрахованная доставка",
+    trust_note: "Все оригинальные работы тщательно упаковываются и отправляются по всему миру. Сроки: Европа 3–7 дней, Турция 2–4 дня, США и Азия 7–14 дней. Трек-номер предоставляется после отправки.",
     ex_1990: '«Медитативные картины» — персональная выставка',
     ex_1994: '«Цветная графика» — персональная выставка',
     ex_2008: '«Тёмный фон» (графика)',
@@ -1076,6 +1228,10 @@ const i18n = {
     label_exhibitions: "Sergi Tarihi", exhibitions_title: "Kişisel Sergiler",
     label_contact: "İletişim", contact_title: "Sanatçıyla\nİletişim",
     map_caption: "Stüdyo · Batum, Gürcistan",
+    trust_payment: "Ödeme Yöntemleri", trust_bank: "Banka Transferi",
+    trust_shipping: "Dünya Geneli Teslimat", trust_track: "Canlı Takip",
+    trust_insured: "Sigortalı Teslimat",
+    trust_note: "Tüm orijinal eserler özenle paketlenerek dünya geneline gönderilmektedir. Teslimat: Avrupa 3–7 gün, Türkiye 2–4 gün, ABD ve Asya 7–14 gün. Kargo numarası gönderim sonrası iletilir.",
     ex_1990: '"Meditatif Resimler" — Kişisel sergi',
     ex_1994: '"Renkli Grafik" — Kişisel sergi',
     ex_2008: '"Karanlık Zemin" (Grafik)',
@@ -1112,6 +1268,10 @@ const i18n = {
     label_exhibitions: "გამოფენების ისტორია", exhibitions_title: "პერსონალური გამოფენები",
     label_contact: "დაგვიკავშირდით", contact_title: "მხატვართან\nდაკავშირება",
     map_caption: "სტუდია · ბათუმი, საქართველო",
+    trust_payment: "მიღებული გადახდები", trust_bank: "საბანკო გადარიცხვა",
+    trust_shipping: "მსოფლიო მიტანა", trust_track: "ლაივ თვალყური",
+    trust_insured: "დაზღვეული მიტანა",
+    trust_note: "ყველა ორიგინალი ნამუშევარი ფრთხილად იფუთება და იგზავნება მთელ მსოფლიოში. ვადები: ევროპა 3–7 დღე, თურქეთი 2–4 დღე, აშშ და აზია 7–14 დღე. სამიზნე ნომერი გაიგზავნება გაგზავნის შემდეგ.",
     ex_1990: '«მედიტაციური სურათები» — პერსონალური გამოფენა',
     ex_1994: '«ფერადი გრაფიკა» — პერსონალური გამოფენა',
     ex_2008: '«მუქი ფონი» (გრაფიკა)',
