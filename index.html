@@ -720,8 +720,7 @@
 <section id="about">
   <div class="about-image fade-up">
     <div class="about-img-frame">
-      <!-- Replace with artist portrait photo -->
-      <span data-i18n="img_portrait">Portrait</span>
+      <img src="images/20.jpeg" alt="Fridon Bolkvadze — Ijareteli" loading="lazy">
     </div>
   </div>
   <div class="about-text fade-up">
@@ -763,26 +762,15 @@
     <a href="vernissage.html" class="btn-primary" data-i18n="gallery_all">View All Works</a>
   </div>
   <div class="gallery-grid fade-up">
-    <div class="gallery-item">
-      <img src="images/6.jpeg" alt="Figures with Blue Orbs">
-      <div class="gallery-overlay">Composition · 2024</div>
-    </div>
-    <div class="gallery-item">
-      <img src="images/3.jpeg" alt="Portrait — Woman">
-      <div class="gallery-overlay">Portrait · 2024</div>
-    </div>
-    <div class="gallery-item">
-      <img src="images/9.jpeg" alt="Figure with Triangles">
-      <div class="gallery-overlay">Figure · 2024</div>
-    </div>
-    <div class="gallery-item">
-      <img src="images/39.jpeg" alt="Dynamic Figures">
-      <div class="gallery-overlay">Dynamic · 2024</div>
-    </div>
-    <div class="gallery-item">
-      <img src="images/10.jpeg" alt="Two Figures — Meditative">
-      <div class="gallery-overlay">Meditative · 2025</div>
-    </div>
+    <div class="gallery-item"><img src="images/6.jpeg" alt="Composition" loading="lazy"><div class="gallery-overlay">Composition</div></div>
+    <div class="gallery-item"><img src="images/3.jpeg" alt="Portrait" loading="lazy"><div class="gallery-overlay">Portrait</div></div>
+    <div class="gallery-item"><img src="images/9.jpeg" alt="Figure" loading="lazy"><div class="gallery-overlay">Figure</div></div>
+    <div class="gallery-item"><img src="images/39.jpeg" alt="Dynamic" loading="lazy"><div class="gallery-overlay">Dynamic</div></div>
+    <div class="gallery-item"><img src="images/10.jpeg" alt="Meditative" loading="lazy"><div class="gallery-overlay">Meditative</div></div>
+    <div class="gallery-item"><img src="images/50.jpeg" alt="Abstract" loading="lazy"><div class="gallery-overlay">Abstract</div></div>
+    <div class="gallery-item"><img src="images/55.jpeg" alt="Figurative" loading="lazy"><div class="gallery-overlay">Figurative</div></div>
+    <div class="gallery-item"><img src="images/80.jpeg" alt="Graphic" loading="lazy"><div class="gallery-overlay">Graphic</div></div>
+    <div class="gallery-item"><img src="images/100.jpeg" alt="Colorful" loading="lazy"><div class="gallery-overlay">Colorful</div></div>
   </div>
   <div class="gallery-more fade-up">
     <a href="vernissage.html" class="btn-primary" data-i18n="gallery_vernissage">Enter the Vernissage →</a>
@@ -1034,7 +1022,7 @@ const i18n = {
   },
   tr: {
     nav_home: "Ana Sayfa", nav_about: "Hakkında", nav_gallery: "Eserler",
-    nav_exhibitions: "Sergiler", nav_vernissage: "Vernik", nav_contact: "İletişim",
+    nav_exhibitions: "Sergiler", nav_vernissage: "Vernisaj", nav_contact: "İletişim",
     hero_welcome: "Hoş Geldiniz",
     hero_sub1: "Craft Gallery'de Kişisel Sergi · Batum, Gürcistan",
     hero_sub2: "Grafik Tasarım",
@@ -1045,8 +1033,8 @@ const i18n = {
     about_p2: "Fridon İkareteli takma adıyla şiir, novella ve fantazmagori yazar. Eserleri «Adjara», «Batum» ve «Sosyal Matsne» gazetelerinde, «Akhali Era» dergisinde yayımlandı. Şiirleri ulusal şiir yarışmalarında ilk ona girdi.",
     about_p3: "Uluslararası plein-air seanslarına ve grup sergilerine aktif katılımcı olan sanatçı, çok sayıda ödülün sahibidir. İtalya Sicilya Uluslararası Büyükelçisi unvanına layık görülmüştür. Eserleri dünyanın farklı ülkelerinde özel ve devlet koleksiyonlarında bulunmaktadır.",
     stat_exhibitions: "Sergi", stat_works: "Eser", stat_years: "Yaşam Yılı",
-    label_gallery: "Seçili Eserler", gallery_title: "Vernik",
-    gallery_all: "Tüm Eserleri Gör", gallery_vernissage: "Verniğe Gir →",
+    label_gallery: "Seçili Eserler", gallery_title: "Vernisaj",
+    gallery_all: "Tüm Eserleri Gör", gallery_vernissage: "Vernisaja Gir →",
     label_exhibitions: "Sergi Tarihi", exhibitions_title: "Kişisel Sergiler",
     label_contact: "İletişim", contact_title: "Sanatçıyla\nİletişim",
     ex_1990: '"Meditatif Resimler" — Kişisel sergi',
@@ -1104,10 +1092,11 @@ const i18n = {
   }
 };
 
-let currentLang = 'en';
+let currentLang = localStorage.getItem('ijareteli_lang') || 'en';
 
 function setLang(lang) {
   currentLang = lang;
+  localStorage.setItem('ijareteli_lang', lang);
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -1144,7 +1133,7 @@ function toggleMenu() {
 }
 
 // Set default
-setLang('en');
+setLang(currentLang);
 </script>
 </body>
 </html>

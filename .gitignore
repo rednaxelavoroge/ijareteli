@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+__MACOSX
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (if we add tooling later)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.env
+.env.local
+
+# Vercel
+.vercel
+
+# Build output
+dist/
+build/
+.cache/
+
+# Temp
+*.log
+*.tmp
