@@ -784,6 +784,7 @@
     <li><a href="#gallery" data-i18n="nav_gallery">Works</a></li>
     <li><a href="#exhibitions" data-i18n="nav_exhibitions">Exhibitions</a></li>
     <li><a href="vernissage.html" data-i18n="nav_vernissage">Vernissage</a></li>
+    <li><a href="nft.html" data-i18n="nav_nft">NFT</a></li>
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
   <div class="lang-switch">
@@ -879,6 +880,29 @@
   <div class="gallery-more fade-up">
     <a href="vernissage.html" class="btn-primary" data-i18n="gallery_vernissage">Enter the Vernissage →</a>
   </div>
+</section>
+
+<!-- NFT TEASER -->
+<section id="nft" style="background:var(--charcoal);color:var(--cream);padding:6rem 5rem;text-align:center;">
+  <p style="font-size:0.68rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-light);margin-bottom:1rem;" data-i18n="nft_label">On-Chain Art · Base Blockchain</p>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:300;color:var(--warm-white);margin-bottom:1.5rem;" data-i18n="nft_title">172 NFTs on Base</h2>
+  <div style="width:60px;height:1px;background:var(--gold);margin:0 auto 2rem;opacity:0.5;"></div>
+  <p style="max-width:600px;margin:0 auto 3rem;font-size:0.92rem;color:rgba(247,243,237,0.65);line-height:1.9;" data-i18n="nft_sub">Three collections of original artworks minted via Manifold. Each NFT is a unique digital certificate of a painting by Fridon Bolkvadze, available for $20 on OpenSea.</p>
+  <div style="display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-bottom:3rem;">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--gold-light);font-weight:300;">172</div>
+      <div style="font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,243,237,0.4);" data-i18n="nft_stat_works">Artworks</div>
+    </div>
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--gold-light);font-weight:300;">3</div>
+      <div style="font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,243,237,0.4);" data-i18n="nft_stat_cols">Collections</div>
+    </div>
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--gold-light);font-weight:300;">$20</div>
+      <div style="font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,243,237,0.4);" data-i18n="nft_stat_price">Per NFT</div>
+    </div>
+  </div>
+  <a href="nft.html" style="display:inline-block;padding:0.9rem 2.5rem;border:1px solid rgba(184,150,90,0.6);font-family:'Jost',sans-serif;font-size:0.75rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-light);text-decoration:none;transition:all 0.3s;background:rgba(184,150,90,0.08);" data-i18n="nft_cta" onmouseover="this.style.background='rgba(184,150,90,0.18)'" onmouseout="this.style.background='rgba(184,150,90,0.08)'">Explore NFT Collections →</a>
 </section>
 
 <!-- EXHIBITIONS -->
@@ -1133,7 +1157,12 @@
 const i18n = {
   en: {
     nav_home: "Home", nav_about: "About", nav_gallery: "Works",
-    nav_exhibitions: "Exhibitions", nav_vernissage: "Vernissage", nav_contact: "Contact",
+    nav_exhibitions: "Exhibitions", nav_vernissage: "Vernissage", nav_nft: "NFT", nav_contact: "Contact",
+    nft_label: "On-Chain Art · Base Blockchain",
+    nft_title: "172 NFTs on Base",
+    nft_sub: "Three collections of original artworks minted via Manifold. Each NFT is a unique digital certificate of a painting by Fridon Bolkvadze, available for $20 on OpenSea.",
+    nft_stat_works: "Artworks", nft_stat_cols: "Collections", nft_stat_price: "Per NFT",
+    nft_cta: "Explore NFT Collections →",
     hero_welcome: "Welcome",
     hero_sub1: "Latest Exhibition: «Infinity» · Batumi, Georgia · 2026",
     hero_sub2: "Graphic Design",
@@ -1172,7 +1201,12 @@ const i18n = {
   },
   ru: {
     nav_home: "Главная", nav_about: "О художнике", nav_gallery: "Работы",
-    nav_exhibitions: "Выставки", nav_vernissage: "Вернисаж", nav_contact: "Контакты",
+    nav_exhibitions: "Выставки", nav_vernissage: "Вернисаж", nav_nft: "NFT", nav_contact: "Контакты",
+    nft_label: "Искусство в блокчейне · Base",
+    nft_title: "172 NFT на Base",
+    nft_sub: "Три коллекции оригинальных работ, заминченных через Manifold. Каждая NFT — уникальный цифровой сертификат картины Фридона Болквадзе, доступный за $20 на OpenSea.",
+    nft_stat_works: "Работ", nft_stat_cols: "Коллекции", nft_stat_price: "За NFT",
+    nft_cta: "Смотреть NFT-коллекции →",
     hero_welcome: "Добро пожаловать",
     hero_sub1: "Последняя выставка: «Бесконечность» · Батуми, Грузия · 2026",
     hero_sub2: "Графика и дизайн",
@@ -1212,7 +1246,12 @@ const i18n = {
   },
   tr: {
     nav_home: "Ana Sayfa", nav_about: "Hakkında", nav_gallery: "Eserler",
-    nav_exhibitions: "Sergiler", nav_vernissage: "Vernisaj", nav_contact: "İletişim",
+    nav_exhibitions: "Sergiler", nav_vernissage: "Vernisaj", nav_nft: "NFT", nav_contact: "İletişim",
+    nft_label: "Blokzincirde Sanat · Base",
+    nft_title: "Base'de 172 NFT",
+    nft_sub: "Manifold aracılığıyla mint edilmiş üç orijinal eser koleksiyonu. Her NFT, Fridon Bolkvadze'nin bir tablosunun benzersiz dijital sertifikasıdır — OpenSea'da $20.",
+    nft_stat_works: "Eser", nft_stat_cols: "Koleksiyon", nft_stat_price: "NFT Başına",
+    nft_cta: "NFT Koleksiyonlarını Keşfet →",
     hero_welcome: "Hoş Geldiniz",
     hero_sub1: "Son Sergi: «Sonsuzluk» · Batum, Gürcistan · 2026",
     hero_sub2: "Grafik Tasarım",
@@ -1252,7 +1291,12 @@ const i18n = {
   },
   ka: {
     nav_home: "მთავარი", nav_about: "მხატვარზე", nav_gallery: "ნამუშევრები",
-    nav_exhibitions: "გამოფენები", nav_vernissage: "ვერნისაჟი", nav_contact: "კონტაქტი",
+    nav_exhibitions: "გამოფენები", nav_vernissage: "ვერნისაჟი", nav_nft: "NFT", nav_contact: "კონტაქტი",
+    nft_label: "ხელოვნება ბლოკჩეინზე · Base",
+    nft_title: "172 NFT Base-ზე",
+    nft_sub: "სამი კოლექცია ორიგინალური ნამუშევრებით, Manifold-ის საშუალებით დამინჩული. თითოეული NFT ფრიდონ ბოლქვაძის ნახატის უნიკალური ციფრული სერტიფიკატია — $20-ად OpenSea-ზე.",
+    nft_stat_works: "ნამუშევარი", nft_stat_cols: "კოლექცია", nft_stat_price: "NFT-ზე",
+    nft_cta: "NFT კოლექციების ნახვა →",
     hero_welcome: "კეთილი იყოს თქვენი მობრძანება",
     hero_sub1: "ბოლო გამოფენა: «უსასრულობა» · ბათუმი, საქართველო · 2026",
     hero_sub2: "გრაფიკული დიზაინი",
