@@ -96,27 +96,85 @@
   .nav-links a:hover::after, .nav-links a.current::after { width: 100%; }
   .nav-links a:hover, .nav-links a.current { color: var(--gold); }
 
-  .lang-switch {
-    display: flex;
-    gap: 0.4rem;
-    align-items: center;
+  /* Language switcher dropdown */
+  .lang-dropdown {
+    position: relative;
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
   }
 
-  .lang-btn {
+  .lang-dropdown-trigger {
     background: transparent;
     border: 1px solid var(--border);
-    color: var(--mid);
-    padding: 0.3rem 0.6rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--charcoal);
     cursor: pointer;
-    font-family: 'Jost', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
     transition: all 0.3s;
   }
 
-  .lang-btn.active, .lang-btn:hover {
-    border-color: var(--gold);
+  .lang-dropdown-trigger:hover {
+    border-color: var(--gold-light);
     color: var(--gold);
+  }
+
+  .lang-dropdown-trigger::after {
+    content: '▾';
+    font-size: 0.6rem;
+    opacity: 0.7;
+  }
+
+  .lang-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(28,28,28,0.08);
+    min-width: 90px;
+    z-index: 100;
+    margin-top: 4px;
+    animation: fadeIn 0.15s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .lang-dropdown:hover .lang-dropdown-content {
+    display: block;
+  }
+
+  .lang-dropdown-item {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--mid);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .lang-dropdown-item:hover {
+    background: var(--cream);
+    color: var(--charcoal);
+  }
+
+  .lang-dropdown-item.active {
+    color: var(--gold);
+    font-weight: 500;
   }
 
   .menu-toggle {
@@ -628,11 +686,17 @@
     <li><a href="nft.html" class="current" data-i18n="nav_nft">NFT</a></li>
     <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
-  <div class="lang-switch">
-    <button class="lang-btn" onclick="setLang('ka')">ქA</button>
-    <button class="lang-btn" onclick="setLang('tr')">TR</button>
-    <button class="lang-btn" onclick="setLang('ru')">RU</button>
-    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+  <div class="lang-dropdown">
+    <button class="lang-dropdown-trigger" id="langTrigger">EN</button>
+    <div class="lang-dropdown-content">
+      <button class="lang-dropdown-item active" onclick="setLang('en')">EN</button>
+      <button class="lang-dropdown-item" onclick="setLang('ka')">ქA</button>
+      <button class="lang-dropdown-item" onclick="setLang('ru')">RU</button>
+      <button class="lang-dropdown-item" onclick="setLang('tr')">TR</button>
+      <button class="lang-dropdown-item" onclick="setLang('it')">IT</button>
+      <button class="lang-dropdown-item" onclick="setLang('es')">ES</button>
+      <button class="lang-dropdown-item" onclick="setLang('ja')">JA</button>
+    </div>
   </div>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 </nav>
@@ -919,16 +983,114 @@ const i18n = {
     lb_copy: 'კოპირება', lb_copied: 'კოპირებულია!',
     back_home: '← მთავარზე დაბრუნება',
   },
+  it: {
+    nav_home: 'Home', nav_about: 'Artista', nav_vernissage: 'Vernissage',
+    nav_awards: 'Premi', nav_nft: 'NFT', nav_contact: 'Contatti',
+    hero_label: 'Arte su Catena',
+    hero_title: 'Collezioni NFT',
+    hero_sub: '172 opere d\'arte originali di Phridon Bolkvadze, coniate sulla blockchain Base tramite Manifold. Ogni pezzo è un certificato digitale unico di un dipinto originale.',
+    coll_label_coffee: 'Collezione · 2024',
+    coll_label_series2: 'Collezione · 2024',
+    coll_label_series5: 'Collezione · 2024',
+    coffee_name: 'Phridon Bolkvadze Coffee',
+    series2_name: 'Phridon Bolkvadze Series 2',
+    series5_name: 'Phridon Bolkvadze Series 5',
+    coffee_desc: 'Una serie di 49 opere che esplorano il ritmo e la forma attraverso la lente della contemplazione mattutina.',
+    series2_desc: '60 dipinti della seconda serie — composizioni espressive e vividi campi di colore.',
+    series5_desc: '63 opere della quinta serie — grafica audace, linee dinamiche e texture stratificate.',
+    badge_49: '49 opere', badge_60: '60 opere', badge_63: '63 opere',
+    btn_view_opensea: 'Visualizza Collezione su OpenSea',
+    lb_contract: 'Contratto', lb_token: 'ID Token',
+    lb_network: 'Rete', lb_price: 'Prezzo',
+    lb_desc: 'Dipinto originale dell\'artista georgiano Phridon Bolkvadze',
+    btn_buy_opensea: 'Acquista su OpenSea',
+    lb_prev: 'Precedente', lb_next: 'Successivo',
+    lb_copy: 'Copia', lb_copied: 'Copiato!',
+    back_home: '← Torna alla Home',
+  },
+  es: {
+    nav_home: 'Inicio', nav_about: 'Artista', nav_vernissage: 'Vernissage',
+    nav_awards: 'Premios', nav_nft: 'NFT', nav_contact: 'Contacto',
+    hero_label: 'Arte en Cadena',
+    hero_title: 'Colecciones NFT',
+    hero_sub: '172 obras de arte originales de Phridon Bolkvadze, acuñadas en la blockchain Base a través de Manifold. Cada pieza es un certificado digital único de una pintura original.',
+    coll_label_coffee: 'Colección · 2024',
+    coll_label_series2: 'Colección · 2024',
+    coll_label_series5: 'Colección · 2024',
+    coffee_name: 'Phridon Bolkvadze Coffee',
+    series2_name: 'Phridon Bolkvadze Series 2',
+    series5_name: 'Phridon Bolkvadze Series 5',
+    coffee_desc: 'Una serie de 49 obras que exploran el ritmo y la forma a través de la perspectiva de la contemplación matutina.',
+    series2_desc: '60 pinturas de la segunda serie: composiciones expresivas y campos de color vivos.',
+    series5_desc: '63 obras de la quinta serie: gráficos audaces, líneas dinámicas y texturas en capas.',
+    badge_49: '49 obras', badge_60: '60 obras', badge_63: '63 obras',
+    btn_view_opensea: 'Ver Colección en OpenSea',
+    lb_contract: 'Contrato', lb_token: 'ID de Token',
+    lb_network: 'Red', lb_price: 'Precio',
+    lb_desc: 'Pintura original del artista georgiano Phridon Bolkvadze',
+    btn_buy_opensea: 'Comprar en OpenSea',
+    lb_prev: 'Anterior', lb_next: 'Siguiente',
+    lb_copy: 'Copiar', lb_copied: '¡Copiado!',
+    back_home: '← Volver al Inicio',
+  },
+  ja: {
+    nav_home: 'ホーム', nav_about: 'アーティストについて', nav_vernissage: 'ヴェルニサージュ',
+    nav_awards: '受賞・認定', nav_nft: 'NFT', nav_contact: 'お問い合わせ',
+    hero_label: 'オンチェーン・アート',
+    hero_title: 'NFT コレクション',
+    hero_sub: 'Manifoldを通じてBaseブロックチェーン上でミントされた、フリードン・ボルクヴァゼによる172点のオリジナル作品。各作品はオリジナル絵画のユニークなデジタル証明書です。',
+    coll_label_coffee: 'コレクション · 2024年',
+    coll_label_series2: 'コレクション · 2024年',
+    coll_label_series5: 'コレクション · 2024年',
+    coffee_name: 'Phridon Bolkvadze Coffee',
+    series2_name: 'Phridon Bolkvadze Series 2',
+    series5_name: 'Phridon Bolkvadze Series 5',
+    coffee_desc: '朝の瞑想のレンズを通してリズムとフォルムを探求する49作品의 シリーズ。',
+    series2_desc: '第2シリーズの60点の絵画 — 表現力豊かな構図と鮮やかなカラーフィールド。',
+    series5_desc: '第5シリーズの63作品 — 大胆なグラフィック、ダイナミックなライン、そして重ねられた質感。',
+    badge_49: '49作品', badge_60: '60作品', badge_63: '63作品',
+    btn_view_opensea: 'OpenSeaでコレクションを見る',
+    lb_contract: 'コントラクト', lb_token: 'トークンID',
+    lb_network: 'ネットワーク', lb_price: '価格',
+    lb_desc: 'ジョージアの画家フリードン・ボルクヴァゼによるオリジナル絵画',
+    btn_buy_opensea: 'OpenSeaで購入する',
+    lb_prev: '前へ', lb_next: '次へ',
+    lb_copy: 'コピー', lb_copied: 'コピーされました！',
+    back_home: '← ホームに戻る',
+  }
 };
 
-let currentLang = localStorage.getItem('ijareteli_lang') || 'en';
+// Browser language detection & initialization
+let currentLang = localStorage.getItem('ijareteli_lang');
+if (!currentLang) {
+  const userLang = (navigator.language || navigator.userLanguage).toLowerCase();
+  if (userLang.startsWith('ka')) currentLang = 'ka';
+  else if (userLang.startsWith('ru')) currentLang = 'ru';
+  else if (userLang.startsWith('tr')) currentLang = 'tr';
+  else if (userLang.startsWith('it')) currentLang = 'it';
+  else if (userLang.startsWith('es')) currentLang = 'es';
+  else if (userLang.startsWith('ja')) currentLang = 'ja';
+  else currentLang = 'en';
+  localStorage.setItem('ijareteli_lang', currentLang);
+}
 
 function setLang(lang) {
   currentLang = lang;
   localStorage.setItem('ijareteli_lang', lang);
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  const btn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
-  if (btn) btn.classList.add('active');
+  
+  // Update dropdown triggers
+  document.querySelectorAll('.lang-dropdown-trigger').forEach(trigger => {
+    trigger.textContent = lang.toUpperCase();
+  });
+  
+  // Update active status on dropdown items
+  document.querySelectorAll('.lang-dropdown-item').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('onclick').includes(`'${lang}'`)) {
+      btn.classList.add('active');
+    }
+  });
+
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (i18n[lang] && i18n[lang][key]) el.innerHTML = i18n[lang][key];

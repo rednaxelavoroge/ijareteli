@@ -97,29 +97,99 @@
 
   .nav-links a:hover { color: var(--gold); }
 
-  /* Language switcher */
-  .lang-switch {
-    display: flex;
-    gap: 0.6rem;
+  /* Language switcher dropdown */
+  .lang-dropdown {
+    position: relative;
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
   }
 
-  .lang-btn {
-    background: none;
-    border: none;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
+  .lang-dropdown-trigger {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
+    color: var(--charcoal);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.3s;
+  }
+
+  .lang-dropdown-trigger:hover {
+    border-color: var(--gold-light);
+    color: var(--gold);
+  }
+
+  .lang-dropdown-trigger::after {
+    content: '▾';
+    font-size: 0.6rem;
+    opacity: 0.7;
+  }
+
+  .lang-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(28,28,28,0.08);
+    min-width: 90px;
+    z-index: 100;
+    margin-top: 4px;
+    animation: fadeIn 0.15s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .lang-dropdown:hover .lang-dropdown-content {
+    display: block;
+  }
+
+  .lang-dropdown-item {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: left;
     color: var(--mid);
     cursor: pointer;
-    padding: 0.2rem 0.4rem;
-    border-bottom: 1px solid transparent;
     transition: all 0.2s;
   }
 
-  .lang-btn.active, .lang-btn:hover {
+  .lang-dropdown-item:hover {
+    background: var(--cream);
+    color: var(--charcoal);
+  }
+
+  .lang-dropdown-item.active {
     color: var(--gold);
-    border-bottom-color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* Ambassador Link Hover Effect */
+  .ambassador-link {
+    color: var(--gold);
+    border-bottom: 1px dashed var(--gold);
+    cursor: zoom-in;
+    transition: color 0.3s, border-bottom-color 0.3s;
+    font-weight: 400;
+  }
+
+  .ambassador-link:hover {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
   }
 
   /* ── HERO ── */
@@ -885,11 +955,17 @@
     <li><a href="nft.html" data-i18n="nav_nft">NFT</a></li>
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
-  <div class="lang-switch">
-    <button class="lang-btn" onclick="setLang('ka')">ქA</button>
-    <button class="lang-btn" onclick="setLang('tr')">TR</button>
-    <button class="lang-btn" onclick="setLang('ru')">RU</button>
-    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+  <div class="lang-dropdown">
+    <button class="lang-dropdown-trigger" id="langTrigger">EN</button>
+    <div class="lang-dropdown-content">
+      <button class="lang-dropdown-item active" onclick="setLang('en')">EN</button>
+      <button class="lang-dropdown-item" onclick="setLang('ka')">ქA</button>
+      <button class="lang-dropdown-item" onclick="setLang('ru')">RU</button>
+      <button class="lang-dropdown-item" onclick="setLang('tr')">TR</button>
+      <button class="lang-dropdown-item" onclick="setLang('it')">IT</button>
+      <button class="lang-dropdown-item" onclick="setLang('es')">ES</button>
+      <button class="lang-dropdown-item" onclick="setLang('ja')">JA</button>
+    </div>
   </div>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -1353,7 +1429,7 @@ const i18n = {
     about_title: "A Life Woven\nfrom Art",
     about_p1: "Phridon Bolkvadze was born in August 1963 in the village of Ikareti, Adigeni district. In 1990 he enrolled in the Faculty of Fashion Design at the Tbilisi State Academy of Fine Arts, graduating in 1995. Since 1996 he has lived and worked in Batumi.",
     about_p2: "Under the literary pseudonym Phridon Ikareteli, he writes poetry, novellas and phantasmagoria. His works have been published in the newspapers «Adjara», «Batumi» and «Social Matsne», and in the magazine «Akhali Era». His poems ranked in the top ten at national poetry competitions.",
-    about_p3: "An active participant in international plein-air sessions and group exhibitions, he is a laureate of numerous awards and has been granted the title of International Ambassador of Sicily, Italy. His works are held in private and state art collections across the world.",
+    about_p3: "An active participant in international plein-air sessions and group exhibitions, he is a laureate of numerous awards and has been granted the title of <span class=\"ambassador-link\" onclick=\"openAwardLb('images/award_guccione.jpeg', 'award_guccione_title', 'award_guccione_desc')\">International Ambassador of Sicily, Italy</span>. His works are held in private and state art collections across the world.",
     stat_exhibitions: "Exhibitions", stat_works: "Artworks", stat_years: "Years of Life",
     label_gallery: "Selected Works", gallery_title: "Vernissage",
     gallery_all: "View All Works", gallery_vernissage: "Enter the Vernissage →",
@@ -1411,7 +1487,7 @@ const i18n = {
     about_title: "Жизнь, сотканная\nиз искусства",
     about_p1: "Фридон Болквадзе родился в августе 1963 года в селе Икарети Адигенского района. В 1990 году поступил на факультет художественного моделирования одежды Тбилисской государственной академии изящных искусств, которую окончил в 1995 году. С 1996 года живёт и работает в Батуми.",
     about_p2: "Под псевдонимом «Фридон Икарети» пишет стихи, повести и фантасмагории. Произведения публиковались в газетах «Аджария», «Батуми», «Социал Мацне» и журнале «Ахали Эра». Стихи вошли в десятку лучших на национальных поэтических конкурсах.",
-    about_p3: "Активный участник международных пленэров и групповых выставок, лауреат многочисленных премий. Удостоен звания Международного посла региона Сицилия (Италия). Работы хранятся в частных и государственных коллекциях разных стран.",
+    about_p3: "Активный участник международных пленэров и групповых выставок, лауреат многочисленных премий. <span class=\"ambassador-link\" onclick=\"openAwardLb('images/award_guccione.jpeg', 'award_guccione_title', 'award_guccione_desc')\">Удостоен звания Международного посла региона Сицилия (Италия)</span>. Работы хранятся в частных и государственных коллекциях разных стран.",
     stat_exhibitions: "Выставок", stat_works: "Работ", stat_years: "Лет жизни",
     label_gallery: "Избранные работы", gallery_title: "Вернисаж",
     gallery_all: "Все работы", gallery_vernissage: "Войти в вернисаж →",
@@ -1470,7 +1546,7 @@ const i18n = {
     about_title: "Sanattan Örülmüş\nBir Hayat",
     about_p1: "Phridon Bolkvadze, Ağustos 1963'te Adigeni ilçesinin İkareti köyünde doğdu. 1990'da Tiflis Devlet Güzel Sanatlar Akademisi'nde moda tasarımı bölümüne kaydoldu ve 1995'te mezun oldu. 1996'dan bu yana Batum'da yaşamakta ve çalışmaktadır.",
     about_p2: "Phridon İkareteli takma adıyla şiir, novella ve fantazmagori yazar. Eserleri «Adjara», «Batum» ve «Sosyal Matsne» gazetelerinde, «Akhali Era» dergisinde yayımlandı. Şiirleri ulusal şiir yarışmalarında ilk ona girdi.",
-    about_p3: "Uluslararası plein-air seanslarına ve grup sergilerine aktif katılımcı olan sanatçı, çok sayıda ödülün sahibidir. İtalya Sicilya Uluslararası Büyükelçisi unvanına layık görülmüştür. Eserleri dünyanın farklı ülkelerinde özel ve devlet koleksiyonlarında bulunmaktadır.",
+    about_p3: "Uluslararası plein-air seanslarına ve grup sergilerine aktif katılımcı olan sanatçı, çok sayıda ödülün sahibidir. <span class=\"ambassador-link\" onclick=\"openAwardLb('images/award_guccione.jpeg', 'award_guccione_title', 'award_guccione_desc')\">İtalya Sicilya Uluslararası Büyükelçisi</span> unvanına layık görülmüştür. Eserleri dünyanın farklı ülkelerinde özel ve devlet koleksiyonlarında bulunmaktadır.",
     stat_exhibitions: "Sergi", stat_works: "Eser", stat_years: "Yaşam Yılı",
     label_gallery: "Seçili Eserler", gallery_title: "Vernisaj",
     gallery_all: "Tüm Eserleri Gör", gallery_vernissage: "Vernisaja Gir →",
@@ -1529,7 +1605,7 @@ const i18n = {
     about_title: "ხელოვნებით\nნაქსოვი სიცოცხლე",
     about_p1: "ფრიდონ ბოლქვაძე დაიბადა 1963 წლის აგვისტოში, ადიგენის რაიონის სოფელ იყარეთში. 1990 წელს ჩაირიცხა თბილისის სახელმწიფო სამხატვრო აკადემიის სამოსის მხატვრული მოდელირების ფაკულტეტზე, რომელიც 1995 წელს დაამთავრა. 1996 წლიდან ცხოვრობს და მუშაობს ბათუმში.",
     about_p2: "ფსევდონიმით «ფრიდონ იჯარეთელი» წერს ლექსებს, მოთხრობებს და ფანტასმაგორიებს. მისი ნაწარმოებები გამოქვეყნდა გაზეთებში «აჭარა», «ბათუმი», «სოციალ მაცნე» და ჟურნალში «ახალი ერა». ლექსები ეროვნულ კონკურსებში პირველ ათეულში მოხვდა.",
-    about_p3: "საერთაშორისო პლენერებისა და ჯგუფური გამოფენების აქტიური მონაწილე, მრავალი ჯილდოს ლაურეატი. მიენიჭა სიცილიის (იტალია) საერთაშორისო ელჩის წოდება. ნამუშევრები ინახება სხვადასხვა ქვეყნის კერძო და სახელმწიფო კოლექციებში.",
+    about_p3: "საერთაშორისო პლენერებისა და ჯგუფური გამოფენების აქტიური მონაწილე, მრავალი ჯილდოს ლაურეატი. მიენიჭა <span class=\"ambassador-link\" onclick=\"openAwardLb('images/award_guccione.jpeg', 'award_guccione_title', 'award_guccione_desc')\">სიცილიის (იტალია) საერთაშორისო ელჩის</span> წოდება. ნამუშევრები ინახება სხვადასხვა ქვეყნის კერძო და სახელმწიფო კოლექციებში.",
     stat_exhibitions: "გამოფენა", stat_works: "ნამუშევარი", stat_years: "ცხოვრების წელი",
     label_gallery: "რჩეული ნამუშევრები", gallery_title: "ვერნისაჟი",
     gallery_all: "ყველა ნამუშევარი", gallery_vernissage: "ვერნისაჟში შესვლა →",
@@ -1557,16 +1633,217 @@ const i18n = {
     ex_2024: 'პერსონალური გამოფენა',
     ex_2025: '«ანკარის ხელოვნება»',
     ex_2026: '«უსასრულობა»',
+  },
+  it: {
+    nav_home: "Home", nav_about: "Artista", nav_gallery: "Opere",
+    nav_exhibitions: "Mostre", nav_awards: "Premi", nav_vernissage: "Vernissage", nav_nft: "NFT", nav_contact: "Contatti",
+    nft_label: "Arte su Catena · Base Blockchain",
+    nft_title: "172 NFT su Base",
+    nft_sub: "Tre collezioni di opere d'arte originali coniate tramite Manifold. Ogni NFT è un certificato digitale unico di un dipinto di Phridon Bolkvadze, disponibile a partire da $20 su OpenSea.",
+    nft_stat_works: "Opere", nft_stat_cols: "Collezioni", nft_stat_price: "Per NFT",
+    nft_cta: "Esplora le collezioni NFT →",
+    hero_welcome: "Benvenuto",
+    hero_sub1: "Ultima mostra: «Infinity» · Batumi, Georgia · 2026",
+    hero_sub2: "Design Grafico",
+    hero_cta: "Visualizza Opere",
+    label_about: "L'Artista",
+    about_title: "Una vita intrecciata\ncon l'arte",
+    about_p1: "Phridon Bolkvadze è nato nell'agosto del 1963 nel villaggio di Ikareti, distretto di Adigeni. Nel 1990 si è iscritto alla Facoltà di Fashion Design presso l'Accademia Statale di Belle Arti di Tbilisi, diplomandosi nel 1995. Dal 1996 vive e lavora a Batumi.",
+    about_p2: "Con lo pseudonimo letterario Phridon Ikareteli scrive poesie, novelle e fantasmagorizzazione. Le sue opere sono state pubblicate nei giornali «Adjara», «Batumi» e «Social Matsne», e nella rivista «Akhali Era». Le sue poesie si sono classificate tra le prime dieci in concorsi nazionali.",
+    about_p3: "Partecipante attivo a plein-air internazionali e mostre collettive, è vincitore di numerosi premi ed è stato insignito del titolo di <span class=\"ambassador-link\" onclick=\"openAwardLb('images/award_guccione.jpeg', 'award_guccione_title', 'award_guccione_desc')\">Ambasciatore Internazionale della Sicilia (Italia)</span>. Le sue opere sono conservate in collezioni d'arte private e statali in tutto il mondo.",
+    stat_exhibitions: "Mostre", stat_works: "Opere", stat_years: "Anni di Vita",
+    label_gallery: "Opere Selezionate", gallery_title: "Vernissage",
+    gallery_all: "Tutte le Opere", gallery_vernissage: "Entra nel Vernissage →",
+    label_exhibitions: "Cronologia Mostre", exhibitions_title: "Mostre Personali",
+    label_contact: "Contattami", contact_title: "Contatta\nl'Artista",
+    map_caption: "Studio · Batumi, Georgia",
+    trust_payment: "We Accept", trust_bank: "Bonifico Bancario",
+    trust_shipping: "Spedizione in tutto il mondo", trust_track: "Tracciamento in tempo reale",
+    trust_insured: "Consegna Assicurata",
+    trust_note: "Tutte le opere d'arte originali sono accuratamente imballate e spedite in tutto il mondo. Tempi di consegna: Europa 3–7 giorni, Turchia 2–4 giorni, USA e Asia 7–14 giorni. Numero di tracciamento fornito alla spedizione.",
+    ex_1990: '“Dipinti Meditativi” — Mostra Personale',
+    ex_1994: '“Grafica a Colori” — Mostra Personale',
+    ex_2008: '“Sfondo Scuro” (Grafica)',
+    ex_2014a: '“Mostra per i Vicini” — In memoria di Nika Bolkvadze',
+    ex_2014b: '“Grafica Acromatica e Cromatica”',
+    ex_2015: '“La strada per l\'arcobaleno”',
+    ex_2018: '“Decorare lo Spazio”',
+    ex_2019a: 'Mostra Personale',
+    ex_2019b: '“ART MODERN”',
+    ex_2019c: '“EXPERIMENTAL” — Cittadella',
+    ex_2020: '“MONUMENTAL”',
+    ex_2022: '“La donna dei miei sogni”',
+    ex_2023a: 'Mostra del 60° Anniversario',
+    ex_2023b: '“Piazza Colorata”',
+    ex_2024: 'Mostra Personale',
+    ex_2025: '“Arte di Ankara”',
+    ex_2026: '“Infinity”',
+    label_awards: "Premi & Riconoscimenti",
+    awards_title: "Riconoscimenti Internazionali",
+    award_guccione_title: "Ambasciatore Internazionale della Cultura, dell'Arte e della Scienza",
+    award_guccione_desc: "Nominato dall'Associazione Culturale \"La via dell' Arte\" · Sicily / Ragusa, Italia · 2025",
+    award_izmir_title: "Certificato di Menzione d'Onore",
+    award_izmir_desc: "Mostra \"Convergence from Divergence\" · Museo della Pittura e della Scienza di Izmir, Turchia · 2025",
+    award_artankara_title: "Certificato di Partecipazione",
+    award_artankara_desc: "11a Fiera Internazionale d'Arte Contemporanea ArtAnkara · Ankara, Turchia · 2025",
+    award_gattopardo_title: "Premio Internazionale Giuseppe Tomasi di Lampedusa",
+    award_gattopardo_desc: "1a Biennale Internazionale d'Arte \"La magia dei colori nei luoghi del Gattopardo\" · Palma di Montechiaro, Italia · 2024–2025",
+    award_monterosso_title: "Premio delle Arti Internazionali",
+    award_monterosso_desc: "2a Collettiva Internazionale d'Arte \"I colori degli artisti per la pace nel mondo\" · Monterosso Almo, Italia · 2024",
+    award_acate_title: "3° Classificato, Trofeo Artistico Internazionale",
+    award_acate_desc: "Concorso Internazionale d'Arte \"Equinozio Culturale Acatese\" · Castello dei Principi di Biscari, Acate, Italia · 2024",
+  },
+  es: {
+    nav_home: "Inicio", nav_about: "Artista", nav_gallery: "Obras",
+    nav_exhibitions: "Exposiciones", nav_awards: "Premios", nav_vernissage: "Vernissage", nav_nft: "NFT", nav_contact: "Contacto",
+    nft_label: "Arte en Cadena · Base Blockchain",
+    nft_title: "172 NFT en Base",
+    nft_sub: "Tres colecciones de obras de arte originales acuñadas a través de Manifold. Cada NFT es un certificado digital único de una pintura de Phridon Bolkvadze, disponible desde $20 en OpenSea.",
+    nft_stat_works: "Obras", nft_stat_cols: "Colecciones", nft_stat_price: "Por NFT",
+    nft_cta: "Explorar las colecciones de NFT →",
+    hero_welcome: "Bienvenido",
+    hero_sub1: "Última exposición: «Infinity» · Batumi, Georgia · 2026",
+    hero_sub2: "Diseño Gráfico",
+    hero_cta: "Ver Obras",
+    label_about: "El Artista",
+    about_title: "Una vida tejida\ncon el arte",
+    about_p1: "Phridon Bolkvadze nació en agosto de 1963 en el pueblo de Ikareti, distrito de Adigeni. En 1990 ingresó en la Facultad de Diseño de Moda de la Academia Estatal de Bellas Artes de Tiflis, graduándose en 1995. Desde 1996 vive y trabaja en Batumi.",
+    about_p2: "Bajo el seudónimo de Phridon Ikareteli, escribe poesía, novelas y fantasmagorías. Sus obras han sido publicadas en los periódicos «Adjara», «Batumi» y «Social Matsne», y en la revista «Akhali Era». Sus poemas se clasificaron entre los diez primeros en concursos nacionales.",
+    about_p3: "Participante activo en sesiones al aire libre y exposiciones colectivas, es galardonado con numerosos premios y ha recibido el título de <span class=\"ambassador-link\" onclick=\"openAwardLb('images/award_guccione.jpeg', 'award_guccione_title', 'award_guccione_desc')\">Embajador Internacional de Sicilia (Italia)</span>. Sus obras se conservan en colecciones de arte privadas y estatales en todo el mundo.",
+    stat_exhibitions: "Exposiciones", stat_works: "Obras", stat_years: "Años de Vida",
+    label_gallery: "Obras Seleccionadas", gallery_title: "Vernissage",
+    gallery_all: "Todas las Obras", gallery_vernissage: "Entrar al Vernissage →",
+    label_exhibitions: "Historia de Exposiciones", exhibitions_title: "Exposiciones Personales",
+    label_contact: "Contacto", contact_title: "Contacto\ndel Artista",
+    map_caption: "Estudio · Batumi, Georgia",
+    trust_payment: "We Accept", trust_bank: "Transferencia Bancaria",
+    trust_shipping: "Envío a todo el mundo", trust_track: "Seguimiento en tiempo real",
+    trust_insured: "Entrega Asegurada",
+    trust_note: "Todas las obras de arte originales se embalan cuidadosamente y se envían a todo el mundo. Tiempos de entrega: Europa 3–7 días, Turquía 2–4 días, EE. UU. y Asia 7–14 días. Número de seguimiento proporcionado al realizar el envío.",
+    ex_1990: '“Pinturas Meditativas” — Exposición Personal',
+    ex_1994: '“Gráficos en Color” — Exposición Personal',
+    ex_2008: '“Fondo Oscuro” (Gráficos)',
+    ex_2014a: '“Exposición para Vecinos” — En memoria de Nika Bolkvadze',
+    ex_2014b: '“Gráficos Acromáticos y Cromáticos”',
+    ex_2015: '“El camino hacia el arcoíris”',
+    ex_2018: '“Decorar el Espacio”',
+    ex_2019a: 'Exposición Personal',
+    ex_2019b: '“ART MODERN”',
+    ex_2019c: '“EXPERIMENTAL” — Ciudadela',
+    ex_2020: '“MONUMENTAL”',
+    ex_2022: '“La mujer de mis sueños”',
+    ex_2023a: 'Exposición del 60° Aniversario',
+    ex_2023b: '“Plaza Colorida”',
+    ex_2024: 'Exposición Personal',
+    ex_2025: '“Arte de Ankara”',
+    ex_2026: '“Infinity”',
+    label_awards: "Premios & Reconocimientos",
+    awards_title: "Reconocimientos Internacionales",
+    award_guccione_title: "Embajador Internacional de la Cultura, el Arte y la Ciencia",
+    award_guccione_desc: "Nominado por la Asociación Cultural \"La via dell' Arte\" · Sicilia / Ragusa, Italia · 2025",
+    award_izmir_title: "Certificado de Mención de Honor",
+    award_izmir_desc: "Exposición \"Convergence from Divergence\" · Museo de Pintura y Escultura de Izmir, Turquía · 2025",
+    award_artankara_title: "Certificado de Participación",
+    award_artankara_desc: "11ª Feria Internacional de Arte Contemporáneo ArtAnkara · Ankara, Turquía · 2025",
+    award_gattopardo_title: "Premio Internacional Giuseppe Tomasi di Lampedusa",
+    award_gattopardo_desc: "1ª Bienal Internacional de Arte \"La magia dei colori nei luoghi del Gattopardo\" · Palma di Montechiaro, Italia · 2024–2025",
+    award_monterosso_title: "Premio de las Artes Internacionales",
+    award_monterosso_desc: "2ª Colectiva Internacional de Arte \"I colori degli artisti per la pace nel mondo\" · Monterosso Almo, Italia · 2024",
+    award_acate_title: "3° Lugar, Trofeo Artístico Internacional",
+    award_acate_desc: "Concurso Internacional de Arte \"Equinozio Culturale Acatese\" · Castillo de los Príncipes de Biscari, Acate, Italia · 2024",
+  },
+  ja: {
+    nav_home: "ホーム", nav_about: "アーティストについて", nav_gallery: "作品一覧",
+    nav_exhibitions: "展覧会", nav_awards: "受賞・認定", nav_vernissage: "ヴェルニサージュ", nav_nft: "NFT", nav_contact: "お問い合わせ",
+    nft_label: "オンチェーン・アート · Baseブロックチェーン",
+    nft_title: "172作品のNFT",
+    nft_sub: "Manifoldを通じてミントされたオリジナル絵画の3つのコレクション。各NFTはフリードン・ボルクヴァゼのオリジナル絵画のユニークなデジタル証明書であり、OpenSeaにて$20からご購入いただけます。",
+    nft_stat_works: "作品数", nft_stat_cols: "コレクション数", nft_stat_price: "NFT単価",
+    nft_cta: "NFTコレクションを見る →",
+    hero_welcome: "ようこそ",
+    hero_sub1: "最新展覧会: «Infinity» · ジョージア州バトゥミ · 2026年",
+    hero_sub2: "グラフィックデザイン",
+    hero_cta: "作品を見る",
+    label_about: "アーティストについて",
+    about_title: "芸術が紡ぐ\n生涯",
+    about_p1: "フリードン・ボルクヴァゼは、1963年8月にアディゲニ地区 of イカレティ村で生まれました。1990年にトビリシ国立美術アカデミーのファッションデザイン学部に入学し、1995年に卒業。1996年よりバトゥミに在住し、制作活動を行っています。",
+    about_p2: "「フリードン・イカレテリ」の筆名で、詩、短編小説、ファンタスマゴリアを執筆。作品は「アジャラ」、「バトゥミ」、「ソシアル・マツネ」などの新聞や、「アハリ・エラ」誌に掲載されています。彼の詩は、全国詩歌コンクールでトップ10にランクインしました。",
+    about_p3: "国際的な野外スケッチ会やグループ展に精力的に参加し、多数 of 賞を受賞。また、イタリアの<span class=\"ambassador-link\" onclick=\"openAwardLb('images/award_guccione.jpeg', 'award_guccione_title', 'award_guccione_desc')\">シチリア州国際文化大使</span>の称号を授与されています。作品は世界各地の個人および公立の美術コレクションに収蔵されています。",
+    stat_exhibitions: "展覧会", stat_works: "作品数", stat_years: "年齢",
+    label_gallery: "選定作品", gallery_title: "ヴェルニサージュ",
+    gallery_all: "全作品を表示", gallery_vernissage: "ヴェルニサージュに入る →",
+    label_exhibitions: "展覧会歴", exhibitions_title: "個展",
+    label_contact: "ご連絡", contact_title: "作家への\nお問い合わせ",
+    map_caption: "アトリエ · ジョージア州バトゥミ",
+    trust_payment: "We Accept", trust_bank: "銀行振込",
+    trust_shipping: "世界遺送対応", trust_track: "追跡サービス",
+    trust_insured: "配送保険完備",
+    trust_note: "すべてのオリジナル作品は、丁寧に梱包され世界各地へ配送されます。お届け期間の目安：ヨーロッパ3〜7日、トルコ2〜4日、米国およびアジア7〜14日。発送時に追跡番号をお知らせいたします。",
+    ex_1990: '「瞑想的絵画」 — 個展',
+    ex_1994: '「色彩グラフィックス」 — 個展',
+    ex_2008: '「ダーク・バックグラウンド」（グラフィック展）',
+    ex_2014a: '「隣人のための展覧会」 — ニカ・ボルクヴァゼ追悼',
+    ex_2014b: '「無彩色と有彩色のグラフィック」',
+    ex_2015: '「虹への道」',
+    ex_2018: '「空間を飾る」',
+    ex_2019a: '個展',
+    ex_2019b: '「ART MODERN」',
+    ex_2019c: '「EXPERIMENTAL」 — シタデル',
+    ex_2020: '「MONUMENTAL」',
+    ex_2022: '「私の夢の女性」',
+    ex_2023a: '60周年記念展',
+    ex_2023b: '「カラフルな広場」',
+    ex_2024: '個展',
+    ex_2025: '「アンカラの芸術」',
+    ex_2026: '「インフィニティ（無限）」',
+    label_awards: "受賞 & 認定",
+    awards_title: "国際的評価",
+    award_guccione_title: "文化・芸術・科学の国際大使",
+    award_guccione_desc: "「La via dell' Arte」文化協会より任命 · イタリア、シチリア / ラグーザ · 2025年",
+    award_izmir_title: "佳作賞（Honorable Mention）認定書",
+    award_izmir_desc: "「Convergence from Divergence」展 · イズミル絵画彫刻美術館、トルコ · 2025年",
+    award_artankara_title: "参加証明書",
+    award_artankara_desc: "第11回 ArtAnkara 国際現代アートフェア · トルコ、アンカラ · 2025年",
+    award_gattopardo_title: "ジュゼペ・トマージ・ディ・ランペドゥーザ国際賞",
+    award_gattopardo_desc: "第1回 国際美術ビエンナーレ \"La magia dei colori nei luoghi del Gattopardo\" · イタリア、パルマ・ディ・モンテキアーロ · 2024–2025年",
+    award_monterosso_title: "国際芸術賞",
+    award_monterosso_desc: "第2回 国際共同美術展 \"I colori degli artisti per la pace nel mondo\" · イタリア、モンテロッソ・アルモ · 2024年",
+    award_acate_title: "国際アートトロフィー 第3位",
+    award_acate_desc: "国際アートコンテスト \"Equinozio Culturale Acatese\" · イタリア、アカーテ、ビスカリ公爵城 · 2024年",
   }
 };
 
-let currentLang = localStorage.getItem('ijareteli_lang') || 'en';
+// Browser language detection & initialization
+let currentLang = localStorage.getItem('ijareteli_lang');
+if (!currentLang) {
+  const userLang = (navigator.language || navigator.userLanguage).toLowerCase();
+  if (userLang.startsWith('ka')) currentLang = 'ka';
+  else if (userLang.startsWith('ru')) currentLang = 'ru';
+  else if (userLang.startsWith('tr')) currentLang = 'tr';
+  else if (userLang.startsWith('it')) currentLang = 'it';
+  else if (userLang.startsWith('es')) currentLang = 'es';
+  else if (userLang.startsWith('ja')) currentLang = 'ja';
+  else currentLang = 'en';
+  localStorage.setItem('ijareteli_lang', currentLang);
+}
 
 function setLang(lang) {
   currentLang = lang;
   localStorage.setItem('ijareteli_lang', lang);
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  
+  // Update dropdown triggers
+  document.querySelectorAll('.lang-dropdown-trigger').forEach(trigger => {
+    trigger.textContent = lang.toUpperCase();
+  });
+  
+  // Update active status on dropdown items
+  document.querySelectorAll('.lang-dropdown-item').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('onclick').includes(`'${lang}'`)) {
+      btn.classList.add('active');
+    }
+  });
+
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (i18n[lang] && i18n[lang][key]) {
@@ -1636,6 +1913,54 @@ document.addEventListener('keydown', e => {
     closeAwardLb();
   } 
 });
+
+// Ambassador Certificate hover preview and touch handler
+(function() {
+  const preview = document.createElement('div');
+  preview.id = 'ambassadorPreview';
+  preview.style.cssText = 'display:none;position:fixed;width:220px;aspect-ratio:924/1024;z-index:999;box-shadow:0 15px 40px rgba(0,0,0,0.3);border:2px solid var(--gold-light);background:var(--warm-white);padding:4px;pointer-events:none;opacity:0;transition:opacity 0.2s ease;';
+  preview.innerHTML = '<img src="images/award_guccione.jpeg" alt="Ambassador Certificate" style="width:100%;height:100%;object-fit:contain;">';
+  document.body.appendChild(preview);
+
+  // Check if touch device
+  const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+  document.addEventListener('mouseover', (e) => {
+    if (isTouch || window.innerWidth < 768) return; // Disable hover on mobile/tablets
+    const link = e.target.closest('.ambassador-link');
+    if (!link) return;
+    preview.style.display = 'block';
+    preview.style.left = `${e.clientX + 15}px`;
+    preview.style.top = `${e.clientY + 15}px`;
+    setTimeout(() => preview.style.opacity = '1', 10);
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (isTouch || window.innerWidth < 768) return;
+    const link = e.target.closest('.ambassador-link');
+    if (!link) return;
+    preview.style.opacity = '0';
+    preview.style.display = 'none';
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (isTouch || window.innerWidth < 768) return;
+    const link = e.target.closest('.ambassador-link');
+    if (!link) return;
+    
+    // Position check to keep inside screen boundaries
+    let x = e.clientX + 15;
+    let y = e.clientY + 15;
+    if (x + 220 > window.innerWidth) {
+      x = e.clientX - 235;
+    }
+    if (y + 245 > window.innerHeight) {
+      y = e.clientY - 260;
+    }
+    preview.style.left = `${x}px`;
+    preview.style.top = `${y}px`;
+  });
+})();
 
 // Set default
 setLang(currentLang);

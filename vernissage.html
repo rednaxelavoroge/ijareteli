@@ -104,27 +104,85 @@
   .nav-links a:hover::after, .nav-links a.current::after { width: 100%; }
   .nav-links a:hover, .nav-links a.current { color: var(--gold); }
 
-  .lang-switch {
-    display: flex;
-    gap: 0.4rem;
-    align-items: center;
+  /* Language switcher dropdown */
+  .lang-dropdown {
+    position: relative;
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
   }
 
-  .lang-btn {
+  .lang-dropdown-trigger {
     background: transparent;
     border: 1px solid var(--border);
-    color: var(--mid);
-    padding: 0.3rem 0.6rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--charcoal);
     cursor: pointer;
-    font-family: 'Jost', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
     transition: all 0.3s;
   }
 
-  .lang-btn.active, .lang-btn:hover {
-    border-color: var(--gold);
+  .lang-dropdown-trigger:hover {
+    border-color: var(--gold-light);
     color: var(--gold);
+  }
+
+  .lang-dropdown-trigger::after {
+    content: '▾';
+    font-size: 0.6rem;
+    opacity: 0.7;
+  }
+
+  .lang-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(28,28,28,0.08);
+    min-width: 90px;
+    z-index: 100;
+    margin-top: 4px;
+    animation: fadeIn 0.15s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .lang-dropdown:hover .lang-dropdown-content {
+    display: block;
+  }
+
+  .lang-dropdown-item {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--mid);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .lang-dropdown-item:hover {
+    background: var(--cream);
+    color: var(--charcoal);
+  }
+
+  .lang-dropdown-item.active {
+    color: var(--gold);
+    font-weight: 500;
   }
 
   .menu-toggle {
@@ -662,11 +720,17 @@
     <li><a href="index.html#awards" data-i18n="nav_awards">Awards</a></li>
     <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
-  <div class="lang-switch">
-    <button class="lang-btn" onclick="setLang('ka')">ქA</button>
-    <button class="lang-btn" onclick="setLang('tr')">TR</button>
-    <button class="lang-btn" onclick="setLang('ru')">RU</button>
-    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+  <div class="lang-dropdown">
+    <button class="lang-dropdown-trigger" id="langTrigger">EN</button>
+    <div class="lang-dropdown-content">
+      <button class="lang-dropdown-item active" onclick="setLang('en')">EN</button>
+      <button class="lang-dropdown-item" onclick="setLang('ka')">ქA</button>
+      <button class="lang-dropdown-item" onclick="setLang('ru')">RU</button>
+      <button class="lang-dropdown-item" onclick="setLang('tr')">TR</button>
+      <button class="lang-dropdown-item" onclick="setLang('it')">IT</button>
+      <button class="lang-dropdown-item" onclick="setLang('es')">ES</button>
+      <button class="lang-dropdown-item" onclick="setLang('ja')">JA</button>
+    </div>
   </div>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 </nav>
@@ -802,17 +866,76 @@ const i18n = {
     btn_original: "ორიგინალის ყიდვა", btn_nft: "Mint NFT", btn_soon: "მალე",
     pm_label: "ორიგინალი ნამუშევარი", pm_sub: "ორიგინალის შესაძენად დაუკავშირდით მხატვარს პირდაპირ. ის მოგაწვდის ფასის, ზომის და მიწოდების დეტალებს.",
     pm_wa: "WhatsApp-ში დაწერა", pm_or: "ან", pm_email: "Email გაგზავნა"
+  },
+  it: {
+    nav_home: "Home", nav_about: "Artista", nav_gallery: "Opere",
+    nav_exhibitions: "Mostre", nav_awards: "Premi", nav_vernissage: "Vernissage", nav_contact: "Contatti",
+    label_vernissage: "La Collezione Completa",
+    vernissage_title: "Vernissage",
+    vernissage_sub: "Una passeggiata curata tra le opere di Phridon Bolkvadze — disegni, dipinti, grafiche e composizioni di quattro decenni di attività.",
+    filter_all: "Tutte le Opere", filter_s1: "Serie I", filter_s2: "Serie II", filter_s3: "Serie III", filter_s4: "Serie IV",
+    back_home: "← Torna alla Home",
+    btn_original: "Acquista Originale", btn_nft: "Conia NFT", btn_soon: "Presto",
+    pm_label: "Opera d'Arte Originale", pm_sub: "Per acquistare l'originale, contatta direttamente l'artista. L'artista fornirà prezzi, dimensioni e dettagli di spedizione.",
+    pm_wa: "Scrivi su WhatsApp", pm_or: "oppure", pm_email: "Invia Email"
+  },
+  es: {
+    nav_home: "Inicio", nav_about: "Artista", nav_gallery: "Obras",
+    nav_exhibitions: "Exposiciones", nav_awards: "Premios", nav_vernissage: "Vernissage", nav_contact: "Contacto",
+    label_vernissage: "La Colección Completa",
+    vernissage_title: "Vernissage",
+    vernissage_sub: "Un recorrido curado por las obras de Phridon Bolkvadze: dibujos, pinturas, gráficos y composiciones de cuatro décadas de trayectoria.",
+    filter_all: "Todas las Obras", filter_s1: "Serie I", filter_s2: "Serie II", filter_s3: "Serie III", filter_s4: "Serie IV",
+    back_home: "← Volver al Inicio",
+    btn_original: "Comprar Original", btn_nft: "Acuñar NFT", btn_soon: "Pronto",
+    pm_label: "Obra de Arte Original", pm_sub: "Para comprar el original, póngase en contacto directamente con el artista. Él le proporcionará información sobre el precio, dimensiones y envío.",
+    pm_wa: "Escribir por WhatsApp", pm_or: "o", pm_email: "Enviar Correo"
+  },
+  ja: {
+    nav_home: "ホーム", nav_about: "アーティストについて", nav_gallery: "作品一覧",
+    nav_exhibitions: "展覧会", nav_awards: "受賞・認定", nav_vernissage: "ヴェルニサージュ", nav_contact: "お問い合わせ",
+    label_vernissage: "コンプリート・コレクション",
+    vernissage_title: "ヴェルニサージュ",
+    vernissage_sub: "フリードン・ボルクヴァゼの作品をめぐるキュレーションされた散歩道 — 40年にわたる制作活動から生まれた素描、絵画、グラフィック、構図。",
+    filter_all: "すべての作品", filter_s1: "シリーズ I", filter_s2: "シリーズ II", filter_s3: "シリーズ III", filter_s4: "シリーズ IV",
+    back_home: "← ホームに戻る",
+    btn_original: "オリジナルを購入", btn_nft: "NFTをミント", btn_soon: "近日公開",
+    pm_label: "オリジナル作品", pm_sub: "オリジナル作品のご購入は、作家へ直接お問い合わせください。価格、サイズ、配送方法の詳細をご案内いたします。",
+    pm_wa: "WhatsAppで連絡", pm_or: "または", pm_email: "メールを送信"
   }
 };
 
-let currentLang = localStorage.getItem('ijareteli_lang') || 'en';
+// Browser language detection & initialization
+let currentLang = localStorage.getItem('ijareteli_lang');
+if (!currentLang) {
+  const userLang = (navigator.language || navigator.userLanguage).toLowerCase();
+  if (userLang.startsWith('ka')) currentLang = 'ka';
+  else if (userLang.startsWith('ru')) currentLang = 'ru';
+  else if (userLang.startsWith('tr')) currentLang = 'tr';
+  else if (userLang.startsWith('it')) currentLang = 'it';
+  else if (userLang.startsWith('es')) currentLang = 'es';
+  else if (userLang.startsWith('ja')) currentLang = 'ja';
+  else currentLang = 'en';
+  localStorage.setItem('ijareteli_lang', currentLang);
+}
 
 function setLang(lang) {
   currentLang = lang;
   localStorage.setItem('ijareteli_lang', lang);
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-  const btn = document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`);
-  if (btn) btn.classList.add('active');
+  
+  // Update dropdown triggers
+  document.querySelectorAll('.lang-dropdown-trigger').forEach(trigger => {
+    trigger.textContent = lang.toUpperCase();
+  });
+  
+  // Update active status on dropdown items
+  document.querySelectorAll('.lang-dropdown-item').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('onclick').includes(`'${lang}'`)) {
+      btn.classList.add('active');
+    }
+  });
+
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (i18n[lang] && i18n[lang][key]) {
@@ -938,7 +1061,10 @@ function openPurchaseModal(n) {
     en: `Hello! I am interested in purchasing the original of Work №${num}. Please provide details on price, dimensions and shipping.`,
     ru: `Здравствуйте! Хочу купить оригинал работы №${num}. Пожалуйста, сообщите цену, размер и условия доставки.`,
     tr: `Merhaba! ${num} numaralı eserin orijinalini satın almak istiyorum. Lütfen fiyat, boyut ve teslimat bilgilerini paylaşın.`,
-    ka: `გამარჯობა! მაინტერესებს №${num} ნამუშევრის ორიგინალის შეძენა. გთხოვთ მომაწოდოთ ფასი, ზომა და მიწოდების დეტალები.`
+    ka: `გამარჯობა! მაინტერესებს №${num} ნამუშევრის ორიგინალის შეძენა. გთხოვთ მომაწოდოთ ფასი, ზომა და მიწოდების დეტალები.`,
+    it: `Ciao! Sono interessato all'acquisto dell'originale dell'opera №${num}. Per favore, forniscimi dettagli su prezzo, dimensioni e spedizione.`,
+    es: `¡Hola! Estoy interesado en comprar el original de la obra №${num}. Por favor, facilíteme detalles sobre el precio, dimensiones y envío.`,
+    ja: `こんにちは！作品 №${num} のオリジナル購入に興味があります。価格、サイズ、配送方法の詳細を教えていただけますでしょうか。`
   };
   const msg = msgs[lang] || msgs.en;
   const waUrl = `https://wa.me/995555692224?text=${encodeURIComponent(msg)}`;
