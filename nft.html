@@ -676,7 +676,7 @@
       <p class="collection-desc" data-i18n="series2_desc">60 paintings from the second series — expressive compositions and vivid colour fields.</p>
       <div class="collection-badges">
         <span class="badge"><span class="badge-dot"></span><span data-i18n="badge_60">60 works</span></span>
-        <span class="badge"><span class="badge-dot"></span>$20 USD</span>
+        <span class="badge"><span class="badge-dot"></span>$30 USD</span>
         <span class="badge"><span class="badge-dot"></span>Base</span>
         <span class="badge"><span class="badge-dot"></span>Manifold</span>
       </div>
@@ -700,7 +700,7 @@
       <p class="collection-desc" data-i18n="series5_desc">63 works from the fifth series — bold graphics, dynamic lines and layered textures.</p>
       <div class="collection-badges">
         <span class="badge"><span class="badge-dot"></span><span data-i18n="badge_63">63 works</span></span>
-        <span class="badge"><span class="badge-dot"></span>$20 USD</span>
+        <span class="badge"><span class="badge-dot"></span>$50 USD</span>
         <span class="badge"><span class="badge-dot"></span>Base</span>
         <span class="badge"><span class="badge-dot"></span>Manifold</span>
       </div>
@@ -754,7 +754,7 @@
         </div>
         <div class="lb-meta-row">
           <span class="lb-meta-label" data-i18n="lb_price">Price</span>
-          <span class="lb-price">$20 USD</span>
+          <span class="lb-price" id="lbPrice">$20 USD</span>
         </div>
       </div>
       <a class="lb-buy-btn" id="lbBuyBtn" href="#" target="_blank" rel="noopener">
@@ -786,6 +786,7 @@ const COLLECTIONS = [
     openseaItem: id => `https://opensea.io/item/base/0x149131c16e480b6cf0e960c90dea5e370e1d6a69/${id}`,
     gridEl: 'grid-coffee',
     nameKey: 'coffee_name',
+    price: '$20',
   },
   {
     id: 'series2',
@@ -796,6 +797,7 @@ const COLLECTIONS = [
     openseaItem: id => `https://opensea.io/item/base/0xea579fbc1b1d2bee004d3dee295b45bc5b5adeeb/${id}`,
     gridEl: 'grid-series2',
     nameKey: 'series2_name',
+    price: '$30',
   },
   {
     id: 'series5',
@@ -806,6 +808,7 @@ const COLLECTIONS = [
     openseaItem: id => `https://opensea.io/item/base/0x227a5500fb34156f1d10fb6a7c93ad11c6e8d05d/${id}`,
     gridEl: 'grid-series5',
     nameKey: 'series5_name',
+    price: '$50',
   },
 ];
 
@@ -946,7 +949,7 @@ function buildGrids() {
       const imgSrc = IPFS + col.imgFile(id);
       div.innerHTML = `
         <img src="${imgSrc}" alt="${col.id} #${id}" loading="lazy">
-        <span class="nft-item-num">#${id}</span>
+        <span class="nft-item-num">#${id} · ${col.price}</span>
       `;
       div.onclick = () => openLightbox(col, id);
       frag.appendChild(div);
@@ -993,6 +996,7 @@ function updateLightbox() {
   document.getElementById('lbBuyBtn').href = lbCol.openseaItem(lbTokenId);
   document.getElementById('lbTokenId').textContent = lbTokenId;
   document.getElementById('lbContractShort').textContent = shortContract(lbCol.contract);
+  document.getElementById('lbPrice').textContent = `${lbCol.price} USD`;
   updateLightboxText();
 }
 
