@@ -412,6 +412,103 @@
     color: var(--mid);
   }
 
+  /* ── AWARDS & RECOGNITION ── */
+  #awards {
+    background: var(--warm-white);
+    border-top: 1px solid var(--border);
+  }
+
+  .awards-header {
+    margin-bottom: 4rem;
+    text-align: center;
+  }
+
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 2.5rem;
+  }
+
+  .award-item {
+    display: flex;
+    flex-direction: column;
+    cursor: zoom-in;
+    transition: transform 0.4s ease;
+  }
+
+  .award-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .award-img-frame {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(28,28,28,0.03);
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+
+  .award-item:hover .award-img-frame {
+    box-shadow: 0 12px 30px rgba(28,28,28,0.1);
+    border-color: var(--gold-light);
+  }
+
+  .award-img-frame img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+  }
+
+  .award-item:hover .award-img-frame img {
+    transform: scale(1.03);
+  }
+
+  .award-info {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+
+  .award-item-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--charcoal);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .award-item-desc {
+    font-size: 0.78rem;
+    color: var(--mid);
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 900px) {
+    .awards-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem 2rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .awards-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .award-img-frame {
+      padding: 1rem;
+    }
+  }
+
   /* ── GALLERY PREVIEW ── */
   #gallery {
     padding: 7rem 5rem;
@@ -783,6 +880,7 @@
     <li><a href="#about" data-i18n="nav_about">About</a></li>
     <li><a href="#gallery" data-i18n="nav_gallery">Works</a></li>
     <li><a href="#exhibitions" data-i18n="nav_exhibitions">Exhibitions</a></li>
+    <li><a href="#awards" data-i18n="nav_awards">Awards</a></li>
     <li><a href="vernissage.html" data-i18n="nav_vernissage">Vernissage</a></li>
     <li><a href="nft.html" data-i18n="nav_nft">NFT</a></li>
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
@@ -852,6 +950,76 @@
       <div>
         <div class="stat-num">60+</div>
         <div class="stat-label" data-i18n="stat_years">Years of Life</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS & RECOGNITION -->
+<section id="awards">
+  <div class="awards-header fade-up">
+    <p class="section-label" data-i18n="label_awards">Awards & Recognition</p>
+    <h2 class="section-title" data-i18n="awards_title">International Accolades</h2>
+  </div>
+  <div class="awards-grid fade-up">
+    <!-- Card 1: Guccione (Ambassador) -->
+    <div class="award-item" onclick="openAwardLb('images/award_guccione.jpeg', 'award_guccione_title', 'award_guccione_desc')">
+      <div class="award-img-frame">
+        <img src="images/award_guccione.jpeg" alt="International Ambassador of Culture, Art and Science" loading="lazy">
+      </div>
+      <div class="award-info">
+        <h3 class="award-item-title" data-i18n="award_guccione_title">International Ambassador of Culture, Art and Science</h3>
+        <p class="award-item-desc" data-i18n="award_guccione_desc">Cultural Association "La via dell' Arte" · Sicily / Ragusa, Italy · 2025</p>
+      </div>
+    </div>
+    <!-- Card 5: Izmir (Honorable Mention) -->
+    <div class="award-item" onclick="openAwardLb('images/award_izmir.jpeg', 'award_izmir_title', 'award_izmir_desc')">
+      <div class="award-img-frame">
+        <img src="images/award_izmir.jpeg" alt="Certificate of Honorable Mention" loading="lazy">
+      </div>
+      <div class="award-info">
+        <h3 class="award-item-title" data-i18n="award_izmir_title">Certificate of Honorable Mention</h3>
+        <p class="award-item-desc" data-i18n="award_izmir_desc">"Convergence from Divergence" Exhibition, Izmir Painting and Sculpture Museum · Izmir, Turkey · 2025</p>
+      </div>
+    </div>
+    <!-- Card 2: ArtAnkara (Participation) -->
+    <div class="award-item" onclick="openAwardLb('images/award_artankara.jpeg', 'award_artankara_title', 'award_artankara_desc')">
+      <div class="award-img-frame">
+        <img src="images/award_artankara.jpeg" alt="Certificate of Participation" loading="lazy">
+      </div>
+      <div class="award-info">
+        <h3 class="award-item-title" data-i18n="award_artankara_title">Certificate of Participation</h3>
+        <p class="award-item-desc" data-i18n="award_artankara_desc">11th ArtAnkara International Contemporary Art Fair · Ankara, Turkey · 2025</p>
+      </div>
+    </div>
+    <!-- Card 3: Gattopardo (Lampedusa Award) -->
+    <div class="award-item" onclick="openAwardLb('images/award_gattopardo.jpeg', 'award_gattopardo_title', 'award_gattopardo_desc')">
+      <div class="award-img-frame">
+        <img src="images/award_gattopardo.jpeg" alt="International Giuseppe Tomasi di Lampedusa Award" loading="lazy">
+      </div>
+      <div class="award-info">
+        <h3 class="award-item-title" data-i18n="award_gattopardo_title">International Giuseppe Tomasi di Lampedusa Award</h3>
+        <p class="award-item-desc" data-i18n="award_gattopardo_desc">1st International Art Biennale · Palma di Montechiaro, Italy · 2024–2025</p>
+      </div>
+    </div>
+    <!-- Card 4: Monterosso (Arts Award) -->
+    <div class="award-item" onclick="openAwardLb('images/award_monterosso.jpeg', 'award_monterosso_title', 'award_monterosso_desc')">
+      <div class="award-img-frame">
+        <img src="images/award_monterosso.jpeg" alt="International Arts Award" loading="lazy">
+      </div>
+      <div class="award-info">
+        <h3 class="award-item-title" data-i18n="award_monterosso_title">International Arts Award</h3>
+        <p class="award-item-desc" data-i18n="award_monterosso_desc">2nd International Art Exhibition · Monterosso Almo, Italy · 2024</p>
+      </div>
+    </div>
+    <!-- Card 6: Acate (3rd Place) -->
+    <div class="award-item" onclick="openAwardLb('images/award_acate.jpeg', 'award_acate_title', 'award_acate_desc')">
+      <div class="award-img-frame">
+        <img src="images/award_acate.jpeg" alt="3rd Place, International Art Trophy" loading="lazy">
+      </div>
+      <div class="award-info">
+        <h3 class="award-item-title" data-i18n="award_acate_title">3rd Place, International Art Trophy</h3>
+        <p class="award-item-desc" data-i18n="award_acate_desc">"Equinozio Culturale Acatese" · Acate, Italy · 2024</p>
       </div>
     </div>
   </div>
@@ -1157,7 +1325,21 @@
 const i18n = {
   en: {
     nav_home: "Home", nav_about: "About", nav_gallery: "Works",
-    nav_exhibitions: "Exhibitions", nav_vernissage: "Vernissage", nav_nft: "NFT", nav_contact: "Contact",
+    nav_exhibitions: "Exhibitions", nav_awards: "Awards", nav_vernissage: "Vernissage", nav_nft: "NFT", nav_contact: "Contact",
+    label_awards: "Awards & Recognition",
+    awards_title: "International Accolades",
+    award_guccione_title: "International Ambassador of Culture, Art and Science",
+    award_guccione_desc: "Nominated by Cultural Association \"La via dell' Arte\" · Sicily / Ragusa, Italy · 2025",
+    award_izmir_title: "Certificate of Honorable Mention",
+    award_izmir_desc: "\"Convergence from Divergence\" Exhibition · Izmir Painting and Sculpture Museum, Turkey · 2025",
+    award_artankara_title: "Certificate of Participation",
+    award_artankara_desc: "11th ArtAnkara International Contemporary Art Fair · Ankara, Turkey · 2025",
+    award_gattopardo_title: "International Giuseppe Tomasi di Lampedusa Award",
+    award_gattopardo_desc: "1st International Art Biennale \"La magia dei colori nei luoghi del Gattopardo\" · Palma di Montechiaro, Italy · 2024–2025",
+    award_monterosso_title: "International Arts Award",
+    award_monterosso_desc: "2nd International Art Exhibition \"I colori degli artisti per la pace nel mondo\" · Monterosso Almo, Italy · 2024",
+    award_acate_title: "3rd Place, International Art Trophy",
+    award_acate_desc: "International Art Contest \"Equinozio Culturale Acatese\" · Castello dei Principi di Biscari, Acate, Italy · 2024",
     nft_label: "On-Chain Art · Base Blockchain",
     nft_title: "172 NFTs on Base",
     nft_sub: "Three collections of original artworks minted via Manifold. Each NFT is a unique digital certificate of a painting by Phridon Bolkvadze, available from $20 on OpenSea.",
@@ -1201,7 +1383,21 @@ const i18n = {
   },
   ru: {
     nav_home: "Главная", nav_about: "О художнике", nav_gallery: "Работы",
-    nav_exhibitions: "Выставки", nav_vernissage: "Вернисаж", nav_nft: "NFT", nav_contact: "Контакты",
+    nav_exhibitions: "Выставки", nav_awards: "Награды", nav_vernissage: "Вернисаж", nav_nft: "NFT", nav_contact: "Контакты",
+    label_awards: "Награды и признание",
+    awards_title: "Международное признание",
+    award_guccione_title: "Международный посол культуры, искусства и науки",
+    award_guccione_desc: "Присвоено Культурной ассоциацией «La via dell’ Arte» · Сицилия / Рагуза, Италия · 2025",
+    award_izmir_title: "Почетный диплом (Honorable Mention)",
+    award_izmir_desc: "Выставка «Convergence from Divergence» · Измирский музей живописи и скульптуры, Турция · 2025",
+    award_artankara_title: "Диплом участника",
+    award_artankara_desc: "XI Международная ярмарка современного искусства ArtAnkara · Анкара, Турция · 2025",
+    award_gattopardo_title: "Международная премия им. Джузеппе Томази ди Лампедуза",
+    award_gattopardo_desc: "I Международная биеннале искусств «La magia dei colori nei luoghi del Gattopardo» · Пальма-ди-Монтекьяро, Италия · 2024–2025",
+    award_monterosso_title: "Международная премия в области искусств",
+    award_monterosso_desc: "II Международная художественная выставка «I colori degli artisti per la pace nel mondo» · Монтероссо-Альмо, Италия · 2024",
+    award_acate_title: "III место, Международный художественный кубок",
+    award_acate_desc: "Международный конкурс искусств «Equinozio Culturale Acatese» · Замок князей Бискари, Акате, Италия · 2024",
     nft_label: "Искусство в блокчейне · Base",
     nft_title: "172 NFT на Base",
     nft_sub: "Три коллекции оригинальных работ, заминченных через Manifold. Каждая NFT — уникальный цифровой сертификат картины Фридона Болквадзе, доступный от $20 на OpenSea.",
@@ -1246,7 +1442,21 @@ const i18n = {
   },
   tr: {
     nav_home: "Ana Sayfa", nav_about: "Hakkında", nav_gallery: "Eserler",
-    nav_exhibitions: "Sergiler", nav_vernissage: "Vernisaj", nav_nft: "NFT", nav_contact: "İletişim",
+    nav_exhibitions: "Sergiler", nav_awards: "Ödüller", nav_vernissage: "Vernisaj", nav_nft: "NFT", nav_contact: "İletişim",
+    label_awards: "Ödüller ve Takdirler",
+    awards_title: "Uluslararası Başarılar",
+    award_guccione_title: "Uluslararası Kültür, Sanat ve Bilim Elçisi",
+    award_guccione_desc: "\"La via dell' Arte\" Kültür Derneği tarafından atanmıştır · Sicilya / Ragusa, İtalya · 2025",
+    award_izmir_title: "Onur Belgesi",
+    award_izmir_desc: "\"Convergence from Divergence\" Sergisi · İzmir Resim ve Heykel Müzesi, Türkiye · 2025",
+    award_artankara_title: "Katılım Belgesi",
+    award_artankara_desc: "11. ArtAnkara Uluslararası Çağdaş Sanat Fuarı · Ankara, Türkiye · 2025",
+    award_gattopardo_title: "Uluslararası Giuseppe Tomasi di Lampedusa Ödülü",
+    award_gattopardo_desc: "1. Uluslararası Sanat Bienali \"La magia dei colori nei luoghi del Gattopardo\" · Palma di Montechiaro, İtalya · 2024–2025",
+    award_monterosso_title: "Uluslararası Sanat Ödülü",
+    award_monterosso_desc: "2. Uluslararası Sanat Sergisi \"I colori degli artisti per la pace nel mondo\" · Monterosso Almo, İtalya · 2024",
+    award_acate_title: "Uluslararası Sanat Kupası Üçüncülük Ödülü",
+    award_acate_desc: "Uluslararası Sanat Yarışması \"Equinozio Culturale Acatese\" · Biscari Prensleri Kalesi, Acate, İtalya · 2024",
     nft_label: "Blokzincirde Sanat · Base",
     nft_title: "Base'de 172 NFT",
     nft_sub: "Manifold aracılığıyla mint edilmiş üç orijinal eser koleksiyonu. Her NFT, Phridon Bolkvadze'nin bir tablosunun benzersiz dijital sertifikasıdır — OpenSea'da $20'dan başlayan fiyatlarla.",
@@ -1291,7 +1501,21 @@ const i18n = {
   },
   ka: {
     nav_home: "მთავარი", nav_about: "მხატვარზე", nav_gallery: "ნამუშევრები",
-    nav_exhibitions: "გამოფენები", nav_vernissage: "ვერნისაჟი", nav_nft: "NFT", nav_contact: "კონტაქტი",
+    nav_exhibitions: "გამოფენები", nav_awards: "ჯილდოები", nav_vernissage: "ვერნისაჟი", nav_nft: "NFT", nav_contact: "კონტაქტი",
+    label_awards: "ჯილდოები და აღიარება",
+    awards_title: "საერთაშორისო აღიარება",
+    award_guccione_title: "კულტურის, ხელოვნებისა და მეცნიერების საერთაშორისო ელჩი",
+    award_guccione_desc: "მინიჭებულია კულტურული ასოციაცია „La via dell’ Arte“-ს მიერ · სიცილია / რაგუზა, იტალია · 2025",
+    award_izmir_title: "საპატიო სიგელი (Honorable Mention)",
+    award_izmir_desc: "გამოფენა „Convergence from Divergence“ · იზმირის ფერწერისა და ქანდაკების მუზეუმი, თურქეთი · 2025",
+    award_artankara_title: "მონაწილეობის სერტიფიკატი",
+    award_artankara_desc: "თანამედროვე ხელოვნების მე-11 საერთაშორისო გამოფენა ArtAnkara · ანკარა, თურქეთი · 2025",
+    award_gattopardo_title: "ჯუზეპე ტომაზი დი ლამპედუსას სახელობის საერთაშორისო პრემია",
+    award_gattopardo_desc: "ხელოვნების I საერთაშორისო ბიენალე „La magia dei colori nei luoghi del Gattopardo“ · პალმა დი მონტეკიარო, იტალია · 2024–2025",
+    award_monterosso_title: "ხელოვნების საერთაშორისო პრემია",
+    award_monterosso_desc: "II საერთაშორისო სამხატვრო გამოფენა „I colori degli artisti per la pace nel mondo“ · მონტეროსო ალმო, იტალია · 2024",
+    award_acate_title: "III ადგილი, საერთაშორისო სახელოვნებო თასი",
+    award_acate_desc: "საერთაშორისო სახელოვნებო კონკურსი „Equinozio Culturale Acatese“ · ბისკარის პრინცების ციხესიმაგრე, აკატე, იტალია · 2024",
     nft_label: "ხელოვნება ბლოკჩეინზე · Base",
     nft_title: "172 NFT Base-ზე",
     nft_sub: "სამი კოლექცია ორიგინალური ნამუშევრებით, Manifold-ის საშუალებით დამინჩული. თითოეული NFT ფრიდონ ბოლქვაძის ნახატის უნიკალური ციფრული სერტიფიკატია — $20-დან OpenSea-ზე.",
@@ -1389,7 +1613,29 @@ function closeGalleryLb(e) {
   document.getElementById('galleryLb').style.display = 'none';
   document.body.style.overflow = '';
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGalleryLb(); });
+
+// Award lightbox
+function openAwardLb(src, titleKey, descKey) {
+  const lb = document.getElementById('awardLb');
+  document.getElementById('awardLbImg').src = src;
+  const t = i18n[currentLang] || i18n.en;
+  document.getElementById('awardLbTitle').innerHTML = (t[titleKey] || '').replace(/\n/g, '<br>');
+  document.getElementById('awardLbDesc').innerHTML = (t[descKey] || '').replace(/\n/g, '<br>');
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeAwardLb(e) {
+  if (e) e.stopPropagation();
+  document.getElementById('awardLb').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { 
+  if (e.key === 'Escape') {
+    closeGalleryLb();
+    closeAwardLb();
+  } 
+});
 
 // Set default
 setLang(currentLang);
@@ -1399,6 +1645,19 @@ setLang(currentLang);
   <button onclick="closeGalleryLb(event)" style="position:absolute;top:1.5rem;right:1.5rem;background:rgba(253,250,246,0.1);border:1px solid rgba(253,250,246,0.25);color:#FDFAF6;width:48px;height:48px;border-radius:50%;font-size:1.3rem;cursor:pointer;">✕</button>
   <img id="galleryLbImg" src="" alt="" style="max-width:92vw;max-height:86vh;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
   <div id="galleryLbCaption" style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);color:#FDFAF6;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.15em;background:rgba(253,250,246,0.08);padding:0.4rem 1.2rem;border-radius:40px;backdrop-filter:blur(10px);white-space:nowrap;"></div>
+</div>
+
+<!-- AWARD LIGHTBOX -->
+<div id="awardLb" style="display:none;position:fixed;inset:0;background:rgba(14,14,14,0.97);z-index:200;flex-direction:column;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out;" onclick="closeAwardLb()">
+  <button onclick="closeAwardLb(event)" style="position:absolute;top:1.5rem;right:1.5rem;background:rgba(253,250,246,0.1);border:1px solid rgba(253,250,246,0.25);color:#FDFAF6;width:48px;height:48px;border-radius:50%;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.3s;" onmouseover="this.style.background='rgba(253,250,246,0.2)'" onmouseout="this.style.background='rgba(253,250,246,0.1)'">✕</button>
+  
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:90vw;max-height:80vh;cursor:default;" onclick="event.stopPropagation()">
+    <img id="awardLbImg" src="" alt="" style="max-width:100%;max-height:65vh;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,0.6);margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.1);">
+    <div style="text-align:center;color:#FDFAF6;max-width:600px;">
+      <h3 id="awardLbTitle" style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;letter-spacing:0.05em;color:var(--gold-light);margin-bottom:0.5rem;line-height:1.3;"></h3>
+      <p id="awardLbDesc" style="font-family:'Jost',sans-serif;font-size:0.85rem;color:rgba(253,250,246,0.6);letter-spacing:0.03em;line-height:1.5;"></p>
+    </div>
+  </div>
 </div>
 
 </body>
