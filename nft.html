@@ -844,6 +844,11 @@ const IPFS = 'https://nftstorage.link/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3r
 // thirdweb card-checkout app (one deployment serves every artwork via ?listingId).
 const CHECKOUT_BASE = 'https://phridon-buy-test.vercel.app/';
 
+// Fast, cached, resized thumbnails via wsrv.nl image proxy — IPFS gateways are slow/flaky.
+function thumb(file, w) {
+  return `https://wsrv.nl/?url=${encodeURIComponent(IPFS + file)}&w=${w}&q=80&output=webp`;
+}
+
 // listingId(id) — VERIFIED against on-chain getAllValidListings 2026-06-27 (Marketplace V3 0x3Bf1…51e9).
 // `id` is 1-based within a collection; on-chain tokenId = id-1. Prices confirmed: 20/30/50 USDC.
 // Coffee mapping is irregular (cancelled $2 test = id0; $20 test coffee#1 = id1; batch from id2),
@@ -890,7 +895,7 @@ function checkoutUrl(col, id, title) {
     listingId: String(col.listingId(id)),
     price: String(col.priceUsd),
     title: title,
-    img: IPFS + col.imgFile(id),
+    img: thumb(col.imgFile(id), 600),
   });
   return CHECKOUT_BASE + '?' + params.toString();
 }
@@ -1127,7 +1132,7 @@ function buildGrids() {
       div.className = 'nft-item';
       div.dataset.col = col.id;
       div.dataset.token = id;
-      const imgSrc = IPFS + col.imgFile(id);
+      const imgSrc = thumb(col.imgFile(id), 500);
       div.innerHTML = `
         <img src="${imgSrc}" alt="${col.id} #${id}" loading="lazy">
         <span class="nft-item-num">#${id} · ${col.price}</span>
@@ -1171,7 +1176,7 @@ function navLightbox(dir) {
 }
 
 function updateLightbox() {
-  const imgSrc = IPFS + lbCol.imgFile(lbTokenId);
+  const imgSrc = thumb(lbCol.imgFile(lbTokenId), 1200);
   document.getElementById('lbImg').src = imgSrc;
   document.getElementById('lbImg').alt = `${lbCol.id} #${lbTokenId}`;
   const t = i18n[currentLang] || i18n.en;
