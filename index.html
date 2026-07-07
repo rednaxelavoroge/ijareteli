@@ -482,6 +482,91 @@
     color: var(--mid);
   }
 
+  /* ── STUDIO FILM ── */
+  #film {
+    background: var(--charcoal);
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  #film .section-label { color: var(--gold-light); }
+  #film .section-label::after { background: var(--gold); }
+  #film .section-title { color: var(--warm-white); }
+  .film-header { margin-bottom: 3rem; }
+  .film-sub {
+    max-width: 480px;
+    margin: 1.2rem auto 0;
+    color: #B8B2A8;
+    font-size: 0.92rem;
+    line-height: 1.8;
+  }
+  .film-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  .film-wrap::before {
+    content: '';
+    position: absolute;
+    top: 14px; left: 14px; right: -14px; bottom: -14px;
+    border: 1px solid rgba(212,180,131,0.45);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .film-frame {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 478 / 850;
+    overflow: hidden;
+    background: #000;
+    cursor: pointer;
+    border: 1px solid rgba(184,150,90,0.35);
+  }
+  .film-poster,
+  .film-frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .film-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.4) 100%);
+    transition: background 0.3s ease;
+  }
+  .film-frame:hover .film-overlay { background: linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.55) 100%); }
+  .film-play {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.7);
+    background: rgba(28,28,28,0.35);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  }
+  .film-frame:hover .film-play {
+    transform: scale(1.08);
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+  .film-play svg { width: 24px; height: 24px; margin-left: 4px; fill: #fff; }
+  .film-note {
+    margin-top: 1.6rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #7a746b;
+  }
+
   /* ── AWARDS & RECOGNITION ── */
   #awards {
     background: var(--warm-white);
@@ -1106,6 +1191,25 @@
   </div>
 </section>
 
+<!-- STUDIO FILM -->
+<section id="film">
+  <div class="film-header fade-up">
+    <p class="section-label" data-i18n="label_video">Studio Film</p>
+    <h2 class="section-title" data-i18n="video_title">Works in Motion</h2>
+    <p class="film-sub" data-i18n="video_sub">A short film through the artist's abstract worlds.</p>
+  </div>
+  <div class="film-wrap fade-up">
+    <div class="film-frame" id="filmFrame" role="button" tabindex="0" aria-label="Play studio film"
+         onclick="loadFilm(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();loadFilm(this);}">
+      <img class="film-poster" src="images/video-poster.jpg" alt="Phridon Bolkvadze — studio film" loading="lazy" decoding="async">
+      <div class="film-overlay">
+        <span class="film-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+      </div>
+    </div>
+  </div>
+  <p class="film-note" data-i18n="video_note">Press play to watch</p>
+</section>
+
 <!-- AWARDS & RECOGNITION -->
 <section id="awards">
   <div class="awards-header fade-up">
@@ -1478,6 +1582,10 @@ const i18n = {
     nav_home: "Home", nav_about: "About", nav_gallery: "Works",
     nav_exhibitions: "Exhibitions", nav_awards: "Awards", nav_vernissage: "Vernissage", nav_nft: "NFT", nav_contact: "Contact",
     label_awards: "Awards & Recognition",
+    label_video: "Studio Film",
+    video_title: "Works in Motion",
+    video_sub: "A short film through the artist's abstract worlds.",
+    video_note: "Press play to watch",
     awards_title: "International Accolades",
     award_guccione_title: "International Ambassador of Culture, Art and Science",
     award_guccione_desc: "Nominated by Cultural Association \"La via dell' Arte\" · Sicily / Ragusa, Italy · 2025",
@@ -1536,6 +1644,10 @@ const i18n = {
     nav_home: "Главная", nav_about: "О художнике", nav_gallery: "Работы",
     nav_exhibitions: "Выставки", nav_awards: "Награды", nav_vernissage: "Вернисаж", nav_nft: "NFT", nav_contact: "Контакты",
     label_awards: "Награды и признание",
+    label_video: "Фильм из мастерской",
+    video_title: "Работы в движении",
+    video_sub: "Короткий фильм по абстрактным мирам художника.",
+    video_note: "Нажмите, чтобы смотреть",
     awards_title: "Международное признание",
     award_guccione_title: "Международный посол культуры, искусства и науки",
     award_guccione_desc: "Присвоено Культурной ассоциацией «La via dell’ Arte» · Сицилия / Рагуза, Италия · 2025",
@@ -1595,6 +1707,10 @@ const i18n = {
     nav_home: "Ana Sayfa", nav_about: "Hakkında", nav_gallery: "Eserler",
     nav_exhibitions: "Sergiler", nav_awards: "Ödüller", nav_vernissage: "Vernisaj", nav_nft: "NFT", nav_contact: "İletişim",
     label_awards: "Ödüller ve Takdirler",
+    label_video: "Atölye Filmi",
+    video_title: "Hareket Halindeki Eserler",
+    video_sub: "Sanatçının soyut dünyalarında kısa bir film.",
+    video_note: "İzlemek için oynat",
     awards_title: "Uluslararası Başarılar",
     award_guccione_title: "Uluslararası Kültür, Sanat ve Bilim Elçisi",
     award_guccione_desc: "\"La via dell' Arte\" Kültür Derneği tarafından atanmıştır · Sicilya / Ragusa, İtalya · 2025",
@@ -1654,6 +1770,10 @@ const i18n = {
     nav_home: "მთავარი", nav_about: "მხატვარზე", nav_gallery: "ნამუშევრები",
     nav_exhibitions: "გამოფენები", nav_awards: "ჯილდოები", nav_vernissage: "ვერნისაჟი", nav_nft: "NFT", nav_contact: "კონტაქტი",
     label_awards: "ჯილდოები და აღიარება",
+    label_video: "ფილმი სახელოსნოდან",
+    video_title: "ნამუშევრები მოძრაობაში",
+    video_sub: "მოკლე ფილმი მხატვრის აბსტრაქტულ სამყაროებში.",
+    video_note: "დასაკრავად დააჭირეთ",
     awards_title: "საერთაშორისო აღიარება",
     award_guccione_title: "კულტურის, ხელოვნებისა და მეცნიერების საერთაშორისო ელჩი",
     award_guccione_desc: "მინიჭებულია კულტურული ასოციაცია „La via dell’ Arte“-ს მიერ · სიცილია / რაგუზა, იტალია · 2025",
@@ -1754,6 +1874,10 @@ const i18n = {
     ex_2025: '“Arte di Ankara”',
     ex_2026: '“Infinity”',
     label_awards: "Premi & Riconoscimenti",
+    label_video: "Film dallo Studio",
+    video_title: "Opere in Movimento",
+    video_sub: "Un breve film attraverso i mondi astratti dell'artista.",
+    video_note: "Premi play per guardare",
     awards_title: "Riconoscimenti Internazionali",
     award_guccione_title: "Ambasciatore Internazionale della Cultura, dell'Arte e della Scienza",
     award_guccione_desc: "Nominato dall'Associazione Culturale \"La via dell' Arte\" · Sicily / Ragusa, Italia · 2025",
@@ -1813,6 +1937,10 @@ const i18n = {
     ex_2025: '“Arte de Ankara”',
     ex_2026: '“Infinity”',
     label_awards: "Premios & Reconocimientos",
+    label_video: "Película del Estudio",
+    video_title: "Obras en Movimiento",
+    video_sub: "Un breve film por los mundos abstractos del artista.",
+    video_note: "Pulsa para reproducir",
     awards_title: "Reconocimientos Internacionales",
     award_guccione_title: "Embajador Internacional de la Cultura, el Arte y la Ciencia",
     award_guccione_desc: "Nominado por la Asociación Cultural \"La via dell' Arte\" · Sicilia / Ragusa, Italia · 2025",
@@ -1872,6 +2000,10 @@ const i18n = {
     ex_2025: '「アンカラの芸術」',
     ex_2026: '「インフィニティ（無限）」',
     label_awards: "受賞 & 認定",
+    label_video: "スタジオ・フィルム",
+    video_title: "動く作品",
+    video_sub: "アーティストの抽象世界をめぐる短編映像。",
+    video_note: "再生して観る",
     awards_title: "国際的評価",
     award_guccione_title: "文化・芸術・科学の国際大使",
     award_guccione_desc: "「La via dell' Arte」文化協会より任命 · イタリア、シチリア / ラグーザ · 2025年",
@@ -1964,6 +2096,27 @@ function closeGalleryLb(e) {
   if (e) e.stopPropagation();
   document.getElementById('galleryLb').style.display = 'none';
   document.body.style.overflow = '';
+}
+
+// Studio film — facade: video file is fetched only after the user clicks (page stays light)
+function loadFilm(frame) {
+  if (frame.dataset.loaded) return;
+  frame.dataset.loaded = '1';
+  const v = document.createElement('video');
+  v.src = 'images/video.mp4';
+  v.poster = 'images/video-poster.jpg';
+  v.controls = true;
+  v.autoplay = true;
+  v.playsInline = true;
+  v.setAttribute('playsinline', '');
+  v.preload = 'auto';
+  frame.innerHTML = '';
+  frame.appendChild(v);
+  frame.style.cursor = 'default';
+  frame.removeAttribute('role');
+  frame.removeAttribute('tabindex');
+  const p = v.play();
+  if (p && p.catch) p.catch(function(){});
 }
 
 // Award lightbox

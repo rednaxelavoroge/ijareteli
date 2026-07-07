@@ -19,6 +19,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Warm up connections to the image CDN + IPFS fallback gateways so previews start faster -->
+<link rel="preconnect" href="https://wsrv.nl" crossorigin>
+<link rel="preconnect" href="https://dweb.link" crossorigin>
+<link rel="dns-prefetch" href="https://nftstorage.link">
 <style>
   :root {
     --cream: #F7F3ED;
@@ -231,6 +235,88 @@
     border-bottom: 1px solid var(--border);
   }
 
+  /* ── ONE OF ONE (original burned) ── */
+  .one-of-one {
+    background: radial-gradient(120% 120% at 50% 0%, #2b231e 0%, var(--charcoal) 55%);
+    color: var(--cream);
+    text-align: center;
+    padding: 4.75rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .ofo-inner { max-width: 720px; margin: 0 auto; }
+  .ofo-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+  }
+  .ofo-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-weight: 300;
+    color: var(--warm-white);
+    line-height: 1.1;
+    margin-bottom: 0;
+  }
+  .ofo-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 1.3rem auto;
+  }
+  .ofo-desc {
+    color: rgba(247,243,237,0.72);
+    font-size: 0.98rem;
+    line-height: 1.95;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .ofo-desc strong { color: var(--gold-light); font-weight: 400; }
+
+  /* ── COFFEEISM MANIFESTO ── */
+  .coffeeism {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 4.5rem 2rem 4rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(184,150,90,0.06) 0%, rgba(184,150,90,0) 70%);
+  }
+  .coffeeism-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .coffeeism-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 300;
+    color: var(--charcoal);
+    line-height: 1.05;
+    margin-bottom: 0;
+  }
+  .coffeeism-title::after {
+    content: '';
+    display: block;
+    width: 54px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+    margin: 1.3rem auto;
+  }
+  .coffeeism-desc {
+    color: var(--mid);
+    font-size: 0.98rem;
+    line-height: 1.95;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
   .collection-header {
     padding: 4rem 3rem 2.5rem;
     background: var(--warm-white);
@@ -348,11 +434,21 @@
   .nft-item {
     position: relative;
     overflow: hidden;
-    background: var(--warm-white);
+    background: linear-gradient(100deg, #efe9e0 30%, #f7f2ec 50%, #efe9e0 70%);
+    background-size: 200% 100%;
+    animation: nftShimmer 1.4s ease-in-out infinite;
     cursor: zoom-in;
     aspect-ratio: 1;
     box-shadow: 0 2px 8px rgba(28,28,28,0.04);
     transition: box-shadow 0.3s, transform 0.3s;
+  }
+  .nft-item.loaded {
+    animation: none;
+    background: var(--warm-white);
+  }
+  @keyframes nftShimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
 
   .nft-item:hover {
@@ -717,6 +813,22 @@
   <p data-i18n="hero_sub">172 original artworks by Phridon Bolkvadze, minted on Polygon. Buy any piece with a card (USD). Each piece is a unique digital certificate of an original painting.</p>
 </header>
 
+<!-- ONE OF ONE — the physical original is burned after minting -->
+<section class="one-of-one">
+  <div class="ofo-inner">
+    <p class="ofo-label" data-i18n="ofo_label">One of One · Forever</p>
+    <h2 class="ofo-title" data-i18n="ofo_title">The Original Is Burned</h2>
+    <p class="ofo-desc" data-i18n="ofo_desc">Once a painting is minted, Phridon Bolkvadze commits the physical original to fire. No print, no copy, no canvas in a vault survives — the NFT becomes the single, final form of the work. Its owner holds not a reproduction, but the only version that will ever exist.</p>
+  </div>
+</section>
+
+<!-- COFFEEISM MANIFESTO -->
+<section class="coffeeism">
+  <p class="coffeeism-label" data-i18n="coffeeism_label">An Original Art Movement</p>
+  <h2 class="coffeeism-title" data-i18n="coffeeism_name">Coffeeism</h2>
+  <p class="coffeeism-desc" data-i18n="coffeeism_desc">Coffeeism is an art movement that Phridon Bolkvadze created and named himself. His works are painted with natural coffee and coffee grounds, whose pigment yields warm, earthy tones and a living texture that cannot be reproduced. No such movement yet exists officially in the world — it is the artist's own term, and each work remains unique, a single original.</p>
+</section>
+
 <!-- COFFEE COLLECTION -->
 <div class="collection-section" id="coffee">
   <div class="collection-header">
@@ -840,6 +952,15 @@
 
 <script>
 const IPFS = 'https://nftstorage.link/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3rd6gu4i2v57afbhjjo4nqlq/';
+// Alternate (Cloudflare-backed) gateway used as a fallback when the primary is slow or misses a file
+const IPFS_ALT = 'https://dweb.link/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3rd6gu4i2v57afbhjjo4nqlq/';
+
+// Serve previews through a resizing image CDN (Cloudflare-cached) instead of the slow
+// IPFS gateway — cuts each thumbnail from full-res to a small file. Falls back to the
+// direct IPFS URL via the <img> onerror handler if the CDN is ever unavailable.
+function cdnImg(url, w, q) {
+  return 'https://wsrv.nl/?url=' + encodeURIComponent(url) + '&w=' + w + '&q=' + (q || 75) + '&output=webp';
+}
 
 // thirdweb card-checkout app (one deployment serves every artwork via ?listingId).
 const CHECKOUT_BASE = 'https://buy.ijareteli.com/';
@@ -912,7 +1033,13 @@ const i18n = {
     hero_label: 'On-Chain Art',
     hero_title: 'NFT Collections',
     hero_sub: '172 original artworks by Phridon Bolkvadze, minted on Polygon. Buy any piece with a card (USD). Each piece is a unique digital certificate of an original painting.',
+    ofo_label: "One of One · Forever",
+    ofo_title: "The Original Is Burned",
+    ofo_desc: "Once a painting is minted, Phridon Bolkvadze commits the physical original to fire. No print, no copy, no canvas in a vault survives — the NFT becomes the single, final form of the work. Its owner holds not a reproduction, but the only version that will ever exist.",
     coll_label_coffee: 'Collection · 2024',
+    coffeeism_label: "An Original Art Movement",
+    coffeeism_name: "Coffeeism",
+    coffeeism_desc: "Coffeeism is an art movement that Phridon Bolkvadze created and named himself. His works are painted with natural coffee and coffee grounds, whose pigment yields warm, earthy tones and a living texture that cannot be reproduced. No such movement yet exists officially in the world — it is the artist's own term, and each work remains unique, a single original.",
     coll_label_series2: 'Collection · 2024',
     coll_label_series5: 'Collection · 2024',
     coffee_name: 'Phridon Bolkvadze Coffee',
@@ -937,7 +1064,13 @@ const i18n = {
     hero_label: 'Искусство в блокчейне',
     hero_title: 'NFT-коллекции',
     hero_sub: '172 оригинальные работы Фридона Болквадзе, заминченные на блокчейне Polygon. Купите любую работу картой (USD). Каждая NFT — уникальный цифровой сертификат оригинальной картины.',
+    ofo_label: "Единственный экземпляр · Навсегда",
+    ofo_title: "Оригинал сжигается",
+    ofo_desc: "После того как картина выпущена в виде NFT, Фридон Болквадзе предаёт огню физический оригинал. Не остаётся ни отпечатка, ни копии, ни холста в хранилище — NFT становится единственной, окончательной формой произведения. Его владелец обладает не репродукцией, а единственной версией, которая когда-либо будет существовать.",
     coll_label_coffee: 'Коллекция · 2024',
+    coffeeism_label: "Авторское направление",
+    coffeeism_name: "Кофецизм",
+    coffeeism_desc: "Кофецизм — художественное направление, которое Фридон Болквадзе создал и назвал сам. Его работы пишутся натуральным кофе и кофейной гущей: пигмент рождает тёплые землистые оттенки и живую фактуру, которую невозможно повторить. Официально такого течения в мире пока не существует — это авторский термин художника, и каждая работа остаётся уникальной, в единственном экземпляре.",
     coll_label_series2: 'Коллекция · 2024',
     coll_label_series5: 'Коллекция · 2024',
     coffee_name: 'Phridon Bolkvadze Coffee',
@@ -962,7 +1095,13 @@ const i18n = {
     hero_label: 'Blokzincirde Sanat',
     hero_title: 'NFT Koleksiyonları',
     hero_sub: 'Phridon Bolkvadze\'nin Polygon blokzincirinde mint edilmiş 172 orijinal eseri. Herhangi bir eseri kartla (USD) satın alın. Her NFT, bir orijinal tablonun benzersiz dijital sertifikasıdır.',
+    ofo_label: "Tek ve Benzersiz · Sonsuza Dek",
+    ofo_title: "Orijinali Yakılır",
+    ofo_desc: "Bir eser mint edildikten sonra Phridon Bolkvadze fiziksel orijinali ateşe verir. Ne bir baskı, ne bir kopya, ne de bir kasada saklanan tuval kalır — NFT, eserin tek ve nihai biçimi olur. Sahibi bir reprodüksiyona değil, var olacak tek versiyona sahip olur.",
     coll_label_coffee: 'Koleksiyon · 2024',
+    coffeeism_label: "Özgün Bir Sanat Akımı",
+    coffeeism_name: "Coffeeism",
+    coffeeism_desc: "Coffeeism, Phridon Bolkvadze'nin kendisinin yarattığı ve adlandırdığı bir sanat akımıdır. Eserleri doğal kahve ve kahve telvesiyle yapılır; bu pigment, taklit edilemeyen sıcak, topraksı tonlar ve canlı bir doku verir. Dünyada henüz resmî olarak böyle bir akım yoktur — bu, sanatçının kendi terimidir ve her eser tektir, eşsizdir.",
     coll_label_series2: 'Koleksiyon · 2024',
     coll_label_series5: 'Koleksiyon · 2024',
     coffee_name: 'Phridon Bolkvadze Coffee',
@@ -987,7 +1126,13 @@ const i18n = {
     hero_label: 'ხელოვნება ბლოკჩეინზე',
     hero_title: 'NFT კოლექციები',
     hero_sub: 'ფრიდონ ბოლქვაძის 172 ორიგინალი ნამუშევარი, Polygon ბლოკჩეინზე დამინჩული. იყიდეთ ნებისმიერი ნამუშევარი ბარათით (USD). თითოეული NFT ორიგინალი ნახატის უნიკალური ციფრული სერტიფიკატია.',
+    ofo_label: "ერთადერთი ეგზემპლარი · სამუდამოდ",
+    ofo_title: "ორიგინალი იწვება",
+    ofo_desc: "მას შემდეგ, რაც ნახატი NFT-ის სახით გამოვა, ფრიდონ ბოლქვაძე ცეცხლს მისცემს ფიზიკურ ორიგინალს. აღარ რჩება არც ანაბეჭდი, არც ასლი, არც ტილო საცავში — NFT ხდება ნაწარმოების ერთადერთი, საბოლოო ფორმა. მისი მფლობელი ფლობს არა რეპროდუქციას, არამედ ერთადერთ ვერსიას, რომელიც ოდესმე იარსებებს.",
     coll_label_coffee: 'კოლექცია · 2024',
+    coffeeism_label: "ავტორული მიმართულება",
+    coffeeism_name: "კოფეციზმი",
+    coffeeism_desc: "კოფეციზმი — მხატვრული მიმართულებაა, რომელიც ფრიდონ ბოლქვაძემ თავად შექმნა და დაასახელა. მისი ნამუშევრები იქმნება ნატურალური ყავითა და ყავის ნალექით: პიგმენტი აჩენს თბილ, მიწისფერ ტონებსა და ცოცხალ ფაქტურას, რომლის გამეორება შეუძლებელია. ოფიციალურად ასეთი მიმდინარეობა მსოფლიოში ჯერ არ არსებობს — ეს თავად ხელოვანის ტერმინია, და თითოეული ნამუშევარი უნიკალურია, ერთადერთ ეგზემპლარად.",
     coll_label_series2: 'კოლექცია · 2024',
     coll_label_series5: 'კოლექცია · 2024',
     coffee_name: 'Phridon Bolkvadze Coffee',
@@ -1012,7 +1157,13 @@ const i18n = {
     hero_label: 'Arte su Catena',
     hero_title: 'Collezioni NFT',
     hero_sub: '172 opere d\'arte originali di Phridon Bolkvadze, coniate sulla blockchain Polygon. Acquista qualsiasi pezzo con carta (USD). Ogni pezzo è un certificato digitale unico di un dipinto originale.',
+    ofo_label: "Esemplare Unico · Per Sempre",
+    ofo_title: "L'Originale Viene Bruciato",
+    ofo_desc: "Una volta coniata l'opera, Phridon Bolkvadze consegna alle fiamme l'originale fisico. Non sopravvive alcuna stampa, copia o tela in un caveau — l'NFT diventa l'unica e definitiva forma dell'opera. Il suo proprietario non possiede una riproduzione, ma l'unica versione che esisterà mai.",
     coll_label_coffee: 'Collezione · 2024',
+    coffeeism_label: "Un Movimento Artistico Originale",
+    coffeeism_name: "Coffeeism",
+    coffeeism_desc: "Il Coffeeism è un movimento artistico che Phridon Bolkvadze ha creato e nominato lui stesso. Le sue opere sono realizzate con caffè naturale e fondi di caffè: il pigmento dona tonalità calde e terrose e una texture viva, impossibile da riprodurre. Ufficialmente un movimento simile non esiste ancora al mondo — è un termine dell'artista, e ogni opera resta unica, in un unico esemplare.",
     coll_label_series2: 'Collezione · 2024',
     coll_label_series5: 'Collezione · 2024',
     coffee_name: 'Phridon Bolkvadze Coffee',
@@ -1037,7 +1188,13 @@ const i18n = {
     hero_label: 'Arte en Cadena',
     hero_title: 'Colecciones NFT',
     hero_sub: '172 obras de arte originales de Phridon Bolkvadze, acuñadas en la blockchain Polygon. Compra cualquier pieza con tarjeta (USD). Cada pieza es un certificado digital único de una pintura original.',
+    ofo_label: "Ejemplar Único · Para Siempre",
+    ofo_title: "El Original Se Quema",
+    ofo_desc: "Una vez acuñada la obra, Phridon Bolkvadze entrega a las llamas el original físico. No sobrevive ninguna impresión, copia ni lienzo en una bóveda — el NFT se convierte en la única y definitiva forma de la obra. Su propietario no posee una reproducción, sino la única versión que jamás existirá.",
     coll_label_coffee: 'Colección · 2024',
+    coffeeism_label: "Un Movimiento Artístico Propio",
+    coffeeism_name: "Coffeeism",
+    coffeeism_desc: "El Coffeeism es un movimiento artístico que Phridon Bolkvadze creó y nombró él mismo. Sus obras se realizan con café natural y posos de café: el pigmento aporta tonos cálidos y terrosos y una textura viva, imposible de reproducir. Oficialmente aún no existe tal movimiento en el mundo — es un término del propio artista, y cada obra es única, un ejemplar irrepetible.",
     coll_label_series2: 'Colección · 2024',
     coll_label_series5: 'Colección · 2024',
     coffee_name: 'Phridon Bolkvadze Coffee',
@@ -1062,7 +1219,13 @@ const i18n = {
     hero_label: 'オンチェーン・アート',
     hero_title: 'NFT コレクション',
     hero_sub: 'Polygonブロックチェーン上でミントされた、フリードン・ボルクヴァゼによる172点のオリジナル作品。どの作品もカード（USD）で購入できます。各作品はオリジナル絵画のユニークなデジタル証明書です。',
+    ofo_label: "唯一無二 · 永遠に",
+    ofo_title: "原画は焼却される",
+    ofo_desc: "作品がミントされると、フリードン・ボルクヴァゼは物理的な原画を火にくべます。複製も、コピーも、保管庫に眠るキャンバスも残りません——NFTがその作品の唯一にして最終の姿となります。所有者が手にするのは複製ではなく、この世に存在する唯一の版です。",
     coll_label_coffee: 'コレクション · 2024年',
+    coffeeism_label: "作家独自の芸術運動",
+    coffeeism_name: "コフェシズム",
+    coffeeism_desc: "コフェシズムは、フリードン・ボルクヴァゼ自身が生み出し、名づけた芸術の潮流です。作品は天然のコーヒーとコーヒーの粉で描かれ、その顔料が温かく素朴な色合いと、二度と再現できない生きた質感を生みます。世界にはまだ公式にこの潮流は存在せず——これは作家自身の言葉であり、各作品は一点ものとして唯一無二です。",
     coll_label_series2: 'コレクション · 2024年',
     coll_label_series5: 'コレクション · 2024年',
     coffee_name: 'Phridon Bolkvadze Coffee',
@@ -1132,11 +1295,27 @@ function buildGrids() {
       div.className = 'nft-item';
       div.dataset.col = col.id;
       div.dataset.token = id;
-      const imgSrc = thumb(col.imgFile(id), 500);
-      div.innerHTML = `
-        <img src="${imgSrc}" alt="${col.id} #${id}" loading="lazy">
-        <span class="nft-item-num">#${id} · ${col.price}</span>
-      `;
+      const file = col.imgFile(id);
+      const direct = IPFS + file;
+      const alt = IPFS_ALT + file;
+      // Fallback chain: CDN(webp) → CDN via alt gateway → alt gateway direct → origin direct
+      const sources = [ cdnImg(direct, 520, 70), cdnImg(alt, 520, 70), alt, direct ];
+      const img = document.createElement('img');
+      img.alt = `${col.id} #${id}`;
+      img.decoding = 'async';
+      img.width = 520; img.height = 520;
+      const eager = (col.id === 'coffee' && id <= 10);
+      img.loading = eager ? 'eager' : 'lazy';
+      if (eager) img.setAttribute('fetchpriority', 'high');
+      let si = 0;
+      img.onerror = () => { if (++si < sources.length) img.src = sources[si]; else img.onerror = null; };
+      img.onload = () => div.classList.add('loaded');
+      img.src = sources[0];
+      const num = document.createElement('span');
+      num.className = 'nft-item-num';
+      num.textContent = `#${id} · ${col.price}`;
+      div.appendChild(img);
+      div.appendChild(num);
       div.onclick = () => openLightbox(col, id);
       frag.appendChild(div);
     }
@@ -1176,9 +1355,16 @@ function navLightbox(dir) {
 }
 
 function updateLightbox() {
-  const imgSrc = thumb(lbCol.imgFile(lbTokenId), 1200);
-  document.getElementById('lbImg').src = imgSrc;
-  document.getElementById('lbImg').alt = `${lbCol.id} #${lbTokenId}`;
+  const lbFile = lbCol.imgFile(lbTokenId);
+  const direct = IPFS + lbFile;
+  const alt = IPFS_ALT + lbFile;
+  // Keep the card-checkout image via thumb() as first choice, fall back across gateways on error
+  const lbSources = [ thumb(lbFile, 1200), cdnImg(direct, 1400, 82), alt, direct ];
+  const lbImg = document.getElementById('lbImg');
+  let ls = 0;
+  lbImg.onerror = () => { if (++ls < lbSources.length) lbImg.src = lbSources[ls]; else lbImg.onerror = null; };
+  lbImg.src = lbSources[0];
+  lbImg.alt = `${lbCol.id} #${lbTokenId}`;
   const t = i18n[currentLang] || i18n.en;
   const colName = t[lbCol.nameKey] || lbCol.id;
   document.getElementById('lbBuyBtn').href = checkoutUrl(lbCol, lbTokenId, `${colName} #${lbTokenId}`);
