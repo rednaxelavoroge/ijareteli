@@ -6,11 +6,15 @@ Official website of Georgian artist **Fridon Bolkvadze** (Ijareteli / MODA ARTS)
 
 ## Stack
 
-Static site — no build step, no dependencies.
+Static site — no build step, no frontend dependencies.
 - `index.html` — landing page (Hero, About, Gallery preview, Exhibitions, Contact)
 - `vernissage.html` — full gallery with lightbox and series filter
+- `nft.html` — NFT collections + card checkout links
 - `images/` — artwork JPEGs, numbered `1.jpeg` – `128.jpeg`
-- 4 languages: English, Русский, Türkçe, ქართული (switch persists via localStorage)
+- Languages: EN, KA, RU, TR, IT, ES, JA (switch persists via localStorage)
+- `js/analytics.js` + `js/config.js` — GTM, Consent Mode v2, dataLayer events, Meta CAPI client
+- `api/meta-capi.js` — Meta Conversions API (Vercel serverless)
+- Ads setup guide: **[ADS-SETUP.md](./ADS-SETUP.md)**
 
 ## Deploy
 

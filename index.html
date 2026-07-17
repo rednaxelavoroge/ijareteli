@@ -5,19 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phridon Bolkvadze · Ijareteli · Artist</title>
 <meta name="description" content="Phridon Bolkvadze Ijareteli — Georgian artist, painter, designer. Over 2000 works. Based in Batumi, Georgia. International Ambassador of Sicily, Italy.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#1C1C1C">
+<meta name="author" content="Phridon Bolkvadze · MODA ARTS">
+<link rel="canonical" href="https://www.ijareteli.com/">
 
 <!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231C1C1C'/><text x='50%25' y='72%25' font-family='Georgia,serif' font-size='20' fill='%23B8965A' text-anchor='middle'>I</text></svg>">
-<link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231C1C1C'/><text x='50%25' y='72%25' font-family='Georgia,serif' font-size='20' fill='%23B8965A' text-anchor='middle'>I</text></svg>">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="alternate icon" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://ijareteli.com/">
+<meta property="og:url" content="https://www.ijareteli.com/">
 <meta property="og:title" content="Phridon Bolkvadze · Ijareteli · Artist">
 <meta property="og:description" content="Georgian artist, painter and designer. Over 2000 works spanning four decades. International Ambassador of Sicily, Italy. Based in Batumi, Georgia.">
 <meta property="og:image" content="https://www.ijareteli.com/images/41.jpeg">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="1327">
+<meta property="og:image:alt" content="Artwork by Phridon Bolkvadze Ijareteli">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="MODA ARTS · Ijareteli">
 
@@ -26,6 +32,11 @@
 <meta name="twitter:title" content="Phridon Bolkvadze · Ijareteli · Artist">
 <meta name="twitter:description" content="Georgian artist, painter and designer. Over 2000 works spanning four decades. Based in Batumi, Georgia.">
 <meta name="twitter:image" content="https://www.ijareteli.com/images/41.jpeg">
+<meta name="twitter:image:alt" content="Artwork by Phridon Bolkvadze Ijareteli">
+
+<!-- Analytics: Consent Mode v2 + GTM (tags configured in GTM) -->
+<script src="/js/config.js"></script>
+<script src="/js/analytics.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -2091,6 +2102,15 @@ function openGalleryLb(src, caption) {
   document.getElementById('galleryLbCaption').textContent = caption;
   lb.style.display = 'flex';
   document.body.style.overflow = 'hidden';
+  if (window.IJ) {
+    var idMatch = (src || '').match(/(\d+)\.jpe?g/i);
+    IJ.viewContent({
+      id: idMatch ? idMatch[1] : caption,
+      name: caption || 'Gallery work',
+      category: 'gallery_preview',
+      content_type: 'product'
+    });
+  }
 }
 function closeGalleryLb(e) {
   if (e) e.stopPropagation();
@@ -2117,6 +2137,10 @@ function loadFilm(frame) {
   frame.removeAttribute('tabindex');
   const p = v.play();
   if (p && p.catch) p.catch(function(){});
+  // GA4 Enhanced Measurement also tracks video; this is an explicit engagement signal
+  if (window.IJ && window.dataLayer) {
+    dataLayer.push({ event: 'video_start', video_title: 'Studio Film', video_provider: 'self_hosted' });
+  }
 }
 
 // Award lightbox

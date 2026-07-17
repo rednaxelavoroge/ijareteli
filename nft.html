@@ -5,17 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NFT Collections · Phridon Bolkvadze · Ijareteli</title>
 <meta name="description" content="172 NFT artworks by Phridon Bolkvadze, minted on Polygon. Buy any piece with a card in USD. Three collections: Coffee, Series 2, Series 5.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#1C1C1C">
+<link rel="canonical" href="https://www.ijareteli.com/nft">
 
 <!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231C1C1C'/><text x='50%25' y='72%25' font-family='Georgia,serif' font-size='20' fill='%23B8965A' text-anchor='middle'>I</text></svg>">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://ijareteli.com/nft">
+<meta property="og:url" content="https://www.ijareteli.com/nft">
 <meta property="og:title" content="NFT Collections · Phridon Bolkvadze · Ijareteli">
 <meta property="og:description" content="172 original artworks by Phridon Bolkvadze minted on Polygon. Buy any piece with a card in USD.">
 <meta property="og:image" content="https://nftstorage.link/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3rd6gu4i2v57afbhjjo4nqlq/0.jpg">
+<meta property="og:image:alt" content="NFT collections by Phridon Bolkvadze">
 <meta property="og:site_name" content="MODA ARTS · Ijareteli">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NFT Collections · Phridon Bolkvadze · Ijareteli">
+<meta name="twitter:description" content="172 original artworks by Phridon Bolkvadze minted on Polygon. Buy any piece with a card in USD.">
+<meta name="twitter:image" content="https://nftstorage.link/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3rd6gu4i2v57afbhjjo4nqlq/0.jpg">
+
+<!-- Analytics: Consent Mode v2 + GTM -->
+<script src="/js/config.js"></script>
+<script src="/js/analytics.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -1335,6 +1350,18 @@ function openLightbox(col, tokenId) {
   document.getElementById('nftLightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
   lbOpen = true;
+  if (window.IJ) {
+    var t = i18n[currentLang] || i18n.en;
+    var colName = t[col.nameKey] || col.id;
+    IJ.viewContent({
+      id: col.id + '-' + tokenId,
+      name: colName + ' #' + tokenId,
+      category: col.id,
+      content_type: 'product',
+      value: col.priceUsd,
+      currency: 'USD'
+    });
+  }
 }
 
 function closeLightbox() {
@@ -1367,7 +1394,21 @@ function updateLightbox() {
   lbImg.alt = `${lbCol.id} #${lbTokenId}`;
   const t = i18n[currentLang] || i18n.en;
   const colName = t[lbCol.nameKey] || lbCol.id;
-  document.getElementById('lbBuyBtn').href = checkoutUrl(lbCol, lbTokenId, `${colName} #${lbTokenId}`);
+  var buyBtn = document.getElementById('lbBuyBtn');
+  buyBtn.href = checkoutUrl(lbCol, lbTokenId, `${colName} #${lbTokenId}`);
+  buyBtn.onclick = function () {
+    if (window.IJ) {
+      IJ.initiateCheckout({
+        id: lbCol.id + '-' + lbTokenId,
+        name: colName + ' #' + lbTokenId,
+        category: lbCol.id,
+        content_type: 'product',
+        value: lbCol.priceUsd,
+        currency: 'USD',
+        num_items: 1
+      });
+    }
+  };
   document.getElementById('lbTokenId').textContent = lbTokenId - 1;
   document.getElementById('lbContractShort').textContent = shortContract(lbCol.contract);
   document.getElementById('lbPrice').textContent = `${lbCol.price} USD`;

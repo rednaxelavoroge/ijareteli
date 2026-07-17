@@ -1,0 +1,10 @@
+# ijareteli.com
+User-agent: *
+Allow: /
+
+# Prefer www (apex redirects to www)
+Sitemap: https://www.ijareteli.com/sitemap.xml
+
+# Block junk paths if any appear later
+Disallow: /api/
+Disallow: /_t.tmp

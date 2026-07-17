@@ -5,22 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vernissage · Phridon Bolkvadze · Ijareteli</title>
 <meta name="description" content="Complete collection of works by Phridon Bolkvadze Ijareteli — 127 paintings, drawings and graphics by the Georgian artist from Batumi.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#1C1C1C">
+<link rel="canonical" href="https://www.ijareteli.com/vernissage">
 
 <!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231C1C1C'/><text x='50%25' y='72%25' font-family='Georgia,serif' font-size='20' fill='%23B8965A' text-anchor='middle'>I</text></svg>">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://ijareteli.com/vernissage">
+<meta property="og:url" content="https://www.ijareteli.com/vernissage">
 <meta property="og:title" content="Vernissage · Phridon Bolkvadze · Ijareteli">
 <meta property="og:description" content="127 works by Georgian artist Phridon Bolkvadze — paintings, drawings and graphics spanning four decades of practice.">
 <meta property="og:image" content="https://www.ijareteli.com/images/6.jpeg">
+<meta property="og:image:alt" content="Vernissage — works by Phridon Bolkvadze">
 <meta property="og:site_name" content="MODA ARTS · Ijareteli">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vernissage · Phridon Bolkvadze · Ijareteli">
+<meta name="twitter:description" content="127 works by Georgian artist Phridon Bolkvadze — paintings, drawings and graphics spanning four decades of practice.">
 <meta name="twitter:image" content="https://www.ijareteli.com/images/6.jpeg">
+<meta name="twitter:image:alt" content="Vernissage — works by Phridon Bolkvadze">
+
+<!-- Analytics: Consent Mode v2 + GTM -->
+<script src="/js/config.js"></script>
+<script src="/js/analytics.js"></script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -1000,6 +1012,10 @@ function filterSeries(series, btn) {
     }
   });
   window.scrollTo({ top: document.querySelector('.gallery-wrap').offsetTop - 80, behavior: 'smooth' });
+  if (window.IJ) {
+    var term = series === 'all' ? 'all works' : ('series ' + series);
+    IJ.search(term, { content_category: 'vernissage_filter' });
+  }
 }
 
 // Lightbox
@@ -1013,6 +1029,14 @@ function openLightbox(n) {
   updateLightbox();
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';
+  if (window.IJ) {
+    IJ.viewContent({
+      id: String(n),
+      name: 'Work № ' + String(n).padStart(3, '0'),
+      category: 'vernissage',
+      content_type: 'product'
+    });
+  }
 }
 
 function closeLightbox(e) {
@@ -1078,6 +1102,20 @@ function openPurchaseModal(n) {
 
   purchaseModal.classList.add('open');
   document.body.style.overflow = 'hidden';
+  if (window.IJ) {
+    IJ.initiateCheckout({
+      id: String(n),
+      name: 'Work № ' + num,
+      category: 'original_artwork',
+      content_type: 'product'
+    });
+    IJ.lead({
+      id: String(n),
+      name: 'Work № ' + num,
+      category: 'original_artwork',
+      lead_type: 'buy_original_intent'
+    });
+  }
 }
 
 function closePurchaseModal() {
