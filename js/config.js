@@ -16,7 +16,7 @@ window.IJ_ANALYTICS = {
 
   // Meta Pixel ID (digits only). Used by GTM Pixel tag + CAPI server route.
   // Example: '123456789012345'
-  metaPixelId: 'XXXXXXXXXXXXXXX',
+  metaPixelId: '1871946304162262',
 
   // Server-side Conversions API endpoint (same origin)
   capiEndpoint: '/api/meta-capi',
