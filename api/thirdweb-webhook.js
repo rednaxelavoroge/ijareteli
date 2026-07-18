@@ -86,23 +86,27 @@ function json(res, status, body) {
 
 module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') { res.statusCode = 204; res.end(); return; }
-  if (req.method !== 'POST') return json(res, 405, { ok: false, error: 'Method not allowed' });
+  // thirdweb verifies the endpoint when the webhook is CREATED — it probes the URL
+  // (GET/HEAD, or an unsigned test POST) and only saves the webhook if it gets a 2xx.
+  // So always ACK connectivity checks with 200. Real Purchase events are still gated
+  // by the signature check below, so an unauthenticated request can never inject one.
+  if (req.method === 'GET' || req.method === 'HEAD') return json(res, 200, { ok: true, ping: true });
+  if (req.method !== 'POST') return json(res, 200, { ok: true, ping: true });
 
   const pixelId = process.env.META_PIXEL_ID;
   const token = process.env.META_CAPI_ACCESS_TOKEN;
   const secret = process.env.THIRDWEB_WEBHOOK_SECRET;
   const testCode = process.env.META_TEST_EVENT_CODE;
-  if (!pixelId || !token) return json(res, 503, { ok: false, error: 'CAPI not configured (META_PIXEL_ID / META_CAPI_ACCESS_TOKEN)' });
-  if (!secret) return json(res, 503, { ok: false, error: 'THIRDWEB_WEBHOOK_SECRET not set' });
 
   let raw, data, preparsed;
   try { ({ raw, parsed: data, preparsed } = await readRaw(req)); }
-  catch (e) { return json(res, 400, { ok: false, error: e.message }); }
+  catch (e) { return json(res, 200, { ok: true, ignored: 'unreadable body' }); }
 
-  // Reject anything we can't authenticate.
-  if (!verifySignature(raw, req.headers, secret)) {
-    return json(res, 401, { ok: false, error: 'Invalid signature' });
-  }
+  // Only PROCESS (fire a Meta Purchase) for authenticated events with full config.
+  // Everything else — verification pings, unsigned or malformed requests — is
+  // acknowledged with 200 but NOT acted on, so no fake Purchase can be injected.
+  const authed = !!(pixelId && token && secret) && verifySignature(raw, req.headers, secret);
+  if (!authed) return json(res, 200, { ok: true, verified: false });
   // Optional replay protection when thirdweb includes a timestamp header.
   const ts = Number(req.headers['x-timestamp'] || req.headers['x-pay-timestamp']);
   if (ts && Math.abs(Date.now() / 1000 - ts) > 300) {
