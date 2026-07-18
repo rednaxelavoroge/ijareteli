@@ -1466,9 +1466,38 @@ function toggleMenu() {
   document.getElementById('navLinks').classList.toggle('open');
 }
 
+// ── DEEP LINK ──
+// /nft?art=<id> opens one specific artwork's buy modal directly (per-artwork ads).
+// <id> is the artwork's image index 0–171 — the SAME number used in ad tags,
+// e.g. utm_content=artwork_050  →  ?art=050. Zero-padded or plain both resolve
+// ("050" and "50" → 50). Dedicated param, independent of utm_*.
+// Absent or unknown id → normal /nft grid, no error, no empty screen.
+// Canonical stays https://www.ijareteli.com/nft (unaffected by ?art). Works in every language.
+function findArtwork(artId) {
+  for (const col of COLLECTIONS) {
+    for (let id = 1; id <= col.count; id++) {
+      if (col.imgFile(id) === artId + '.jpg') return { col, id };
+    }
+  }
+  return null;
+}
+function handleArtDeepLink() {
+  try {
+    const raw = new URLSearchParams(location.search).get('art');
+    if (!raw || !/^\d+$/.test(raw.trim())) return;   // absent / non-numeric → normal grid
+    const hit = findArtwork(parseInt(raw, 10));       // parseInt normalizes "050" and "50" → 50
+    if (!hit) return;                                 // unknown id → normal grid, no error
+    const item = document.querySelector(
+      '.nft-item[data-col="' + hit.col.id + '"][data-token="' + hit.id + '"]');
+    if (item) item.scrollIntoView({ block: 'center' });
+    openLightbox(hit.col, hit.id);                    // identical to a tap: price + Buy with card
+  } catch (e) { /* never break the page on a malformed param */ }
+}
+
 // ── INIT ──
 buildGrids();
 setLang(currentLang);
+handleArtDeepLink();
 </script>
 </body>
 </html>
