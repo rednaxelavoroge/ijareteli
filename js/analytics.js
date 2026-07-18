@@ -140,7 +140,7 @@
   }
 
   // ── CAPI client (server mirror, dedup via event_id) ─────────────────────
-  function sendCapi(eventName, eventId, customData, userData) {
+  function sendCapi(eventName, eventId, customData, userData, testEventCode) {
     var consent = readConsent();
     if (!consent || !consent.ads) {
       log('CAPI skipped — no ads consent');
@@ -164,7 +164,8 @@
         },
         userData || {}
       ),
-      utm: utm
+      utm: utm,
+      test_event_code: testEventCode || undefined
     };
 
     try {
@@ -186,9 +187,23 @@
     }
   }
 
+  // ── Direct Meta Pixel fire (for events with no published GTM tag) ───────
+  function firePixel(metaEventName, eventId, customData) {
+    var consent = readConsent();
+    if (!consent || !consent.ads) { log('Pixel skipped — no ads consent'); return; }
+    if (typeof window.fbq !== 'function') { log('Pixel skipped — fbq not loaded'); return; }
+    try {
+      window.fbq('track', metaEventName, customData || {}, { eventID: eventId });
+      log('Pixel sent', metaEventName, eventId);
+    } catch (e) { log('Pixel error', e); }
+  }
+
   // ── dataLayer event push ───────────────────────────────────────────────
   function pushEvent(eventName, params, metaEventName) {
-    var eventId = (params && params.event_id) || uuid();
+    params = params || {};
+    var eventId = params.event_id || uuid();
+    var testEventCode = params.test_event_code;
+    if (testEventCode !== undefined) { params = Object.assign({}, params); delete params.test_event_code; }
     var utm = getUtm();
     var payload = Object.assign(
       {
@@ -211,7 +226,11 @@
       ['content_ids', 'content_name', 'content_type', 'content_category', 'value', 'currency', 'num_items', 'search_string', 'order_id'].forEach(function (k) {
         if (payload[k] !== undefined) custom[k] = payload[k];
       });
-      sendCapi(metaEventName, eventId, custom);
+      sendCapi(metaEventName, eventId, custom, undefined, testEventCode);
+      // GTM currently has only the Pixel base tag (PageView); fire Purchase to the
+      // Pixel directly so it works without a published GTM Purchase tag. The eventID
+      // dedups with the CAPI event above (and with any GTM Purchase tag added later).
+      if (metaEventName === 'Purchase') firePixel(metaEventName, eventId, custom);
     }
     return eventId;
   }
@@ -289,17 +308,22 @@
 
     purchase: function (opts) {
       opts = opts || {};
+      var oid = opts.order_id || opts.transaction_id;
       return pushEvent(
         'purchase',
         {
+          // Deterministic event_id (purchase_<order/tx id>) so the browser event and
+          // the server thirdweb-webhook event dedup into ONE Purchase in Meta.
+          event_id: opts.event_id || (oid ? 'purchase_' + oid : undefined),
           transaction_id: opts.transaction_id || opts.order_id || uuid(),
-          order_id: opts.order_id || opts.transaction_id,
+          order_id: oid,
           value: opts.value,
           currency: opts.currency || 'USD',
           content_ids: opts.content_ids || (opts.id ? [String(opts.id)] : undefined),
           content_name: opts.content_name || opts.name,
           content_type: opts.content_type || 'product',
-          num_items: opts.num_items || 1
+          num_items: opts.num_items || 1,
+          test_event_code: opts.test_event_code
         },
         'Purchase'
       );
@@ -423,12 +447,17 @@
     try {
       var params = new URLSearchParams(window.location.search);
       if (params.get('purchase') === 'success' || params.get('payment') === 'success') {
+        var oid = params.get('order_id') || params.get('tx') || undefined;
         IJ.purchase({
-          transaction_id: params.get('order_id') || params.get('tx') || undefined,
+          order_id: oid,
+          transaction_id: oid,
           value: params.get('value') ? parseFloat(params.get('value')) : undefined,
           currency: params.get('currency') || 'USD',
           content_ids: params.get('content_ids') ? params.get('content_ids').split(',') : undefined,
-          content_name: params.get('title') || undefined
+          content_name: params.get('title') || undefined,
+          // QA only: route this Purchase to Events Manager → Test Events without
+          // touching live data.  e.g. ...&purchase=success&value=20&tec=TESTxxxxx
+          test_event_code: params.get('test_event_code') || params.get('tec') || undefined
         });
       }
     } catch (e) { /* ignore */ }

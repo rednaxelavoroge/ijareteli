@@ -189,7 +189,10 @@ module.exports = async function handler(req, res) {
     data: [eventData],
     partner_agent: 'ijareteli-capi-1.0'
   };
-  if (testCode) payload.test_event_code = testCode;
+  // Per-request test code (QA) takes precedence over the env default, so a single
+  // Purchase can be routed to Events Manager → Test Events without going live.
+  const effectiveTestCode = (body && body.test_event_code) || testCode;
+  if (effectiveTestCode) payload.test_event_code = effectiveTestCode;
 
   try {
     const url = `${META_GRAPH}/${encodeURIComponent(pixelId)}/events?access_token=${encodeURIComponent(token)}`;
