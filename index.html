@@ -607,6 +607,7 @@
   }
 
   .award-img-frame {
+    position: relative;
     width: 100%;
     aspect-ratio: 1;
     background: var(--cream);
@@ -618,6 +619,23 @@
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(28,28,28,0.03);
     transition: box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+
+  .award-tag {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    background: var(--gold);
+    color: #FDFAF6;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    z-index: 2;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(28,28,28,0.12);
   }
 
   .award-item:hover .award-img-frame {
@@ -658,10 +676,25 @@
     letter-spacing: 0.03em;
   }
 
+  @media (min-width: 901px) {
+    .awards-grid > .award-item:last-child:nth-child(3n + 1) {
+      grid-column: 2;
+    }
+  }
+
   @media (max-width: 900px) {
     .awards-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 2.5rem 2rem;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 900px) {
+    .awards-grid > .award-item:last-child:nth-child(2n + 1) {
+      grid-column: span 2;
+      max-width: 380px;
+      margin: 0 auto;
+      width: 100%;
     }
   }
 
@@ -1228,6 +1261,17 @@
     <h2 class="section-title" data-i18n="awards_title">International Accolades</h2>
   </div>
   <div class="awards-grid fade-up">
+    <!-- Card 0: Artist of the Year 2026 (Monterosso Almo) -->
+    <div class="award-item" onclick="openAwardLb('images/award_monterosso_2026.jpeg', 'award_artist2026_title', 'award_artist2026_desc')">
+      <div class="award-img-frame">
+        <span class="award-tag" data-i18n="award_artist2026_tag">5 Sept 2026</span>
+        <img src="images/award_monterosso_2026.jpeg" alt="Premio Artista dell'Anno 2026" loading="lazy">
+      </div>
+      <div class="award-info">
+        <h3 class="award-item-title" data-i18n="award_artist2026_title">Artist of the Year 2026 Award</h3>
+        <p class="award-item-desc" data-i18n="award_artist2026_desc">International Art Exhibition "L'Arte unisce il mondo" · Palazzo Cocuzza, Monterosso Almo, Sicily, Italy · Awarded September 5, 2026</p>
+      </div>
+    </div>
     <!-- Card 1: Guccione (Ambassador) -->
     <div class="award-item" onclick="openAwardLb('images/award_guccione.jpeg', 'award_guccione_title', 'award_guccione_desc')">
       <div class="award-img-frame">
@@ -1598,6 +1642,9 @@ const i18n = {
     video_sub: "A short film through the artist's abstract worlds.",
     video_note: "Press play to watch",
     awards_title: "International Accolades",
+    award_artist2026_tag: "5 Sept 2026",
+    award_artist2026_title: "Artist of the Year 2026 Award",
+    award_artist2026_desc: "International Art Exhibition \"L'Arte unisce il mondo\" · Palazzo Cocuzza, Monterosso Almo, Sicily, Italy · Awarded September 5, 2026",
     award_guccione_title: "International Ambassador of Culture, Art and Science",
     award_guccione_desc: "Nominated by Cultural Association \"La via dell' Arte\" · Sicily / Ragusa, Italy · 2025",
     award_izmir_title: "Certificate of Honorable Mention",
@@ -1660,6 +1707,9 @@ const i18n = {
     video_sub: "Короткий фильм по абстрактным мирам художника.",
     video_note: "Нажмите, чтобы смотреть",
     awards_title: "Международное признание",
+    award_artist2026_tag: "5 сент 2026",
+    award_artist2026_title: "Премия «Художник года 2026»",
+    award_artist2026_desc: "Международная художественная выставка «L'Arte unisce il mondo» · Палаццо Кокуцца, Монтероссо-Альмо, Сицилия, Италия · Вручена 5 сентября 2026",
     award_guccione_title: "Международный посол культуры, искусства и науки",
     award_guccione_desc: "Присвоено Культурной ассоциацией «La via dell’ Arte» · Сицилия / Рагуза, Италия · 2025",
     award_izmir_title: "Почетный диплом (Honorable Mention)",
@@ -1723,6 +1773,9 @@ const i18n = {
     video_sub: "Sanatçının soyut dünyalarında kısa bir film.",
     video_note: "İzlemek için oynat",
     awards_title: "Uluslararası Başarılar",
+    award_artist2026_tag: "5 Eylül 2026",
+    award_artist2026_title: "2026 Yılın Sanatçısı Ödülü",
+    award_artist2026_desc: "Uluslararası Sanat Sergisi \"L'Arte unisce il mondo\" · Palazzo Cocuzza, Monterosso Almo, Sicilya, İtalya · 5 Eylül 2026'da takdim edildi",
     award_guccione_title: "Uluslararası Kültür, Sanat ve Bilim Elçisi",
     award_guccione_desc: "\"La via dell' Arte\" Kültür Derneği tarafından atanmıştır · Sicilya / Ragusa, İtalya · 2025",
     award_izmir_title: "Onur Belgesi",
@@ -1786,6 +1839,9 @@ const i18n = {
     video_sub: "მოკლე ფილმი მხატვრის აბსტრაქტულ სამყაროებში.",
     video_note: "დასაკრავად დააჭირეთ",
     awards_title: "საერთაშორისო აღიარება",
+    award_artist2026_tag: "5 სექტ. 2026",
+    award_artist2026_title: "„წლის მხატვარი 2026“ პრემია",
+    award_artist2026_desc: "საერთაშორისო სამხატვრო გამოფენა „L'Arte unisce il mondo“ · პალაცო კოკუცა, მონტეროსო ალმო, სიცილია, იტალია · გადაეცა 2026 წლის 5 სექტემბერს",
     award_guccione_title: "კულტურის, ხელოვნებისა და მეცნიერების საერთაშორისო ელჩი",
     award_guccione_desc: "მინიჭებულია კულტურული ასოციაცია „La via dell’ Arte“-ს მიერ · სიცილია / რაგუზა, იტალია · 2025",
     award_izmir_title: "საპატიო სიგელი (Honorable Mention)",
@@ -1890,6 +1946,9 @@ const i18n = {
     video_sub: "Un breve film attraverso i mondi astratti dell'artista.",
     video_note: "Premi play per guardare",
     awards_title: "Riconoscimenti Internazionali",
+    award_artist2026_tag: "5 Settembre 2026",
+    award_artist2026_title: "Premio Artista dell'Anno 2026",
+    award_artist2026_desc: "Collettiva Internazionale d'Arte \"L'Arte unisce il mondo\" · Palazzo Cocuzza, Monterosso Almo, Sicilia, Italia · Conferito il 5 Settembre 2026",
     award_guccione_title: "Ambasciatore Internazionale della Cultura, dell'Arte e della Scienza",
     award_guccione_desc: "Nominato dall'Associazione Culturale \"La via dell' Arte\" · Sicily / Ragusa, Italia · 2025",
     award_izmir_title: "Certificato di Menzione d'Onore",
@@ -1953,6 +2012,9 @@ const i18n = {
     video_sub: "Un breve film por los mundos abstractos del artista.",
     video_note: "Pulsa para reproducir",
     awards_title: "Reconocimientos Internacionales",
+    award_artist2026_tag: "5 Sept 2026",
+    award_artist2026_title: "Premio Artista del Año 2026",
+    award_artist2026_desc: "Exposición Colectiva Internacional \"L'Arte unisce il mondo\" · Palazzo Cocuzza, Monterosso Almo, Sicilia, Italia · Otorgado el 5 de septiembre de 2026",
     award_guccione_title: "Embajador Internacional de la Cultura, el Arte y la Ciencia",
     award_guccione_desc: "Nominado por la Asociación Cultural \"La via dell' Arte\" · Sicilia / Ragusa, Italia · 2025",
     award_izmir_title: "Certificado de Mención de Honor",
@@ -2016,6 +2078,9 @@ const i18n = {
     video_sub: "アーティストの抽象世界をめぐる短編映像。",
     video_note: "再生して観る",
     awards_title: "国際的評価",
+    award_artist2026_tag: "2026年9月5日",
+    award_artist2026_title: "2026年 アーティスト・オブ・ザ・イヤー賞",
+    award_artist2026_desc: "国際美術展「L'Arte unisce il mondo」 · イタリア、シチリア、モンテロッソ・アルモ、コクッツァ宮殿 · 2026年9月5日授与",
     award_guccione_title: "文化・芸術・科学の国際大使",
     award_guccione_desc: "「La via dell' Arte」文化協会より任命 · イタリア、シチリア / ラグーザ · 2025年",
     award_izmir_title: "佳作賞（Honorable Mention）認定書",
