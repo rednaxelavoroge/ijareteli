@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://www.ijareteli.com/nft">
 <meta property="og:title" content="Original Digital Artworks by Phridon Bolkvadze · Ijareteli">
 <meta property="og:description" content="Own an authenticated digital original by Georgian artist Phridon Bolkvadze. Pay by card in USD.">
-<meta property="og:image" content="https://nftstorage.link/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3rd6gu4i2v57afbhjjo4nqlq/0.jpg">
+<meta property="og:image" content="https://www.ijareteli.com/thumbnails/coffee-001.webp">
 <meta property="og:image:alt" content="Digital artworks by Phridon Bolkvadze">
 <meta property="og:site_name" content="MODA ARTS · Ijareteli">
 
@@ -26,7 +26,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Original Digital Artworks by Phridon Bolkvadze · Ijareteli">
 <meta name="twitter:description" content="Own an authenticated digital original by Georgian artist Phridon Bolkvadze. Pay by card in USD.">
-<meta name="twitter:image" content="https://nftstorage.link/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3rd6gu4i2v57afbhjjo4nqlq/0.jpg">
+<meta name="twitter:image" content="https://www.ijareteli.com/thumbnails/coffee-001.webp">
 
 <!-- Analytics: Consent Mode v2 + GTM -->
 <script src="/js/config.js"></script>
@@ -34,10 +34,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<!-- Warm up connections to the image CDN + IPFS fallback gateways so previews start faster -->
-<link rel="preconnect" href="https://wsrv.nl" crossorigin>
-<link rel="preconnect" href="https://dweb.link" crossorigin>
-<link rel="dns-prefetch" href="https://nftstorage.link">
+<!-- Warm up connections to fallback IPFS gateways -->
+<link rel="preconnect" href="https://gateway.pinata.cloud" crossorigin>
+<link rel="preconnect" href="https://ipfs.io" crossorigin>
 <style>
   :root {
     --cream: #F7F3ED;
@@ -971,24 +970,16 @@
 </div>
 
 <script>
-const IPFS = 'https://nftstorage.link/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3rd6gu4i2v57afbhjjo4nqlq/';
-// Alternate (Cloudflare-backed) gateway used as a fallback when the primary is slow or misses a file
-const IPFS_ALT = 'https://dweb.link/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3rd6gu4i2v57afbhjjo4nqlq/';
-
-// Serve previews through a resizing image CDN (Cloudflare-cached) instead of the slow
-// IPFS gateway — cuts each thumbnail from full-res to a small file. Falls back to the
-// direct IPFS URL via the <img> onerror handler if the CDN is ever unavailable.
-function cdnImg(url, w, q) {
-  return 'https://wsrv.nl/?url=' + encodeURIComponent(url) + '&w=' + w + '&q=' + (q || 75) + '&output=webp';
-}
+// Reliable IPFS gateways used as fallback
+const IPFS_GATEWAYS = [
+  'https://gateway.pinata.cloud/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3rd6gu4i2v57afbhjjo4nqlq/',
+  'https://ipfs.io/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3rd6gu4i2v57afbhjjo4nqlq/',
+  'https://cloudflare-ipfs.com/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3rd6gu4i2v57afbhjjo4nqlq/',
+  'https://dweb.link/ipfs/bafybeicvcsnhemudkvyyd2wwf6hdwhcc4h3rd6gu4i2v57afbhjjo4nqlq/'
+];
 
 // thirdweb card-checkout app (one deployment serves every artwork via ?listingId).
 const CHECKOUT_BASE = 'https://buy.ijareteli.com/';
-
-// Fast, cached, resized thumbnails via wsrv.nl image proxy — IPFS gateways are slow/flaky.
-function thumb(file, w) {
-  return `https://wsrv.nl/?url=${encodeURIComponent(IPFS + file)}&w=${w}&q=80&output=webp`;
-}
 
 // listingId(id) — VERIFIED against on-chain getAllValidListings 2026-06-27 (Marketplace V3 0x3Bf1…51e9).
 // `id` is 1-based within a collection; on-chain tokenId = id-1. Prices confirmed: 20/30/50 USDC.
@@ -1000,6 +991,7 @@ const COLLECTIONS = [
     contract: '0x3b267143F3C3c724EA76A9B79e8c758C0eb966E4',
     count: 49,
     imgFile: id => `${id - 1}.jpg`,
+    thumbFile: id => `/thumbnails/coffee-${String(id).padStart(3, '0')}.webp`,
     listingId: id => (id === 1 ? 2 : id === 2 ? 1 : id + 1), // token0→2, token1→1, token≥2→token+2
     gridEl: 'grid-coffee',
     nameKey: 'coffee_name',
@@ -1011,6 +1003,7 @@ const COLLECTIONS = [
     contract: '0x67dc02CfcDB23861073cc471317680481CA26f30',
     count: 60,
     imgFile: id => `${id + 48}.jpg`,
+    thumbFile: id => `/thumbnails/series2-${String(id).padStart(3, '0')}.webp`,
     listingId: id => id + 50,           // token t → listingId 51+t
     gridEl: 'grid-series2',
     nameKey: 'series2_name',
@@ -1022,6 +1015,7 @@ const COLLECTIONS = [
     contract: '0x95300078d5e9F5D9dB9245E942a0C365F589e084',
     count: 63,
     imgFile: id => `${id + 108}.jpg`,
+    thumbFile: id => `/thumbnails/series5-${String(id).padStart(3, '0')}.webp`,
     listingId: id => id + 110,          // token t → listingId 111+t
     gridEl: 'grid-series5',
     nameKey: 'series5_name',
@@ -1032,11 +1026,12 @@ const COLLECTIONS = [
 
 // Build the card-checkout URL for a specific artwork.
 function checkoutUrl(col, id, title) {
+  const thumbUrl = (location.origin || 'https://www.ijareteli.com') + col.thumbFile(id);
   const params = new URLSearchParams({
     listingId: String(col.listingId(id)),
     price: String(col.priceUsd),
     title: title,
-    img: thumb(col.imgFile(id), 600),
+    img: thumbUrl,
   });
   return CHECKOUT_BASE + '?' + params.toString();
 }
@@ -1330,10 +1325,15 @@ function buildGrids() {
       div.dataset.col = col.id;
       div.dataset.token = id;
       const file = col.imgFile(id);
-      const direct = IPFS + file;
-      const alt = IPFS_ALT + file;
-      // Fallback chain: CDN(webp) → CDN via alt gateway → alt gateway direct → origin direct
-      const sources = [ cdnImg(direct, 520, 70), cdnImg(alt, 520, 70), alt, direct ];
+      const localSrc = col.thumbFile(id);
+      // Local WebP thumbnail is primary; fall back across reliable IPFS gateways
+      const sources = [
+        localSrc,
+        IPFS_GATEWAYS[0] + file,
+        IPFS_GATEWAYS[1] + file,
+        IPFS_GATEWAYS[2] + file,
+        IPFS_GATEWAYS[3] + file
+      ];
       const img = document.createElement('img');
       img.alt = `${col.id} #${id}`;
       img.decoding = 'async';
@@ -1402,10 +1402,15 @@ function navLightbox(dir) {
 
 function updateLightbox() {
   const lbFile = lbCol.imgFile(lbTokenId);
-  const direct = IPFS + lbFile;
-  const alt = IPFS_ALT + lbFile;
-  // Keep the card-checkout image via thumb() as first choice, fall back across gateways on error
-  const lbSources = [ thumb(lbFile, 1200), cdnImg(direct, 1400, 82), alt, direct ];
+  const localSrc = lbCol.thumbFile(lbTokenId);
+  // Local preview is fast and reliable; fallback across gateways
+  const lbSources = [
+    localSrc,
+    IPFS_GATEWAYS[0] + lbFile,
+    IPFS_GATEWAYS[1] + lbFile,
+    IPFS_GATEWAYS[2] + lbFile,
+    IPFS_GATEWAYS[3] + lbFile
+  ];
   const lbImg = document.getElementById('lbImg');
   let ls = 0;
   lbImg.onerror = () => { if (++ls < lbSources.length) lbImg.src = lbSources[ls]; else lbImg.onerror = null; };

@@ -30,3 +30,7 @@ build/
 # Temp
 *.log
 *.tmp
+
+# Review packs
+thumbnails/meta-ads-review/
+
