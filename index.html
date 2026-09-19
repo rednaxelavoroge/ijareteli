@@ -676,6 +676,16 @@
     letter-spacing: 0.03em;
   }
 
+  .award-item.award-featured .award-img-frame {
+    border-color: var(--gold-light);
+    box-shadow: 0 8px 25px rgba(184, 150, 90, 0.15);
+  }
+
+  .award-item.award-featured:hover .award-img-frame {
+    box-shadow: 0 14px 35px rgba(184, 150, 90, 0.28);
+    border-color: var(--gold);
+  }
+
   @media (min-width: 901px) {
     .awards-grid > .award-item:last-child:nth-child(3n + 1) {
       grid-column: 2;
@@ -1261,17 +1271,6 @@
     <h2 class="section-title" data-i18n="awards_title">International Accolades</h2>
   </div>
   <div class="awards-grid fade-up">
-    <!-- Card 0: Artist of the Year 2026 (Monterosso Almo) -->
-    <div class="award-item" onclick="openAwardLb('images/award_monterosso_2026.jpeg', 'award_artist2026_title', 'award_artist2026_desc')">
-      <div class="award-img-frame">
-        <span class="award-tag" data-i18n="award_artist2026_tag">5 Sept 2026</span>
-        <img src="images/award_monterosso_2026.jpeg" alt="Premio Artista dell'Anno 2026" loading="lazy">
-      </div>
-      <div class="award-info">
-        <h3 class="award-item-title" data-i18n="award_artist2026_title">Artist of the Year 2026 Award</h3>
-        <p class="award-item-desc" data-i18n="award_artist2026_desc">International Art Exhibition "L'Arte unisce il mondo" · Palazzo Cocuzza, Monterosso Almo, Sicily, Italy · Awarded September 5, 2026</p>
-      </div>
-    </div>
     <!-- Card 1: Guccione (Ambassador) -->
     <div class="award-item" onclick="openAwardLb('images/award_guccione.jpeg', 'award_guccione_title', 'award_guccione_desc')">
       <div class="award-img-frame">
@@ -1330,6 +1329,17 @@
       <div class="award-info">
         <h3 class="award-item-title" data-i18n="award_acate_title">3rd Place, International Art Trophy</h3>
         <p class="award-item-desc" data-i18n="award_acate_desc">"Equinozio Culturale Acatese" · Acate, Italy · 2024</p>
+      </div>
+    </div>
+    <!-- Card 7: Artist of the Year 2026 (Monterosso Almo) - Centered Grand Finale -->
+    <div class="award-item award-featured" onclick="openAwardLb('images/award_monterosso_2026.jpeg', 'award_artist2026_title', 'award_artist2026_desc')">
+      <div class="award-img-frame">
+        <span class="award-tag" data-i18n="award_artist2026_tag">5 Sept 2026</span>
+        <img src="images/award_monterosso_2026.jpeg" alt="Premio Artista dell'Anno 2026" loading="lazy">
+      </div>
+      <div class="award-info">
+        <h3 class="award-item-title" data-i18n="award_artist2026_title">Artist of the Year 2026 Award</h3>
+        <p class="award-item-desc" data-i18n="award_artist2026_desc">International Art Exhibition "L'Arte unisce il mondo" · Palazzo Cocuzza, Monterosso Almo, Sicily, Italy · Awarded September 5, 2026</p>
       </div>
     </div>
   </div>
