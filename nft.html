@@ -499,7 +499,7 @@
     position: fixed;
     inset: 0;
     background: rgba(14,14,14,0.97);
-    z-index: 200;
+    z-index: 10000;
     display: none;
     align-items: center;
     justify-content: center;
@@ -525,14 +525,60 @@
     align-items: center;
     justify-content: center;
     min-width: 0;
+    position: relative;
+    cursor: zoom-in;
+    user-select: none;
   }
 
   .lb-image-wrap img {
     max-width: 100%;
     max-height: 82vh;
+    width: auto;
+    height: auto;
+    min-width: min(100%, 360px);
     object-fit: contain;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.65);
     display: block;
+    cursor: zoom-in;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+  }
+
+  .lb-image-wrap:hover img {
+    transform: scale(1.02);
+    box-shadow: 0 26px 80px rgba(0,0,0,0.85);
+  }
+
+  .lb-zoom-hint {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.1rem;
+    background: rgba(18, 18, 18, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 24px;
+    color: var(--warm-white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    opacity: 0.9;
+    transition: opacity 0.25s, transform 0.25s, background 0.25s, border-color 0.25s, color 0.25s;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    z-index: 2;
+  }
+
+  .lb-image-wrap:hover .lb-zoom-hint {
+    opacity: 1;
+    background: rgba(28, 25, 20, 0.96);
+    border-color: var(--gold);
+    color: var(--gold-light);
+    transform: translateX(-50%) translateY(-2px);
   }
 
   .lb-info {
@@ -688,6 +734,231 @@
   }
 
   .lb-close:hover { background: rgba(253,250,246,0.18); }
+
+  /* ── ENLARGED FULLSCREEN ARTWORK ZOOM VIEW ── */
+  .nft-zoom-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 8, 8, 0.98);
+    z-index: 10010;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    user-select: none;
+    animation: zoomFadeIn 0.22s ease-out;
+  }
+
+  .nft-zoom-modal.open {
+    display: flex;
+  }
+
+  @keyframes zoomFadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .zoom-top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(180deg, rgba(14,14,14,0.95) 0%, rgba(14,14,14,0) 100%);
+    z-index: 10;
+    gap: 1rem;
+    box-sizing: border-box;
+  }
+
+  .zoom-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .zoom-col-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  .zoom-art-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    color: var(--warm-white);
+  }
+
+  .zoom-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .zoom-btn-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.1rem;
+    background: rgba(253,250,246,0.08);
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    color: var(--warm-white);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+
+  .zoom-btn-toggle:hover {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  .zoom-close-btn {
+    background: rgba(253,250,246,0.08);
+    border: 1px solid rgba(253,250,246,0.25);
+    color: var(--warm-white);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .zoom-close-btn:hover {
+    background: rgba(253,250,246,0.2);
+    border-color: var(--warm-white);
+  }
+
+  .zoom-stage {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    cursor: zoom-in;
+    padding: 0.5rem 2rem;
+    box-sizing: border-box;
+  }
+
+  .zoom-stage.zoomed {
+    cursor: zoom-out;
+  }
+
+  .zoom-img {
+    max-width: 94vw;
+    max-height: calc(100vh - 160px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.85);
+    transform-origin: center center;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+    display: block;
+    pointer-events: auto;
+  }
+
+  .zoom-stage.zoomed .zoom-img {
+    transform: scale(2.2);
+  }
+
+  .zoom-bottom-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(0deg, rgba(14,14,14,0.95) 0%, rgba(14,14,14,0) 100%);
+    z-index: 10;
+    gap: 1rem;
+    box-sizing: border-box;
+  }
+
+  .zoom-hint-text {
+    font-size: 0.75rem;
+    color: rgba(253,250,246,0.6);
+    letter-spacing: 0.08em;
+  }
+
+  .zoom-buy-quick {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.65rem 1.4rem;
+    background: var(--gold);
+    color: var(--charcoal);
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 2px;
+    transition: background 0.25s, transform 0.2s;
+  }
+
+  .zoom-buy-quick:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  .zoom-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(253,250,246,0.08);
+    border: 1px solid rgba(253,250,246,0.2);
+    color: var(--warm-white);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.4rem;
+    z-index: 15;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    backdrop-filter: blur(8px);
+  }
+
+  .zoom-nav-btn:hover {
+    background: rgba(253,250,246,0.2);
+    border-color: var(--gold);
+    color: var(--gold-light);
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .zoom-prev { left: 1.5rem; }
+  .zoom-next { right: 1.5rem; }
+
+  @media (max-width: 700px) {
+    .zoom-top-bar { padding: 0.8rem 1rem; }
+    .zoom-art-title { font-size: 1.05rem; }
+    .zoom-btn-toggle span { display: none; }
+    .zoom-bottom-bar { padding: 0.8rem 1rem; justify-content: center; }
+    .zoom-hint-text { display: none; }
+    .zoom-nav-btn { width: 40px; height: 40px; font-size: 1.1rem; }
+    .zoom-prev { left: 0.6rem; }
+    .zoom-next { right: 0.6rem; }
+    .zoom-stage.zoomed .zoom-img { transform: scale(2.4); }
+  }
+
+
 
   /* ── BACK LINK ── */
   .back-link-wrap {
@@ -925,8 +1196,12 @@
 <div class="nft-lightbox" id="nftLightbox" onclick="handleLbBackdrop(event)">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
   <div class="lb-inner" onclick="event.stopPropagation()">
-    <div class="lb-image-wrap">
+    <div class="lb-image-wrap" id="lbImageWrap" onclick="openZoomView()" title="Нажмите, чтобы рассмотреть подробнее / Click to enlarge">
       <img id="lbImg" src="" alt="" loading="lazy">
+      <div class="lb-zoom-hint">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        <span id="lbZoomHintText" data-i18n="lb_zoom_hint">Увеличить</span>
+      </div>
     </div>
     <div class="lb-info">
       <div class="lb-collection-tag" id="lbTag"></div>
@@ -969,6 +1244,38 @@
   </div>
 </div>
 
+<!-- ENLARGED ARTWORK FULLSCREEN ZOOM VIEW -->
+<div class="nft-zoom-modal" id="nftZoomModal" onclick="handleZoomBackdrop(event)" role="dialog" aria-modal="true">
+  <div class="zoom-top-bar" onclick="event.stopPropagation()">
+    <div class="zoom-title-wrap">
+      <span class="zoom-col-tag" id="zoomColTag"></span>
+      <span class="zoom-art-title" id="zoomArtTitle"></span>
+    </div>
+    <div class="zoom-actions">
+      <button class="zoom-btn-toggle" id="zoomToggleBtn" onclick="toggleZoomMode(event)" title="Увеличить детали / Zoom detail">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        <span id="zoomToggleLabel" data-i18n="zoom_toggle_in">2× Детали</span>
+      </button>
+      <button class="zoom-close-btn" onclick="closeZoomView()" aria-label="Close enlarged view">✕</button>
+    </div>
+  </div>
+
+  <div class="zoom-stage" id="zoomStage" onclick="toggleZoomMode(event)" onmousemove="handleZoomMouseMove(event)">
+    <img id="zoomImg" class="zoom-img" src="" alt="">
+  </div>
+
+  <div class="zoom-bottom-bar" onclick="event.stopPropagation()">
+    <span class="zoom-hint-text" id="zoomHintNav" data-i18n="zoom_hint_nav">Кликните на картину для 2× зума · Esc или ✕ для возврата к покупке</span>
+    <a class="zoom-buy-quick" id="zoomBuyQuick" href="#" target="_blank" rel="noopener">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      <span data-i18n="btn_buy_card">Купить картой</span>
+    </a>
+  </div>
+
+  <button class="zoom-nav-btn zoom-prev" onclick="navZoom(-1, event)" aria-label="Previous artwork">‹</button>
+  <button class="zoom-nav-btn zoom-next" onclick="navZoom(1, event)" aria-label="Next artwork">›</button>
+</div>
+
 <script>
 // Reliable IPFS gateways used as fallback
 const IPFS_GATEWAYS = [
@@ -992,6 +1299,7 @@ const COLLECTIONS = [
     count: 49,
     imgFile: id => `${id - 1}.jpg`,
     thumbFile: id => `/thumbnails/coffee-${String(id).padStart(3, '0')}.webp`,
+    hiResFile: id => `/artworks/coffee-${String(id).padStart(3, '0')}.webp`,
     listingId: id => (id === 1 ? 2 : id === 2 ? 1 : id + 1), // token0→2, token1→1, token≥2→token+2
     gridEl: 'grid-coffee',
     nameKey: 'coffee_name',
@@ -1004,6 +1312,7 @@ const COLLECTIONS = [
     count: 60,
     imgFile: id => `${id + 48}.jpg`,
     thumbFile: id => `/thumbnails/series2-${String(id).padStart(3, '0')}.webp`,
+    hiResFile: id => `/artworks/series2-${String(id).padStart(3, '0')}.webp`,
     listingId: id => id + 50,           // token t → listingId 51+t
     gridEl: 'grid-series2',
     nameKey: 'series2_name',
@@ -1016,6 +1325,7 @@ const COLLECTIONS = [
     count: 63,
     imgFile: id => `${id + 108}.jpg`,
     thumbFile: id => `/thumbnails/series5-${String(id).padStart(3, '0')}.webp`,
+    hiResFile: id => `/artworks/series5-${String(id).padStart(3, '0')}.webp`,
     listingId: id => id + 110,          // token t → listingId 111+t
     gridEl: 'grid-series5',
     nameKey: 'series5_name',
@@ -1074,6 +1384,10 @@ const i18n = {
     badge_card: 'pay by card',
     prov_label: 'Provenance', prov_title: 'What You Receive',
     prov_desc: 'Each purchase delivers a blockchain-verified certificate of authenticity for an original work by Phridon Bolkvadze, recorded on the Polygon network and sent to your wallet. Payment is by card in USD.',
+    lb_zoom_hint: 'Enlarge',
+    zoom_toggle_in: '2× Detail',
+    zoom_toggle_out: '1× Fit view',
+    zoom_hint_nav: 'Click artwork for 2× zoom · Esc or ✕ to return to purchase',
   },
   ru: {
     nav_home: 'Главная', nav_about: 'О художнике', nav_vernissage: 'Вернисаж',
@@ -1107,6 +1421,10 @@ const i18n = {
     badge_card: 'оплата картой',
     prov_label: 'Провенанс', prov_title: 'Что вы получаете',
     prov_desc: 'Каждая покупка — это подтверждённый блокчейном сертификат подлинности оригинальной работы Фридона Болквадзе, записанный в сети Polygon и отправленный на ваш кошелёк. Оплата картой в USD.',
+    lb_zoom_hint: 'Увеличить',
+    zoom_toggle_in: '2× Детали',
+    zoom_toggle_out: '1× Общий вид',
+    zoom_hint_nav: 'Кликните на картину для 2× зума · Esc или ✕ для возврата к покупке',
   },
   tr: {
     nav_home: 'Ana Sayfa', nav_about: 'Hakkında', nav_vernissage: 'Vernisaj',
@@ -1140,6 +1458,10 @@ const i18n = {
     badge_card: 'kartla ödeme',
     prov_label: 'Provenans', prov_title: 'Ne Alırsınız',
     prov_desc: 'Her satın alma, Phridon Bolkvadze’ye ait orijinal bir eserin blokzincirle doğrulanmış orijinallik sertifikasını içerir; Polygon ağına kaydedilir ve cüzdanınıza gönderilir. Ödeme, USD olarak kartla yapılır.',
+    lb_zoom_hint: 'Büyüt',
+    zoom_toggle_in: '2× Detay',
+    zoom_toggle_out: '1× Tam görünüm',
+    zoom_hint_nav: '2× yakınlaştırma için resme tıklayın · Satın almaya dönmek için Esc veya ✕',
   },
   ka: {
     nav_home: 'მთავარი', nav_about: 'მხატვარზე', nav_vernissage: 'ვერნისაჟი',
@@ -1173,6 +1495,10 @@ const i18n = {
     badge_card: 'გადახდა ბარათით',
     prov_label: 'წარმომავლობა', prov_title: 'რას იღებთ',
     prov_desc: 'თითოეული შენაძენი არის ფრიდონ ბოლქვაძის ორიგინალი ნამუშევრის ბლოკჩეინით დადასტურებული ავთენტურობის სერტიფიკატი, ჩაწერილი Polygon-ის ქსელში და გამოგზავნილი თქვენს საფულეზე. გადახდა ხდება ბარათით, USD-ში.',
+    lb_zoom_hint: 'გადიდება',
+    zoom_toggle_in: '2× დეტალები',
+    zoom_toggle_out: '1× ზოგადი ხედი',
+    zoom_hint_nav: 'დააწკაპუნეთ 2× გადიდებისთვის · Esc ან ✕ შესყიდვაზე დასაბრუნებლად',
   },
   it: {
     nav_home: 'Home', nav_about: 'Artista', nav_vernissage: 'Vernissage',
@@ -1206,6 +1532,10 @@ const i18n = {
     badge_card: 'paga con carta',
     prov_label: 'Provenienza', prov_title: 'Cosa Ricevi',
     prov_desc: 'Ogni acquisto fornisce un certificato di autenticità verificato su blockchain per un\'opera originale di Phridon Bolkvadze, registrato sulla rete Polygon e inviato al tuo wallet. Il pagamento avviene con carta in USD.',
+    lb_zoom_hint: 'Ingrandisci',
+    zoom_toggle_in: '2× Dettagli',
+    zoom_toggle_out: '1× Vista intera',
+    zoom_hint_nav: 'Clicca sull\'opera per zoom 2× · Esc o ✕ per tornare all\'acquisto',
   },
   es: {
     nav_home: 'Inicio', nav_about: 'Artista', nav_vernissage: 'Vernissage',
@@ -1214,7 +1544,7 @@ const i18n = {
     hero_sub: '172 obras de arte originales de Phridon Bolkvadze. Compra cualquier pieza con tarjeta (USD). Cada pieza es un certificado digital único de una pintura original.',
     ofo_label: "Ejemplar Único · Para Siempre",
     ofo_title: "El Original Se Quema",
-    ofo_desc: "Una vez emitida la obra como original digital, Phridon Bolkvadze entrega a las llamas el original físico. No sobrevive ninguna impresión, copia ni lienzo en una bóveda — el original digital se convierte en la única y definitiva forma de la obra. Su propietario no posee una reproducción, sino la única versión que jamás existirá.",
+    ofo_desc: "Una vez emitida la obra como original digital, Phridon Bolkvadze entrega a las llamas el original físico. No sobrevive ninguna impresión, copia ni lienzo en una bóveda — el original digital se convierte en la única definitiva forma de la obra. Su propietario no posee una reproducción, sino la única versión que jamás existirá.",
     coll_label_coffee: 'Colección · 2024',
     coffeeism_label: "Un Movimiento Artístico Propio",
     coffeeism_name: "COFEXSIZM",
@@ -1239,6 +1569,10 @@ const i18n = {
     badge_card: 'pago con tarjeta',
     prov_label: 'Procedencia', prov_title: 'Qué Recibes',
     prov_desc: 'Cada compra entrega un certificado de autenticidad verificado en blockchain de una obra original de Phridon Bolkvadze, registrado en la red Polygon y enviado a tu monedero. El pago se realiza con tarjeta en USD.',
+    lb_zoom_hint: 'Ampliar',
+    zoom_toggle_in: '2× Detalle',
+    zoom_toggle_out: '1× Vista completa',
+    zoom_hint_nav: 'Haz clic en la obra para zoom 2× · Esc o ✕ para volver a la compra',
   },
   ja: {
     nav_home: 'ホーム', nav_about: 'アーティストについて', nav_vernissage: 'ヴェルニサージュ',
@@ -1272,6 +1606,10 @@ const i18n = {
     badge_card: 'カード決済',
     prov_label: '来歴', prov_title: '購入で得られるもの',
     prov_desc: '各購入では、フリードン・ボルクヴァゼによるオリジナル作品の、ブロックチェーンで検証された真正性証明書をお渡しします。Polygonネットワークに記録され、あなたのウォレットに送られます。支払いはUSDのカード決済です。',
+    lb_zoom_hint: '拡大',
+    zoom_toggle_in: '2× 詳細',
+    zoom_toggle_out: '1× 全体表示',
+    zoom_hint_nav: '作品をクリックして2倍拡大 · Escまたは✕で購入に戻る',
   }
 };
 
@@ -1312,6 +1650,7 @@ function setLang(lang) {
   });
   document.documentElement.lang = lang;
   if (lbOpen) updateLightboxText();
+  if (zoomOpen) updateZoomView();
 }
 
 // ── BUILD GRIDS ──
@@ -1384,6 +1723,7 @@ function openLightbox(col, tokenId) {
 }
 
 function closeLightbox() {
+  if (zoomOpen) closeZoomView();
   document.getElementById('nftLightbox').classList.remove('open');
   document.body.style.overflow = '';
   lbOpen = false;
@@ -1400,22 +1740,54 @@ function navLightbox(dir) {
   updateLightbox();
 }
 
+let currentHiResUrl = '';
+
 function updateLightbox() {
   const lbFile = lbCol.imgFile(lbTokenId);
-  const localSrc = lbCol.thumbFile(lbTokenId);
-  // Local preview is fast and reliable; fallback across gateways
-  const lbSources = [
-    localSrc,
+  const localThumb = lbCol.thumbFile(lbTokenId);
+  const localHiRes = lbCol.hiResFile ? lbCol.hiResFile(lbTokenId) : '';
+
+  // Order of high-resolution sources: local hires WebP -> Pinata IPFS -> IPFS gateways
+  const hiResSources = [
+    localHiRes,
     IPFS_GATEWAYS[0] + lbFile,
     IPFS_GATEWAYS[1] + lbFile,
     IPFS_GATEWAYS[2] + lbFile,
     IPFS_GATEWAYS[3] + lbFile
-  ];
+  ].filter(Boolean);
+
   const lbImg = document.getElementById('lbImg');
-  let ls = 0;
-  lbImg.onerror = () => { if (++ls < lbSources.length) lbImg.src = lbSources[ls]; else lbImg.onerror = null; };
-  lbImg.src = lbSources[0];
+  // 1. Show instant local preview right away so user never waits with a blank box
+  lbImg.src = localThumb;
   lbImg.alt = `${lbCol.id} #${lbTokenId}`;
+  currentHiResUrl = localThumb;
+
+  // 2. Preload high resolution in background and smoothly upgrade
+  const reqCol = lbCol;
+  const reqToken = lbTokenId;
+  let hIndex = 0;
+  function tryNextHiRes() {
+    if (hIndex >= hiResSources.length) return;
+    const testUrl = hiResSources[hIndex++];
+    const loader = new Image();
+    loader.onload = () => {
+      // Ensure user is still looking at the same artwork
+      if (lbCol === reqCol && lbTokenId === reqToken) {
+        lbImg.src = testUrl;
+        currentHiResUrl = testUrl;
+        if (zoomOpen) {
+          const zImg = document.getElementById('zoomImg');
+          if (zImg) zImg.src = testUrl;
+        }
+      }
+    };
+    loader.onerror = () => {
+      tryNextHiRes();
+    };
+    loader.src = testUrl;
+  }
+  tryNextHiRes();
+
   const t = i18n[currentLang] || i18n.en;
   const colName = t[lbCol.nameKey] || lbCol.id;
   var buyBtn = document.getElementById('lbBuyBtn');
@@ -1437,6 +1809,11 @@ function updateLightbox() {
   document.getElementById('lbContractShort').textContent = shortContract(lbCol.contract);
   document.getElementById('lbPrice').textContent = `${lbCol.price} USD`;
   updateLightboxText();
+
+  // If zoom modal is already open (e.g. user navigated with arrows), update zoom view as well
+  if (zoomOpen) {
+    updateZoomView();
+  }
 }
 
 function updateLightboxText() {
@@ -1446,6 +1823,139 @@ function updateLightboxText() {
   document.getElementById('lbTitle').textContent = `${colName} #${lbTokenId}`;
   const descEl = document.getElementById('lbDesc');
   descEl.textContent = t.lb_desc || i18n.en.lb_desc;
+  const zoomHintEl = document.getElementById('lbZoomHintText');
+  if (zoomHintEl) zoomHintEl.textContent = t.lb_zoom_hint || 'Enlarge';
+  const zoomHintNav = document.getElementById('zoomHintNav');
+  if (zoomHintNav) zoomHintNav.textContent = t.zoom_hint_nav || '';
+  updateZoomToggleLabel();
+}
+
+// ── ENLARGED FULLSCREEN ARTWORK ZOOM VIEW ──
+let zoomOpen = false;
+let zoomScale = 1;
+
+function openZoomView() {
+  if (!lbCol) return;
+  zoomOpen = true;
+  zoomScale = 1;
+  const modal = document.getElementById('nftZoomModal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  const stage = document.getElementById('zoomStage');
+  stage.classList.remove('zoomed');
+  const zImg = document.getElementById('zoomImg');
+  zImg.style.transformOrigin = 'center center';
+  zImg.style.transform = 'scale(1)';
+
+  updateZoomView();
+}
+
+function updateZoomView() {
+  if (!lbCol) return;
+  const t = i18n[currentLang] || i18n.en;
+  const colName = t[lbCol.nameKey] || lbCol.id;
+  document.getElementById('zoomColTag').textContent = colName;
+  document.getElementById('zoomArtTitle').textContent = `${colName} #${lbTokenId}`;
+
+  const zImg = document.getElementById('zoomImg');
+  zImg.src = currentHiResUrl || lbCol.thumbFile(lbTokenId);
+  zImg.alt = `${colName} #${lbTokenId}`;
+
+  const quickBuy = document.getElementById('zoomBuyQuick');
+  const buyBtn = document.getElementById('lbBuyBtn');
+  if (quickBuy && buyBtn) {
+    quickBuy.href = buyBtn.href;
+    quickBuy.onclick = buyBtn.onclick;
+  }
+
+  updateZoomToggleLabel();
+}
+
+function closeZoomView() {
+  const modal = document.getElementById('nftZoomModal');
+  modal.classList.remove('open');
+  const stage = document.getElementById('zoomStage');
+  stage.classList.remove('zoomed');
+  const zImg = document.getElementById('zoomImg');
+  if (zImg) {
+    zImg.style.transform = 'scale(1)';
+    zImg.style.transformOrigin = 'center center';
+  }
+  zoomOpen = false;
+  zoomScale = 1;
+  // Keep body overflow hidden if underlying purchase lightbox is still open
+  if (lbOpen) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+}
+
+function handleZoomBackdrop(e) {
+  if (e.target === document.getElementById('nftZoomModal') || e.target === document.getElementById('zoomStage')) {
+    if (zoomScale === 2) {
+      toggleZoomMode(e);
+    } else {
+      closeZoomView();
+    }
+  }
+}
+
+function toggleZoomMode(e) {
+  if (e) e.stopPropagation();
+  const stage = document.getElementById('zoomStage');
+  const zImg = document.getElementById('zoomImg');
+  if (zoomScale === 1) {
+    zoomScale = 2;
+    stage.classList.add('zoomed');
+    zImg.style.transform = 'scale(2.2)';
+    if (e && e.clientX && e.clientY) {
+      const rect = stage.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      zImg.style.transformOrigin = `${x}% ${y}%`;
+    } else {
+      zImg.style.transformOrigin = 'center center';
+    }
+  } else {
+    zoomScale = 1;
+    stage.classList.remove('zoomed');
+    zImg.style.transform = 'scale(1)';
+    zImg.style.transformOrigin = 'center center';
+  }
+  updateZoomToggleLabel();
+}
+
+function updateZoomToggleLabel() {
+  const t = i18n[currentLang] || i18n.en;
+  const labelEl = document.getElementById('zoomToggleLabel');
+  if (labelEl) {
+    labelEl.textContent = (zoomScale === 1) ? (t.zoom_toggle_in || '2× Detail') : (t.zoom_toggle_out || '1× Fit view');
+  }
+}
+
+function handleZoomMouseMove(e) {
+  if (zoomScale !== 2) return;
+  const stage = document.getElementById('zoomStage');
+  const zImg = document.getElementById('zoomImg');
+  const rect = stage.getBoundingClientRect();
+  const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+  const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+  zImg.style.transformOrigin = `${x}% ${y}%`;
+}
+
+function navZoom(dir, e) {
+  if (e) e.stopPropagation();
+  zoomScale = 1;
+  const stage = document.getElementById('zoomStage');
+  if (stage) stage.classList.remove('zoomed');
+  const zImg = document.getElementById('zoomImg');
+  if (zImg) {
+    zImg.style.transform = 'scale(1)';
+    zImg.style.transformOrigin = 'center center';
+  }
+  navLightbox(dir);
 }
 
 function copyContract() {
@@ -1460,6 +1970,20 @@ function copyContract() {
 
 // ── KEYBOARD ──
 document.addEventListener('keydown', e => {
+  if (zoomOpen) {
+    if (e.key === 'Escape') {
+      closeZoomView();
+      return;
+    }
+    if (e.key === 'ArrowLeft') {
+      navZoom(-1);
+      return;
+    }
+    if (e.key === 'ArrowRight') {
+      navZoom(1);
+      return;
+    }
+  }
   if (!lbOpen) return;
   if (e.key === 'Escape') closeLightbox();
   if (e.key === 'ArrowLeft') navLightbox(-1);
@@ -1488,7 +2012,8 @@ function findArtwork(artId) {
 }
 function handleArtDeepLink() {
   try {
-    const raw = new URLSearchParams(location.search).get('art');
+    const params = new URLSearchParams(location.search);
+    const raw = params.get('art');
     if (!raw || !/^\d+$/.test(raw.trim())) return;   // absent / non-numeric → normal grid
     const hit = findArtwork(parseInt(raw, 10));       // parseInt normalizes "050" and "50" → 50
     if (!hit) return;                                 // unknown id → normal grid, no error
@@ -1496,6 +2021,9 @@ function handleArtDeepLink() {
       '.nft-item[data-col="' + hit.col.id + '"][data-token="' + hit.id + '"]');
     if (item) item.scrollIntoView({ block: 'center' });
     openLightbox(hit.col, hit.id);                    // identical to a tap: price + Buy with card
+    if (params.get('zoom') === '1' || params.get('zoom') === 'true') {
+      setTimeout(openZoomView, 120);
+    }
   } catch (e) { /* never break the page on a malformed param */ }
 }
 

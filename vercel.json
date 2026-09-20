@@ -15,6 +15,12 @@
       ]
     },
     {
+      "source": "/artworks/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
       "source": "/(.*)\\.(jpg|jpeg|png|webp|avif|svg|ico|mp4)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
